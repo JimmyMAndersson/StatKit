@@ -15,18 +15,7 @@ jobs:
       run: swift build -v
     - name: Run tests
       run: swift test -v
-    - name: Swiftline
-      run: swiftlint lint
-  
-
-on:
-  pull_request:
-    paths:
-      - '.github/workflows/swiftlint.yml'
-      - '.swiftlint.yml'
-      - '**/*.swift'
-
-jobs:
+      
   SwiftLint:
     
     runs-on: ubuntu-latest
