@@ -1,7 +1,7 @@
 <h1 align="center">StatKit</h1>
 
 <p align="center">
-    <img src="https://github.com/JimmyMAndersson/StatKit/workflows/QualityAssurance/badge.svg" />
+    <img src="https://github.com/JimmyMAndersson/StatKit/workflows/Quality%20Assurance/badge.svg" />
     <img src="https://img.shields.io/badge/Swift-5.2-blue.svg" />
     <a href="https://swift.org/package-manager">
         <img src="https://img.shields.io/badge/swiftpm-compatible-orange.svg?style=flat" alt="Swift Package Manager" />
