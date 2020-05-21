@@ -1,4 +1,6 @@
-<h1 align="center">StatKit</h1>
+<p align="center">
+<img src="Logo.png" width="500" max-width="90%" alt="StatKit" />
+</p>
 
 <p align="center">
     <img src="https://github.com/JimmyMAndersson/StatKit/workflows/Quality%20Assurance/badge.svg" />
