@@ -19,7 +19,7 @@ extension Sequence where Element: Hashable {
   }
 }
 
-extension Sequence where Element: Numeric {
+extension Sequence where Element: AdditiveArithmetic {
   /**
    Calculates the sum of all contained elements.
    
@@ -27,6 +27,44 @@ extension Sequence where Element: Numeric {
    */
   @inlinable
   public var sum: Element {
-    self.reduce(into: 0) { (result, element) in result += element }
+    self.reduce(into: .zero) { (result, element) in result += element }
+  }
+}
+
+extension Collection where Element: BinaryInteger {
+  @inlinable
+  public func median() -> Double? {
+    guard count > 0 else { return .none }
+    
+    let evenNumberOfElements = count % 2 == 0
+    let sortedElements = self.sorted()
+    
+    if evenNumberOfElements {
+      let lowerElement = (count - 1) / 2
+      let upperElement = lowerElement + 1
+      return Double(sortedElements[lowerElement] + sortedElements[upperElement]) / 2
+    } else {
+      let medianElement = (count - 1) / 2
+      return Double(sortedElements[medianElement])
+    }
+  }
+}
+
+extension Collection where Element: BinaryFloatingPoint {
+  @inlinable
+  public func median() -> Double? {
+    guard count > 0 else { return .none }
+    
+    let evenNumberOfElements = count % 2 == 0
+    let sortedElements = self.sorted()
+    
+    if evenNumberOfElements {
+      let lowerElement = (count - 1) / 2
+      let upperElement = lowerElement + 1
+      return Double(sortedElements[lowerElement] + sortedElements[upperElement]) / 2
+    } else {
+      let medianElement = (count - 1) / 2
+      return Double(sortedElements[medianElement])
+    }
   }
 }

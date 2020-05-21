@@ -58,4 +58,20 @@ final class SequenceDescriptiveTests: XCTestCase {
     
     XCTAssertEqual(calculatedSum, expectedSum)
   }
+  
+  func testIntMedian() {
+    let intArray = [-1, 4, 2, 20, 3]
+    let calculatedMedian = intArray.median() ?? .nan
+    let expectedMedian = 3.0
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testFloatingPointMedian() {
+    let fpArray = [-1.0, 4.0, 2.0, 20.0, 3.0, 60.0]
+    let calculatedMedian = fpArray.median() ?? .nan
+    let expectedMedian = 3.5
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
 }
