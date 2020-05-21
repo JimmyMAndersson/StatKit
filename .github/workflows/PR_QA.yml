@@ -6,14 +6,34 @@ on:
 
 jobs:
   build:
-
+    
     runs-on: macos-latest
-
+    
     steps:
     - uses: actions/checkout@v2
     - name: Build
       run: swift build -v
     - name: Run tests
       run: swift test -v
-    - name: GitHub Action for SwiftLint
-      uses: norio-nomura/action-swiftlint@3.1.0
+    - name: Swiftline
+      run: swiftlint lint
+  
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/swiftlint.yml'
+      - '.swiftlint.yml'
+      - '**/*.swift'
+
+jobs:
+  SwiftLint:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Swiftlint
+        uses: norio-nomura/action-swiftlint@3.1.0
+        with:
+          args: --strict
