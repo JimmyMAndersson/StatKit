@@ -1,8 +1,8 @@
 extension Collection where Self.Element: BinaryInteger {
   /**
-  Calculates the mean of all contained elements.
-  - returns: The mean of all items.
-  */
+   Calculates the mean of all contained elements.
+   - returns: The mean of all items.
+   */
   @inlinable
   public var mean: Double { Double(sum) / Double(count) }
   
@@ -38,9 +38,9 @@ extension Collection where Self.Element: BinaryInteger {
 
 extension Collection where Self.Element: BinaryFloatingPoint {
   /**
-  Calculates the mean of all contained elements.
-  - returns: The mean of all items.
-  */
+   Calculates the mean of all contained elements.
+   - returns: The mean of all items.
+   */
   @inlinable
   public var mean: Double { Double(sum) / Double(count) }
   

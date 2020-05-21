@@ -82,4 +82,3 @@ final class CollectionVariabilityTests: XCTestCase {
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation)
   }
 }
-
