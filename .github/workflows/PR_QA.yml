@@ -1,4 +1,4 @@
-name: Swift
+name: Quality Assurance
 
 on:
   pull_request:
