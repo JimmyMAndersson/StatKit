@@ -15,7 +15,7 @@ let package = Package(
   targets: [
     .target(
       name: "StatKit",
-      dependencies: [/*.product(name: "Numerics", package: "swift-numerics")*/]),
+      dependencies: []),
     .testTarget(
       name: "StatKitTests",
       dependencies: ["StatKit"]),
