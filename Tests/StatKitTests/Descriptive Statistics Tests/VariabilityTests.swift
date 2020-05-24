@@ -1,23 +1,7 @@
 import XCTest
 @testable import StatKit
 
-final class CollectionVariabilityTests: XCTestCase {
-  func testIntegerMean() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedMean = intArray.mean
-    let expectedMean = 3.0
-    
-    XCTAssertEqual(calculatedMean, expectedMean)
-  }
-  
-  func testFloatingPointMean() {
-    let fpArray = [1.5, 2.5, 3.5, 4.5, 5.5]
-    let calculatedMean = fpArray.mean
-    let expectedMean = 3.5
-    
-    XCTAssertEqual(calculatedMean, expectedMean)
-  }
-  
+final class VariabilityTests: XCTestCase {
   func testIntegerSampleVariance() {
     let intArray = [1, 2, 3, 4, 5]
     let calculatedVariance = intArray.variance(assuming: .sample)
@@ -35,7 +19,7 @@ final class CollectionVariabilityTests: XCTestCase {
   }
   
   func testFloatingPointSampleVariance() {
-    let fpArray = [1, 2, 3, 4, 5]
+    let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
     let calculatedVariance = fpArray.variance(assuming: .sample)
     let expectedVariance = 2.5
     

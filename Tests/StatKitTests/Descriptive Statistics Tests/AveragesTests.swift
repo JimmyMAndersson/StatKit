@@ -1,7 +1,53 @@
 import XCTest
 @testable import StatKit
 
-final class SequenceDescriptiveTests: XCTestCase {
+final class AveragesTests: XCTestCase {
+  func testIntegerArithmeticMean() {
+    let intArray = [1, 2, 3, 4, 5]
+    let calculatedMean = intArray.arithmeticMean
+    let expectedMean = 3.0
+    
+    XCTAssertEqual(calculatedMean, expectedMean)
+  }
+  
+  func testFloatingPointArithmeticMean() {
+    let fpArray = [1.5, 2.5, 3.5, 4.5, 5.5]
+    let calculatedMean = fpArray.arithmeticMean
+    let expectedMean = 3.5
+    
+    XCTAssertEqual(calculatedMean, expectedMean)
+  }
+  
+  func testEmptySetArithmeticMean() {
+    let emptySet = [Double]()
+    let calculatedMean = emptySet.arithmeticMean
+    
+    XCTAssertTrue(calculatedMean.isNaN)
+  }
+  
+  func testIntMedian() {
+    let intArray = [-1, 4, 2, 20, 3]
+    let calculatedMedian = intArray.median()
+    let expectedMedian = 3.0
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testFloatingPointMedian() {
+    let fpArray = [-1.0, 4.0, 2.0, 20.0, 3.0, 60.0]
+    let calculatedMedian = fpArray.median()
+    let expectedMedian = 3.5
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testEmptySetMedian() {
+    let emptySet = [Double]()
+    let calculatedMedian = emptySet.median()
+    
+    XCTAssertTrue(calculatedMedian.isNaN)
+  }
+  
   func testStringMode() {
     let string = "Protocol Oriented Programming is amazing!"
     let calculatedMode = string.mode()
@@ -41,37 +87,5 @@ final class SequenceDescriptiveTests: XCTestCase {
     let expectedMode = Set<Character>()
     
     XCTAssertEqual(calculatedMode.count, expectedMode.count)
-  }
-  
-  func testPositiveSum() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedSum = intArray.sum
-    let expectedSum = 15
-    
-    XCTAssertEqual(calculatedSum, expectedSum)
-  }
-  
-  func testNegativeSum() {
-    let intArray = [1, -2, 3, -4, 5, -6]
-    let calculatedSum = intArray.sum
-    let expectedSum = -3
-    
-    XCTAssertEqual(calculatedSum, expectedSum)
-  }
-  
-  func testIntMedian() {
-    let intArray = [-1, 4, 2, 20, 3]
-    let calculatedMedian = intArray.median() ?? .nan
-    let expectedMedian = 3.0
-    
-    XCTAssertEqual(calculatedMedian, expectedMedian)
-  }
-  
-  func testFloatingPointMedian() {
-    let fpArray = [-1.0, 4.0, 2.0, 20.0, 3.0, 60.0]
-    let calculatedMedian = fpArray.median() ?? .nan
-    let expectedMedian = 3.5
-    
-    XCTAssertEqual(calculatedMedian, expectedMedian)
   }
 }
