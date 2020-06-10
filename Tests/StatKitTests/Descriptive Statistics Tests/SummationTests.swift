@@ -4,7 +4,7 @@ import XCTest
 final class SummationTests: XCTestCase {
   func testPositiveSum() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedSum = intArray.sum
+    let calculatedSum = intArray.sum(over: \.self)
     let expectedSum = 15
     
     XCTAssertEqual(calculatedSum, expectedSum)
@@ -12,7 +12,7 @@ final class SummationTests: XCTestCase {
   
   func testNegativeSum() {
     let intArray = [1, -2, 3, -4, 5, -6]
-    let calculatedSum = intArray.sum
+    let calculatedSum = intArray.sum(over: \.self)
     let expectedSum = -3
     
     XCTAssertEqual(calculatedSum, expectedSum)

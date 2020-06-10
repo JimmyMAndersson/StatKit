@@ -4,7 +4,7 @@ import XCTest
 final class VariabilityTests: XCTestCase {
   func testIntegerSampleVariance() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedVariance = intArray.variance(assuming: .sample)
+    let calculatedVariance = intArray.variance(over: \.self, assuming: .sample)
     let expectedVariance = 2.5
     
     XCTAssertEqual(calculatedVariance, expectedVariance)
@@ -12,7 +12,7 @@ final class VariabilityTests: XCTestCase {
   
   func testIntegerPopulationVariance() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedVariance = intArray.variance(assuming: .population)
+    let calculatedVariance = intArray.variance(over: \.self, assuming: .population)
     let expectedVariance = 2.0
     
     XCTAssertEqual(calculatedVariance, expectedVariance)
@@ -20,7 +20,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointSampleVariance() {
     let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedVariance = fpArray.variance(assuming: .sample)
+    let calculatedVariance = fpArray.variance(over: \.self, assuming: .sample)
     let expectedVariance = 2.5
     
     XCTAssertEqual(calculatedVariance, expectedVariance)
@@ -28,7 +28,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointPopulationVariance() {
     let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedVariance = fpArray.variance(assuming: .population)
+    let calculatedVariance = fpArray.variance(over: \.self, assuming: .population)
     let expectedVariance = 2.0
     
     XCTAssertEqual(calculatedVariance, expectedVariance)
@@ -36,7 +36,7 @@ final class VariabilityTests: XCTestCase {
   
   func testIntegerSampleStandardDeviation() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = intArray.standardDeviation(assuming: .sample)
+    let calculatedStandardDeviation = intArray.standardDeviation(over: \.self, assuming: .sample)
     let expectedStandardDeviation = (2.5).squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation)
@@ -44,7 +44,7 @@ final class VariabilityTests: XCTestCase {
   
   func testIntegerPopulationStandardDeviation() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = intArray.standardDeviation(assuming: .population)
+    let calculatedStandardDeviation = intArray.standardDeviation(over: \.self, assuming: .population)
     let expectedStandardDeviation = 2.0.squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation)
@@ -52,7 +52,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointSampleStandardDeviation() {
     let fpArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = fpArray.standardDeviation(assuming: .sample)
+    let calculatedStandardDeviation = fpArray.standardDeviation(over: \.self, assuming: .sample)
     let expectedStandardDeviation = 2.5.squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation)
@@ -60,7 +60,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointPopulationStandardDeviation() {
     let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedStandardDeviation = fpArray.standardDeviation(assuming: .population)
+    let calculatedStandardDeviation = fpArray.standardDeviation(over: \.self, assuming: .population)
     let expectedStandardDeviation = 2.0.squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation)
