@@ -125,6 +125,12 @@ final class AveragesTests: XCTestCase {
     
     XCTAssertEqual(calculatedXMean, expectedXMean)
     XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 0.000000001)
+  }
+  
+  func testEmptySetGeometricMean() {
+    let emptySet = [Int]()
+    let calculatedMean = emptySet.geometricMean(over: \.self)
     
+    XCTAssertTrue(calculatedMean.isNaN)
   }
 }

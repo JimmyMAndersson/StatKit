@@ -1,4 +1,7 @@
+#if canImport(Darwin)
 import Darwin
+#endif
+
 
 extension Collection {
   
@@ -12,6 +15,7 @@ extension Collection {
     !isEmpty ? sum(over: variable).doubleValue / Double(count) : .nan
   }
   
+  #if canImport(Darwin)
   /// Calculates the geometric mean of the selected variable.
   /// - parameter variable: The variable over which to calculate the mean.
   /// - returns: The geometric mean of all items.
@@ -25,6 +29,7 @@ extension Collection {
     let power = 1 / Double(count)
     return pow(product, power)
   }
+  #endif
   
   /// Calculates the median of the selected variable.
   /// - parameter variable: The variable over which to calculate the median.
