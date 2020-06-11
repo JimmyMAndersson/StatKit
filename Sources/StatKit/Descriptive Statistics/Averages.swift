@@ -1,7 +1,8 @@
 #if canImport(Darwin)
 import Darwin
+#elseif canImport(Glibc)
+import Glibc
 #endif
-
 
 extension Collection {
   
@@ -15,7 +16,7 @@ extension Collection {
     !isEmpty ? sum(over: variable).doubleValue / Double(count) : .nan
   }
   
-  #if canImport(Darwin)
+  #if canImport(Darwin) || canImport(GlibC)
   /// Calculates the geometric mean of the selected variable.
   /// - parameter variable: The variable over which to calculate the mean.
   /// - returns: The geometric mean of all items.
