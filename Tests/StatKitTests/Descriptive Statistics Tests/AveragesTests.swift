@@ -99,4 +99,38 @@ final class AveragesTests: XCTestCase {
     
     XCTAssertEqual(calculatedMode.count, expectedMode.count)
   }
+  
+  func testIntegerGeometricMean() {
+    let intArray = [1, 2, 3, 4, 5]
+    let calculatedMean = intArray.geometricMean(over: \.self)
+    let expectedMean = 2.6051710847
+    
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 0.00001)
+  }
+  
+  func testFloatingPointGeometricMean() {
+    let fpArray = [1.5, 2.5, 3.5, 4.5, 5.5]
+    let calculatedMean = fpArray.geometricMean(over: \.self)
+    let expectedMean = 3.1793248391
+    
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 0.000001)
+  }
+  
+  func testObjectGeometricMean() {
+    let objectArray = [CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9)]
+    let calculatedXMean = objectArray.geometricMean(over: \.x)
+    let expectedXMean = 3.0
+    let calculatedYMean = objectArray.geometricMean(over: \.y)
+    let expectedYMean = 9.0
+    
+    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 0.000000001)
+    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 0.000000001)
+  }
+  
+  func testEmptySetGeometricMean() {
+    let emptySet = [Int]()
+    let calculatedMean = emptySet.geometricMean(over: \.self)
+    
+    XCTAssertTrue(calculatedMean.isNaN)
+  }
 }
