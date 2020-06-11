@@ -1,5 +1,5 @@
 <p align="center">
-<img src="Logo.png" width="500" max-width="90%" alt="StatKit" />
+<img src="StatKit Logo.png" width="500" max-width="90%" alt="StatKit" />
 </p>
 
 <p align="center">
