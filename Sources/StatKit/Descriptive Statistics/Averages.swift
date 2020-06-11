@@ -1,3 +1,5 @@
+import Darwin
+
 extension Collection {
   
   /// Calculates the arithmetic mean of the selected variable.
@@ -8,6 +10,20 @@ extension Collection {
   @inlinable
   public func arithmeticMean<T: ConvertibleToDouble>(over variable: KeyPath<Element, T>) -> Double {
     !isEmpty ? sum(over: variable).doubleValue / Double(count) : .nan
+  }
+  
+  /// Calculates the geometric mean of the selected variable.
+  /// - parameter variable: The variable over which to calculate the mean.
+  /// - returns: The geometric mean of all items.
+  /// Since the geometric mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
+  /// The time complexity of this method is O(n).
+  @inlinable
+  public func geometricMean<T: ConvertibleToDouble>(over variable: KeyPath<Element, T>) -> Double {
+    guard !isEmpty else { return .nan }
+    
+    let product = reduce(into: 1) { product, element in product *= element[keyPath: variable] }.doubleValue
+    let power = 1 / Double(count)
+    return pow(product, power)
   }
   
   /// Calculates the median of the selected variable.

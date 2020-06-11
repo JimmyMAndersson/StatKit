@@ -1,6 +1,8 @@
 import CoreGraphics
 
+/// A protocol marking types that are directly convertible to a real number type.
 public protocol ConvertibleToDouble: Numeric {
+  /// The value in a real number form.
   var doubleValue: Double { get }
 }
 
