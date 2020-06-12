@@ -16,3 +16,4 @@ disabled_rules:
   - trailing_whitespace
   - switch_case_alignment
   - opening_brace
+  - identifier_name

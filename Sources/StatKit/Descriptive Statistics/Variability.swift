@@ -6,14 +6,13 @@ extension Collection {
   /// - returns: The variance of the collection.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func variance<T: ConvertibleToDouble>(over variable: KeyPath<Element, T>,
-                                               assuming composition: DataSetComposition) -> Double
-  {
-    let mean = arithmeticMean(over: variable)
+  public func variance<T: ConvertibleToReal>(of variable: KeyPath<Element, T>,
+                                             composition: DataSetComposition) -> Double {
+    let mean = arithmeticMean(of: variable)
     func square(of number: Double) -> Double { number * number }
     
-    let squareSum = self.reduce(into: 0) { (squareSum, element) in
-      squareSum += square(of: element[keyPath: variable].doubleValue - mean)
+    let squareSum = lazy.reduce(into: 0) { (squareSum, element) in
+      squareSum += square(of: element[keyPath: variable].realValue - mean)
     }
     
     switch composition {
@@ -30,9 +29,9 @@ extension Collection {
   /// - returns: The standard deviation of the collection, rounded to a representable value.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func standardDeviation<T: ConvertibleToDouble>(over variable: KeyPath<Element, T>,
-                                                        assuming composition: DataSetComposition) -> Double
-  {
-    variance(over: variable, assuming: composition).squareRoot()
+  public func standardDeviation<T: ConvertibleToReal>(of variable: KeyPath<Element, T>,
+                                                      composition: DataSetComposition) -> Double {
+    
+    variance(of: variable, composition: composition).squareRoot()
   }
 }

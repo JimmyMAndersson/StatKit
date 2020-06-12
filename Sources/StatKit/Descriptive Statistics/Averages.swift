@@ -12,8 +12,8 @@ extension Collection {
   /// Since the arithmetic mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func arithmeticMean<T: ConvertibleToDouble>(over variable: KeyPath<Element, T>) -> Double {
-    !isEmpty ? sum(over: variable).doubleValue / Double(count) : .nan
+  public func arithmeticMean<T: ConvertibleToReal>(of variable: KeyPath<Element, T>) -> Double {
+    !isEmpty ? sum(over: variable).realValue / Double(count) : .nan
   }
   
   #if canImport(Darwin) || canImport(Glibc)
@@ -23,10 +23,9 @@ extension Collection {
   /// Since the geometric mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func geometricMean<T: ConvertibleToDouble>(over variable: KeyPath<Element, T>) -> Double {
+  public func geometricMean<T: ConvertibleToReal>(of variable: KeyPath<Element, T>) -> Double {
     guard !isEmpty else { return .nan }
-    
-    let product = reduce(into: 1) { product, element in product *= element[keyPath: variable] }.doubleValue
+    let product = lazy.reduce(into: 1) { product, element in product *= element[keyPath: variable] }.realValue
     let power = 1 / Double(count)
     return pow(product, power)
   }
@@ -38,22 +37,24 @@ extension Collection {
   /// Since the median has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func median<T: ConvertibleToDouble & Comparable>(over variable: KeyPath<Element, T>) -> Double {
+  public func median<T: ConvertibleToReal & Comparable>(of variable: KeyPath<Element, T>) -> Double {
     guard count > 0 else { return .nan }
     
     let isEvenNumberOfElements = count % 2 == 0
-    let sortedElements = self.sorted(by: { $0[keyPath: variable] < $1[keyPath: variable] })
+    let sortedElements = lazy.sorted(by: { smaller, greater in
+      smaller[keyPath: variable] < greater[keyPath: variable]
+    })
     
     let index = (count - 1) / 2
     
     var median: Double
     
     if isEvenNumberOfElements {
-      let firstValue = sortedElements[index][keyPath: variable].doubleValue
-      let secondValue = sortedElements[index + 1][keyPath: variable].doubleValue
+      let firstValue = sortedElements[index][keyPath: variable].realValue
+      let secondValue = sortedElements[index + 1][keyPath: variable].realValue
       median = (firstValue + secondValue) / 2
     } else {
-      median = sortedElements[index][keyPath: variable].doubleValue
+      median = sortedElements[index][keyPath: variable].realValue
     }
     
     return median
@@ -70,14 +71,13 @@ extension Sequence {
   /// as opposed to sequences that have several items that occur equally often and are called multimodal.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func mode<T: Hashable>(over variable: KeyPath<Element, T>) -> Set<T> {
-    let dictionary = self.reduce(into: [T: Int]()) { (result, element) in
+  public func mode<T: Hashable>(of variable: KeyPath<Element, T>) -> Set<T> {
+    let dictionary = lazy.reduce(into: [T: Int]()) { result, element in
       result[element[keyPath: variable], default: 0] += 1
     }
-    
     let maximumOccurence = dictionary.values.max() ?? 0
     
-    let result = dictionary
+    let result = dictionary.lazy
       .filter { variableCount in variableCount.value == maximumOccurence }
       .map { variableCount in variableCount.key }
     
