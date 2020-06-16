@@ -6,6 +6,8 @@ extension Sequence {
   /// The time complexity of this method is O(n).
   @inlinable
   public func sum<T: AdditiveArithmetic>(over variable: KeyPath<Element, T>) -> T {
-    lazy.reduce(into: .zero) { (result, element) in result += element[keyPath: variable] }
+    lazy.reduce(into: .zero) { result, element in
+      result += element[keyPath: variable]
+    }
   }
 }

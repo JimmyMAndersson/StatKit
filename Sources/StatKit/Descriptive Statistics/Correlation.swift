@@ -13,10 +13,10 @@ extension Collection {
       let EXY = lazy.map { element in
         element[keyPath: X].realValue * element[keyPath: Y].realValue
       }
-      .arithmeticMean(of: \.self)
+      .mean(of: \.self)
       
-      let EX = lazy.arithmeticMean(of: X)
-      let EY = lazy.arithmeticMean(of: Y)
+      let EX = lazy.mean(of: X)
+      let EY = lazy.mean(of: Y)
       
       return EXY - (EX * EY)
   }

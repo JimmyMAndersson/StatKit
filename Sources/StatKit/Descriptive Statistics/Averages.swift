@@ -1,35 +1,17 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
-import Glibc
-#endif
-
 extension Collection {
   
-  /// Calculates the arithmetic mean of the selected variable.
+  /// Calculates the selected mean of the selected variable.
+  ///
   /// - parameter variable: The variable over which to calculate the mean.
   /// - returns: The mean of all items.
   /// Since the arithmetic mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
-  @inlinable
-  public func arithmeticMean<T: ConvertibleToReal>(of variable: KeyPath<Element, T>) -> Double {
-    !isEmpty ? sum(over: variable).realValue / Double(count) : .nan
+  public func mean<T: ConvertibleToReal>(_ mean: MeanType = .arithmetic, of variable: KeyPath<Element, T>) -> Double {
+    guard !isEmpty else {
+      return .nan
+    }
+    return mean.compute(for: variable, in: self)
   }
-  
-  #if canImport(Darwin) || canImport(Glibc)
-  /// Calculates the geometric mean of the selected variable.
-  /// - parameter variable: The variable over which to calculate the mean.
-  /// - returns: The geometric mean of all items.
-  /// Since the geometric mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
-  /// The time complexity of this method is O(n).
-  @inlinable
-  public func geometricMean<T: ConvertibleToReal>(of variable: KeyPath<Element, T>) -> Double {
-    guard !isEmpty else { return .nan }
-    let product = lazy.reduce(into: 1) { product, element in product *= element[keyPath: variable] }.realValue
-    let power = 1 / Double(count)
-    return pow(product, power)
-  }
-  #endif
   
   /// Calculates the median of the selected variable.
   /// - parameter variable: The variable over which to calculate the median.
@@ -38,9 +20,11 @@ extension Collection {
   /// The time complexity of this method is O(n).
   @inlinable
   public func median<T: ConvertibleToReal & Comparable>(of variable: KeyPath<Element, T>) -> Double {
-    guard count > 0 else { return .nan }
+    guard count > 0 else {
+      return .nan
+    }
     
-    let isEvenNumberOfElements = count % 2 == 0
+    let isEvenNumberOfElements = count.isMultiple(of: 2)
     let sortedElements = lazy.sorted(by: { smaller, greater in
       smaller[keyPath: variable] < greater[keyPath: variable]
     })
@@ -78,8 +62,12 @@ extension Sequence {
     let maximumOccurence = dictionary.values.max() ?? 0
     
     let result = dictionary.lazy
-      .filter { variableCount in variableCount.value == maximumOccurence }
-      .map { variableCount in variableCount.key }
+      .filter { variableCount in
+        variableCount.value == maximumOccurence
+    }
+    .map { variableCount in
+      variableCount.key
+    }
     
     return Set(result)
   }

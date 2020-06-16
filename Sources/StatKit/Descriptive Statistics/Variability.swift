@@ -8,8 +8,10 @@ extension Collection {
   @inlinable
   public func variance<T: ConvertibleToReal>(of variable: KeyPath<Element, T>,
                                              composition: DataSetComposition) -> Double {
-    let mean = arithmeticMean(of: variable)
-    func square(of number: Double) -> Double { number * number }
+    let mean = self.mean(of: variable)
+    func square(of number: Double) -> Double {
+      number * number
+    }
     
     let squareSum = lazy.reduce(into: 0) { (squareSum, element) in
       squareSum += square(of: element[keyPath: variable].realValue - mean)
