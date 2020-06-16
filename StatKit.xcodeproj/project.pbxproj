@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		7F43055F249943EF00EBC751 /* MeanType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F43055E249943EF00EBC751 /* MeanType.swift */; };
 		7F8F60B22493A87A005C7FD2 /* Correlation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F60B12493A87A005C7FD2 /* Correlation.swift */; };
 		7F8F60B52493ADCC005C7FD2 /* CorrelationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8F60B32493AD08005C7FD2 /* CorrelationTests.swift */; };
 		OBJ_34 /* Averages.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Averages.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F43055E249943EF00EBC751 /* MeanType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeanType.swift; sourceTree = "<group>"; };
 		7F8F60B12493A87A005C7FD2 /* Correlation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Correlation.swift; sourceTree = "<group>"; };
 		7F8F60B32493AD08005C7FD2 /* CorrelationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrelationTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Averages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Averages.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_10 /* Averages.swift */,
+				7F43055E249943EF00EBC751 /* MeanType.swift */,
 				OBJ_11 /* Variability.swift */,
 				OBJ_12 /* DataSetComposition.swift */,
 				OBJ_13 /* Summation.swift */,
@@ -291,6 +294,7 @@
 			files = (
 				OBJ_34 /* Averages.swift in Sources */,
 				OBJ_35 /* Variability.swift in Sources */,
+				7F43055F249943EF00EBC751 /* MeanType.swift in Sources */,
 				OBJ_36 /* DataSetComposition.swift in Sources */,
 				OBJ_37 /* Summation.swift in Sources */,
 				7F8F60B22493A87A005C7FD2 /* Correlation.swift in Sources */,
