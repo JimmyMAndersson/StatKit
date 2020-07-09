@@ -7,7 +7,7 @@ extension Collection {
   /// The time complexity of this method is O(n).
   @inlinable
   public func variance<T: ConvertibleToReal>(of variable: KeyPath<Element, T>,
-                                             composition: DataSetComposition) -> Double {
+                                             from composition: DataSetComposition) -> Double {
     let mean = self.mean(of: variable)
     func square(of number: Double) -> Double {
       number * number
@@ -19,9 +19,9 @@ extension Collection {
     
     switch composition {
       case .sample:
-        return squareSum / (Double(count) - 1)
+        return squareSum / (count.realValue - 1)
       case .population:
-        return squareSum / Double(count)
+        return squareSum / count.realValue
     }
   }
   
@@ -32,8 +32,8 @@ extension Collection {
   /// The time complexity of this method is O(n).
   @inlinable
   public func standardDeviation<T: ConvertibleToReal>(of variable: KeyPath<Element, T>,
-                                                      composition: DataSetComposition) -> Double {
+                                                      from composition: DataSetComposition) -> Double {
     
-    variance(of: variable, composition: composition).squareRoot()
+    variance(of: variable, from: composition).squareRoot()
   }
 }
