@@ -6,7 +6,8 @@ public func allTests() -> [XCTestCaseEntry] {
     testCase(AveragesTests.allTests),
     testCase(VariabilityTests.allTests),
     testCase(SummationTests.allTests),
-    testCase(CorrelationTests.allTests)
+    testCase(CorrelationTests.allTests),
+    testCase(CovarianceTests.allTests)
   ]
 }
 #endif
