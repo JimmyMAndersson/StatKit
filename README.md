@@ -17,7 +17,16 @@ Welcome to **StatKit**, a collection of statistical analysis tools for Swift dev
 
 ## Builtin Statistics
 
-StatKit extends the Swift standard library to include relevant functionality for statistical analysis in the types you work with every day.
+StatKit extends the Swift standard library to include relevant functionality for statistical analysis in the types you work with every day. Using StatKit, you will be able to calculate a variety of useful statistics such as:
+
+* **Central Tendency**  
+*Calculate modes, means, and medians of your data collections.*
+
+* **Variability**  
+*Compute variances and standard deviations.*
+
+* **Correlation**  
+*Find linear tendencies and covariance of measurements.* 
 
 A simple example would be to calculate the modes of an integer array, which can be done easily with the following piece of code:
 
@@ -110,7 +119,7 @@ To install StatKit using [Cocoapods](https://cocoapods.org/), simply add `pod St
 
 ## Contributions and support
 
-StatKit is a young project, and is likely to have limitations. These limitations are most likely to be discovered and uncovered as more people starts using it, since use cases may vary greatly between developers.
+StatKit is a young project that is under active development, and is likely to have limitations. These limitations are most likely to be discovered and uncovered as more people starts using it, since use cases may vary greatly between developers.
 
 If you would like to see some missing feature in the library, feel free to open an issue and open a Pull Request. Every Pull Request - from documentation additions to advanced computational functionality - is welcome.
 
