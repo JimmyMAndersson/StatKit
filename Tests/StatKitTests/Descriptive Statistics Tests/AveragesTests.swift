@@ -61,43 +61,38 @@ final class AveragesTests: XCTestCase {
   
   func testStringMode() {
     let string = "Protocol Oriented Programming is amazing!"
-    let calculatedMode = string.mode(of: \.self)
-    let expectedMode = Set<Character>(["i", "o", " ", "r"])
+    let calculatedMode = string.mode(of: \.self).sorted()
+    let expectedMode = Set<Character>(["i", "o", " ", "r"]).sorted()
     
     XCTAssertEqual(calculatedMode.count, expectedMode.count)
-    for element in calculatedMode {
-      XCTAssert(expectedMode.contains(element))
-    }
+    XCTAssert(calculatedMode == expectedMode)
   }
   
   func testIntArrayMode() {
     let intArray = [1, 2, 3, 4, 5, 6, 4]
-    let calculatedMode = intArray.mode(of: \.self)
-    let expectedMode = Set<Int>([4])
+    let calculatedMode = intArray.mode(of: \.self).sorted()
+    let expectedMode = Set<Int>([4]).sorted()
     
     XCTAssertEqual(calculatedMode.count, expectedMode.count)
-    for element in calculatedMode {
-      XCTAssert(expectedMode.contains(element))
-    }
+    XCTAssert(calculatedMode == expectedMode)
   }
   
   func testDoubleSetMode() {
     let doubleSet = Set<Double>(arrayLiteral: 1, 2, 3, 4, 5, 6, 7, 5, 4)
-    let calculatedMode = doubleSet.mode(of: \.self)
-    let expectedMode = Set<Double>([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0])
+    let calculatedMode = doubleSet.mode(of: \.self).sorted()
+    let expectedMode = Set<Double>([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0]).sorted()
     
     XCTAssertEqual(calculatedMode.count, expectedMode.count)
-    for element in calculatedMode {
-      XCTAssert(expectedMode.contains(element))
-    }
+    XCTAssert(calculatedMode == expectedMode)
   }
   
   func testEmptyStringMode() {
     let emptyString = ""
-    let calculatedMode = emptyString.mode(of: \.self)
-    let expectedMode = Set<Character>()
+    let calculatedMode = emptyString.mode(of: \.self).sorted()
+    let expectedMode = Set<Character>().sorted()
     
     XCTAssertEqual(calculatedMode.count, expectedMode.count)
+    XCTAssert(calculatedMode == expectedMode)
   }
   
   func testIntegerGeometricMean() {
