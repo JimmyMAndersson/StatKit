@@ -1,5 +1,5 @@
 <p align="center">
-<img src="StatKit Logo.png" width="500" max-width="90%" alt="StatKit" />
+<img src="https://raw.githubusercontent.com/JimmyMAndersson/StatKit/master/StatKit%20Logo.png" width="500" max-width="90%" alt="StatKit" />
 </p>
 
 <p align="center">
