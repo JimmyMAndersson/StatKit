@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                       = "StatKit"
-  spec.version                    = "0.1.1"
+  spec.version                    = "0.1.2"
   spec.summary                    = "StatKit adds statistical analysis tools to your Swift projects."
   spec.homepage                   = "https://github.com/JimmyMAndersson/StatKit"
   spec.license                    = { :type => "MIT", :file => "LICENSE" }

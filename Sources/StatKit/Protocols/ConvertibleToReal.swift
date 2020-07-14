@@ -17,8 +17,11 @@ extension ConvertibleToReal where Self: BinaryFloatingPoint {
 // - MARK: Floating Point Types
 extension Double: ConvertibleToReal {}
 extension Float: ConvertibleToReal {}
-extension Float80: ConvertibleToReal {}
 extension CGFloat: ConvertibleToReal {}
+
+#if !(arch(arm) || arch(arm64))
+extension Float80: ConvertibleToReal {}
+#endif
 
 // - MARK: Integer Types
 extension Int: ConvertibleToReal {}
