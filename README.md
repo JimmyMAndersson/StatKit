@@ -115,7 +115,14 @@ import StatKit
 ```
 ### Cocoapods
 
-To install StatKit using [Cocoapods](https://cocoapods.org/), simply add `pod StatKit` to your Podfile.  
+To install StatKit using [Cocoapods](https://cocoapods.org/), simply add `pod 'StatKit'` to your Podfile. To use a specific version, check out the [Podfile reference](https://guides.cocoapods.org/using/the-podfile.html) for the appropriate syntax.
+
+```ruby
+target 'MyApp' do
+  use_frameworks!
+  pod 'StatKit'
+end
+```
 
 ## Contributions and support
 
