@@ -1,17 +1,14 @@
 /// A helper object for calculating the Pearson Correlation Coefficient.
-internal struct PearsonCorrelationCalculator: CorrelationCalculationProtocol {
-  func compute<T, U, C>(for X: KeyPath<C.Element, T>,
-                        and Y: KeyPath<C.Element, U>,
-                        in collection: C,
-                        as composition: DataSetComposition) -> Double
+struct PearsonsProductMomentCalculator: LinearCorrelationCalculator {
+  func compute<T, U, C>(
+    for X: KeyPath<C.Element, T>,
+    and Y: KeyPath<C.Element, U>,
+    in collection: C,
+    as composition: DataSetComposition) -> Double
     where T: ConvertibleToReal, U: ConvertibleToReal, C: Collection {
       
-      if collection.count < 2 {
-        return .nan
-      }
-      if X == Y {
-        return 1
-      }
+      guard X != Y else { return 1 }
+      
       let XStdDev = collection.standardDeviation(of: X, from: composition)
       let YStdDev = collection.standardDeviation(of: Y, from: composition)
       let stdDevProduct = XStdDev * YStdDev
