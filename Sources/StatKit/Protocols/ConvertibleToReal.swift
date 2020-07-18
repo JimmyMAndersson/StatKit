@@ -19,7 +19,7 @@ extension Double: ConvertibleToReal {}
 extension Float: ConvertibleToReal {}
 extension CGFloat: ConvertibleToReal {}
 
-#if !(arch(arm) || arch(arm64))
+#if !(arch(arm) || arch(arm64) || os(watchOS))
 extension Float80: ConvertibleToReal {}
 #endif
 

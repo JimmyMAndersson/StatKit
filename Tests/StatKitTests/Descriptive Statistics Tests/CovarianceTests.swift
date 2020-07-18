@@ -70,7 +70,7 @@ final class CovarianceTests: XCTestCase {
                             CGPoint(x: 9, y: 62),
                             CGPoint(x: 10, y: 69)]
         
-        let calculatedCovariance = cgPointArray.covariance(of: \.x, and: \.y, from: .population)
+        _ = cgPointArray.covariance(of: \.x, and: \.y, from: .population)
       }
     }
   }
@@ -161,7 +161,7 @@ final class CovarianceTests: XCTestCase {
                             CGPoint(x: 9, y: 62),
                             CGPoint(x: 10, y: 69)]
         
-        let calculatedCovariance = cgPointArray.covariance(of: \.x, and: \.y, from: .sample)
+        _ = cgPointArray.covariance(of: \.x, and: \.y, from: .sample)
       }
     }
   }
