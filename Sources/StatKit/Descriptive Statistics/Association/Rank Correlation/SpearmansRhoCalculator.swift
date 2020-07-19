@@ -6,8 +6,8 @@ struct SpearmansRhoCalculator: RankCorrelationCalculator {
                         as composition: DataSetComposition) -> Double
     where T: Comparable & Hashable, U: Comparable & Hashable, C: Collection {
       
-      let XRanks = collection.lazy.rank(X, by: >)
-      let YRanks = collection.lazy.rank(Y, by: >)
+      let XRanks = collection.lazy.rank(X, by: >, strategy: .fractional)
+      let YRanks = collection.lazy.rank(Y, by: >, strategy: .fractional)
       let ranks: [(X: Double, Y: Double)] = Array(zip(XRanks, YRanks))
       
       return ranks
