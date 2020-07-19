@@ -21,6 +21,8 @@ public enum RankingStrategy {
   case fractional
   /// The Standard Competition ranking strategy.
   case standardCompetition
+  /// The Modified Competition ranking strategy.
+  case modifiedCompetition
   
   /// A calculator object that can be used to compute the specified rank.
   @usableFromInline
@@ -30,6 +32,8 @@ public enum RankingStrategy {
         return FractionalRanker()
       case .standardCompetition:
         return StandardCompetitionRanker()
+      case .modifiedCompetition:
+        return ModifiedCompetitionRanker()
     }
   }
 }

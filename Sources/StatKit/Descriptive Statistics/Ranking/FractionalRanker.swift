@@ -22,7 +22,7 @@ internal struct FractionalRanker: RankingStrategyProtocol {
         guard
           let rankSum = ranks[element[keyPath: X]]?.rankSum,
           let occurences = ranks[element[keyPath: X]]?.occurences
-          else { fatalError("Could not calculate Spearman's Rho coefficient. Some ranks were missing")}
+          else { fatalError("Could not calculate Fractional ranking. Some ranks were missing")}
         
         return rankSum.realValue / occurences.realValue
       }
