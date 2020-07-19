@@ -21,6 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		7F80B6BF24C4A5CB0057FA07 /* RankingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80B6BE24C4A5CB0057FA07 /* RankingStrategy.swift */; };
+		7F80B6C124C4A6880057FA07 /* FractionalRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80B6C024C4A6880057FA07 /* FractionalRanker.swift */; };
+		7FD8FB0D24C4AB9F0060E865 /* FractionalRankingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8FB0C24C4AB9F0060E865 /* FractionalRankingTests.swift */; };
 		OBJ_53 /* DataSetComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* DataSetComposition.swift */; };
 		OBJ_54 /* Correlation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Correlation.swift */; };
 		OBJ_55 /* LinearCorrelationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* LinearCorrelationMethod.swift */; };
@@ -62,6 +65,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F80B6BE24C4A5CB0057FA07 /* RankingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingStrategy.swift; sourceTree = "<group>"; };
+		7F80B6C024C4A6880057FA07 /* FractionalRanker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractionalRanker.swift; sourceTree = "<group>"; };
+		7FD8FB0C24C4AB9F0060E865 /* FractionalRankingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractionalRankingTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Correlation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Correlation.swift; sourceTree = "<group>"; };
 		OBJ_14 /* LinearCorrelationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearCorrelationMethod.swift; sourceTree = "<group>"; };
 		OBJ_15 /* PearsonsProductMomentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearsonsProductMomentCalculator.swift; sourceTree = "<group>"; };
@@ -163,6 +169,8 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_23 /* Ranking.swift */,
+				7F80B6BE24C4A5CB0057FA07 /* RankingStrategy.swift */,
+				7F80B6C024C4A6880057FA07 /* FractionalRanker.swift */,
 			);
 			path = Ranking;
 			sourceTree = "<group>";
@@ -218,6 +226,7 @@
 				OBJ_36 /* RankCorrelationTests.swift */,
 				OBJ_37 /* SummationTests.swift */,
 				OBJ_38 /* VariabilityTests.swift */,
+				7FD8FB0C24C4AB9F0060E865 /* FractionalRankingTests.swift */,
 			);
 			path = "Descriptive Statistics Tests";
 			sourceTree = "<group>";
@@ -231,7 +240,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -244,7 +253,6 @@
 				OBJ_46 /* README.md */,
 				OBJ_47 /* StatKit.podspec */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -339,7 +347,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_40 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -397,11 +405,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 0;
 			files = (
+				7F80B6C124C4A6880057FA07 /* FractionalRanker.swift in Sources */,
 				OBJ_53 /* DataSetComposition.swift in Sources */,
 				OBJ_54 /* Correlation.swift in Sources */,
 				OBJ_55 /* LinearCorrelationMethod.swift in Sources */,
 				OBJ_56 /* PearsonsProductMomentCalculator.swift in Sources */,
 				OBJ_57 /* RankCorrelationMethod.swift in Sources */,
+				7F80B6BF24C4A5CB0057FA07 /* RankingStrategy.swift in Sources */,
 				OBJ_58 /* SpearmansRhoCalculator.swift in Sources */,
 				OBJ_59 /* Averages.swift in Sources */,
 				OBJ_60 /* MeanType.swift in Sources */,
@@ -431,6 +441,7 @@
 				OBJ_86 /* SummationTests.swift in Sources */,
 				OBJ_87 /* VariabilityTests.swift in Sources */,
 				OBJ_88 /* XCTestManifests.swift in Sources */,
+				7FD8FB0D24C4AB9F0060E865 /* FractionalRankingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
