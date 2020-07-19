@@ -2,7 +2,7 @@
 internal struct FractionalRanker: RankingStrategyProtocol {
   func rank<T, S>(_ X: KeyPath<S.Element, T>,
                   in sequence: S,
-                  by order: (T, T) -> Bool) -> [Double]
+                  by order: (_ lhs: T, _ rhs: T) -> Bool) -> [Double]
     where T: Comparable, T: Hashable, S: Sequence {
       
       let ranks = sequence.lazy.map { element in element[keyPath: X] }

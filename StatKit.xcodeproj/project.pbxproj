@@ -24,6 +24,8 @@
 		7F80B6BF24C4A5CB0057FA07 /* RankingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80B6BE24C4A5CB0057FA07 /* RankingStrategy.swift */; };
 		7F80B6C124C4A6880057FA07 /* FractionalRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F80B6C024C4A6880057FA07 /* FractionalRanker.swift */; };
 		7FD8FB0D24C4AB9F0060E865 /* FractionalRankingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8FB0C24C4AB9F0060E865 /* FractionalRankingTests.swift */; };
+		7FD8FB0F24C4C1FA0060E865 /* StandardCompetitionRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8FB0E24C4C1FA0060E865 /* StandardCompetitionRanker.swift */; };
+		7FD8FB1124C4C4BC0060E865 /* StandardCompetitionRankingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD8FB1024C4C4BC0060E865 /* StandardCompetitionRankingTests.swift */; };
 		OBJ_53 /* DataSetComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_9 /* DataSetComposition.swift */; };
 		OBJ_54 /* Correlation.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* Correlation.swift */; };
 		OBJ_55 /* LinearCorrelationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_14 /* LinearCorrelationMethod.swift */; };
@@ -68,6 +70,8 @@
 		7F80B6BE24C4A5CB0057FA07 /* RankingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingStrategy.swift; sourceTree = "<group>"; };
 		7F80B6C024C4A6880057FA07 /* FractionalRanker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractionalRanker.swift; sourceTree = "<group>"; };
 		7FD8FB0C24C4AB9F0060E865 /* FractionalRankingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FractionalRankingTests.swift; sourceTree = "<group>"; };
+		7FD8FB0E24C4C1FA0060E865 /* StandardCompetitionRanker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCompetitionRanker.swift; sourceTree = "<group>"; };
+		7FD8FB1024C4C4BC0060E865 /* StandardCompetitionRankingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCompetitionRankingTests.swift; sourceTree = "<group>"; };
 		OBJ_12 /* Correlation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Correlation.swift; sourceTree = "<group>"; };
 		OBJ_14 /* LinearCorrelationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearCorrelationMethod.swift; sourceTree = "<group>"; };
 		OBJ_15 /* PearsonsProductMomentCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PearsonsProductMomentCalculator.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			children = (
 				OBJ_23 /* Ranking.swift */,
 				7F80B6BE24C4A5CB0057FA07 /* RankingStrategy.swift */,
+				7FD8FB0E24C4C1FA0060E865 /* StandardCompetitionRanker.swift */,
 				7F80B6C024C4A6880057FA07 /* FractionalRanker.swift */,
 			);
 			path = Ranking;
@@ -227,6 +232,7 @@
 				OBJ_37 /* SummationTests.swift */,
 				OBJ_38 /* VariabilityTests.swift */,
 				7FD8FB0C24C4AB9F0060E865 /* FractionalRankingTests.swift */,
+				7FD8FB1024C4C4BC0060E865 /* StandardCompetitionRankingTests.swift */,
 			);
 			path = "Descriptive Statistics Tests";
 			sourceTree = "<group>";
@@ -416,6 +422,7 @@
 				OBJ_59 /* Averages.swift in Sources */,
 				OBJ_60 /* MeanType.swift in Sources */,
 				OBJ_61 /* Ranking.swift in Sources */,
+				7FD8FB0F24C4C1FA0060E865 /* StandardCompetitionRanker.swift in Sources */,
 				OBJ_62 /* Summation.swift in Sources */,
 				OBJ_63 /* Variability.swift in Sources */,
 				OBJ_64 /* ConvertibleToReal.swift in Sources */,
@@ -437,6 +444,7 @@
 				OBJ_82 /* AveragesTests.swift in Sources */,
 				OBJ_83 /* CovarianceTests.swift in Sources */,
 				OBJ_84 /* LinearCorrelationTests.swift in Sources */,
+				7FD8FB1124C4C4BC0060E865 /* StandardCompetitionRankingTests.swift in Sources */,
 				OBJ_85 /* RankCorrelationTests.swift in Sources */,
 				OBJ_86 /* SummationTests.swift in Sources */,
 				OBJ_87 /* VariabilityTests.swift in Sources */,
