@@ -10,7 +10,6 @@ protocol RankingStrategyProtocol {
   /// - parameter strategy: The calculation method to use.
   /// - returns: An array with the rank of each original element,
   /// where the index of a rank corresponds to the index of the element in the original array.
-  /// The time complexity of this method is O(n).
   func rank<T, S>(_ X: KeyPath<S.Element, T>,
                   in sequence: S,
                   by order: (_ lhs: T, _ rhs: T) -> Bool) -> [Double]
@@ -18,8 +17,10 @@ protocol RankingStrategyProtocol {
 }
 
 public enum RankingStrategy {
-  /// The Fractional Rank strategy.
+  /// The Fractional ranking strategy.
   case fractional
+  /// The Standard Competition ranking strategy.
+  case standardCompetition
   
   /// A calculator object that can be used to compute the specified rank.
   @usableFromInline
@@ -27,6 +28,8 @@ public enum RankingStrategy {
     switch self {
       case .fractional:
         return FractionalRanker()
+      case .standardCompetition:
+        return StandardCompetitionRanker()
     }
   }
 }
