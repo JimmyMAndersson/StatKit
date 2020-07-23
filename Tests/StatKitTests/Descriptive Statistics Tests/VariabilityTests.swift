@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -66,3 +68,5 @@ final class VariabilityTests: XCTestCase {
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation)
   }
 }
+
+#endif

@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
   name: "StatKit",
   platforms: [
-    .macOS(.v10_15), .iOS(.v13), .tvOS(.v13), .watchOS(.v6)
+    .macOS(.v10_15), .iOS(.v13), .tvOS(.v13)
   ],
   products: [
     .library(
@@ -19,5 +19,8 @@ let package = Package(
     .testTarget(
       name: "StatKitTests",
       dependencies: ["StatKit"]),
+  ],
+  swiftLanguageVersions: [
+    .v5
   ]
 )

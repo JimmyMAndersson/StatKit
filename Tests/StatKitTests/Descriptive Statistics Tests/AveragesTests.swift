@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -129,3 +131,5 @@ final class AveragesTests: XCTestCase {
     XCTAssertTrue(calculatedMean.isNaN)
   }
 }
+
+#endif
