@@ -25,6 +25,8 @@ public enum RankingStrategy {
   case modifiedCompetition
   /// The Ordinal ranking strategy.
   case ordinal
+  /// The Dense ranking strategy.
+  case dense
   
   /// A calculator object that can be used to compute the specified rank.
   @usableFromInline
@@ -38,6 +40,8 @@ public enum RankingStrategy {
         return ModifiedCompetitionRanker()
       case .ordinal:
         return OrdinalRanker()
+      case .dense:
+        return DenseRanker()
     }
   }
 }

@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -37,3 +39,5 @@ final class OrdinalRankingTests: XCTestCase {
     XCTAssertEqual(calculatedRank, expectedRank)
   }
 }
+
+#endif
