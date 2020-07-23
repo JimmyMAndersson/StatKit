@@ -23,6 +23,8 @@ public enum RankingStrategy {
   case standardCompetition
   /// The Modified Competition ranking strategy.
   case modifiedCompetition
+  /// The Ordinal ranking strategy.
+  case ordinal
   
   /// A calculator object that can be used to compute the specified rank.
   @usableFromInline
@@ -34,6 +36,8 @@ public enum RankingStrategy {
         return StandardCompetitionRanker()
       case .modifiedCompetition:
         return ModifiedCompetitionRanker()
+      case .ordinal:
+        return OrdinalRanker()
     }
   }
 }
