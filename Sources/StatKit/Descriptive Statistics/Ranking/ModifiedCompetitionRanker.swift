@@ -17,7 +17,8 @@ internal struct ModifiedCompetitionRanker: RankingStrategyProtocol {
       }
       
       return sequence.map { element in
-        guard let rank = ranks[element[keyPath: X]] else {
+        let key = element[keyPath: X]
+        guard let rank = ranks[key] else {
           fatalError("Could not calculate Modified Competition ranking. Some ranks were missing")
         }
         return rank
