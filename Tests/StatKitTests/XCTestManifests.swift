@@ -1,4 +1,4 @@
-#if !canImport(ObjectiveC)
+#if !canImport(ObjectiveC) && !os(watchOS)
 import XCTest
 
 extension AveragesTests {

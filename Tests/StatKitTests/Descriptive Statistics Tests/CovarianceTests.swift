@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -184,3 +186,5 @@ final class CovarianceTests: XCTestCase {
     XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 0.00001)
   }
 }
+
+#endif

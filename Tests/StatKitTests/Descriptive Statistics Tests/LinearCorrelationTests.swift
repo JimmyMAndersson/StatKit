@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -94,3 +96,5 @@ final class LinearCorrelationTests: XCTestCase {
     XCTAssert(calculatedCorrelation.isNaN)
   }
 }
+
+#endif

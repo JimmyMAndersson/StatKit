@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -18,3 +20,5 @@ final class SummationTests: XCTestCase {
     XCTAssertEqual(calculatedSum, expectedSum)
   }
 }
+
+#endif

@@ -1,3 +1,5 @@
+#if !os(watchOS)
+
 import XCTest
 @testable import StatKit
 
@@ -75,3 +77,5 @@ final class RankCorrelationTests: XCTestCase {
     XCTAssertTrue(calculatedAssociation.isNaN)
   }
 }
+
+#endif
