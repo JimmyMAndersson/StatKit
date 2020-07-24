@@ -21,6 +21,6 @@ let package = Package(
       dependencies: ["StatKit"]),
   ],
   swiftLanguageVersions: [
-    .v5
+    .version("5.2")
   ]
 )
