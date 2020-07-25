@@ -16,7 +16,7 @@ extension AveragesTests {
         ("testFloatingPointMedian", testFloatingPointMedian),
         ("testIntArrayMode", testIntArrayMode),
         ("testIntegerArithmeticMean", testIntegerArithmeticMean),
-        ("testBigNumberIntegerArithmeticMean",testBigNumberIntegerArithmeticMean),
+        ("testBigNumberIntegerArithmeticMean", testBigNumberIntegerArithmeticMean),
         ("testIntegerGeometricMean", testIntegerGeometricMean),
         ("testIntMedian", testIntMedian),
         ("testObjectArithmeticMean", testObjectArithmeticMean),
