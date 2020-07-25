@@ -25,7 +25,7 @@ extension MeanType {
                                                              in collection: U) -> Double {
     switch self {
       case .arithmetic:
-        return collection.sum(over: variable).realValue / Double(collection.count)
+        return collection.average(over: variable)
       
       #if canImport(Darwin) || canImport(Glibc)
       case .geometric:

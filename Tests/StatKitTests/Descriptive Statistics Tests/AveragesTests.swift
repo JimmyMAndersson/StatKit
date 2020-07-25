@@ -11,6 +11,14 @@ final class AveragesTests: XCTestCase {
     
     XCTAssertEqual(calculatedMean, expectedMean)
   }
+  func testBigNumberIntegerArithmeticMean() {
+    let value = Int.max / 9
+    let bigIntArray = [9*value, 6*value, 3*value]
+    let calculateMean = bigIntArray.mean(of: \.self)
+    let expectedMean = Double(value*6)
+    print(expectedMean, calculateMean, bigIntArray)
+    XCTAssertEqual(calculateMean, expectedMean)
+  }
   
   func testFloatingPointArithmeticMean() {
     let fpArray = [1.5, 2.5, 3.5, 4.5, 5.5]
