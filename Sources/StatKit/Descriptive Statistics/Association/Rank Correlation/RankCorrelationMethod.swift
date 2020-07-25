@@ -12,7 +12,10 @@ internal protocol RankCorrelationCalculator {
     and Y: KeyPath<C.Element, U>,
     in collection: C,
     as composition: DataSetComposition) -> Double
-    where T: Comparable & Hashable, U: Comparable & Hashable, C: Collection
+    where
+    T: Comparable & Hashable & ConvertibleToReal,
+    U: Comparable & Hashable & ConvertibleToReal,
+    C: Collection
 }
 
 /// Different methods of calculating the association measure between arbitrary comparable variables.
@@ -20,12 +23,25 @@ public enum RankCorrelationMethod {
   /// Spearman's Rho coefficient.
   case spearmansRho
   
+  #if canImport(Darwin) || canImport(Glibc)
+  /// Kendall's Tau coefficient.
+  ///
+  /// This method calculates the Tau-B coefficient, which takes ties into account.
+  /// The time complexity is O(n * log(n)).
+  case kendallsTau
+  #endif
+  
   /// A calculator object that can be used to compute the specified measure of association.
   @usableFromInline
   internal var calculator: RankCorrelationCalculator {
     switch self {
       case .spearmansRho:
         return SpearmansRhoCalculator()
+      
+      #if canImport(Darwin) || canImport(Glibc)
+      case .kendallsTau:
+        return KendallsTauCalculator()
+      #endif
     }
   }
 }

@@ -12,7 +12,10 @@ internal protocol LinearCorrelationCalculator {
     and Y: KeyPath<C.Element, U>,
     in collection: C,
     as composition: DataSetComposition) -> Double
-    where T: ConvertibleToReal, U: ConvertibleToReal, C: Collection
+    where
+    T: ConvertibleToReal,
+    U: ConvertibleToReal,
+    C: Collection
 }
 
 /// Different methods of calculating the correlation coefficient between arbitrary numeric variables.
