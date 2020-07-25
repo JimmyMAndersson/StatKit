@@ -113,9 +113,18 @@ extension RankCorrelationTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__RankCorrelationTests = [
+        ("testKendallsTauBWithSingleEntryCollection", testKendallsTauBWithSingleEntryCollection),
+        ("testKendallsTauWithEmptyCollection", testKendallsTauWithEmptyCollection),
+        ("testKendallsTauWithSingleVariable", testKendallsTauWithSingleVariable),
         ("testPearsonCorrelationWithEmptyCollection", testPearsonCorrelationWithEmptyCollection),
+        ("testPearsonCorrelationWithSingleEntryCollection", testPearsonCorrelationWithSingleEntryCollection),
         ("testPearsonCorrelationWithSingleVariable", testPearsonCorrelationWithSingleVariable),
+        ("testPopulationKendallsTau", testPopulationKendallsTau),
+        ("testPopulationKendallsTauWithTies", testPopulationKendallsTauWithTies),
         ("testPopulationSpearmanAssociation", testPopulationSpearmanAssociation),
+        ("testSampleKendallsTau", testSampleKendallsTau),
+        ("testSampleKendallsTauWithAllTies", testSampleKendallsTauWithAllTies),
+        ("testSampleKendallsTauWithTies", testSampleKendallsTauWithTies),
         ("testSampleSpearmanAssociation", testSampleSpearmanAssociation),
     ]
 }

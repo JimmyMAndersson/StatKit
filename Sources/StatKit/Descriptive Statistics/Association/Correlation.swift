@@ -13,7 +13,9 @@ extension Collection {
     of X: KeyPath<Element, T>,
     and Y: KeyPath<Element, U>,
     from composition: DataSetComposition) -> Double
-    where T: ConvertibleToReal, U: ConvertibleToReal {
+    where
+    T: ConvertibleToReal,
+    U: ConvertibleToReal {
       
       guard count > 1 else { return .nan }
       
@@ -46,7 +48,9 @@ extension Collection {
     of X: KeyPath<Element, T>,
     and Y: KeyPath<Element, U>,
     for composition: DataSetComposition) -> Double
-    where T: ConvertibleToReal, U: ConvertibleToReal {
+    where
+    T: ConvertibleToReal,
+    U: ConvertibleToReal {
       
       guard count > 1 else { return .nan }
       return method.calculator.compute(for: X, and: Y, in: self, as: composition)
@@ -67,7 +71,9 @@ extension Collection {
     of X: KeyPath<Element, T>,
     and Y: KeyPath<Element, U>,
     for composition: DataSetComposition) -> Double
-    where T: Comparable & Hashable, U: Comparable & Hashable {
+    where
+    T: Comparable & Hashable & ConvertibleToReal,
+    U: Comparable & Hashable & ConvertibleToReal {
       
       guard count > 1 else { return .nan }
       return method.calculator.compute(for: X, and: Y, in: self, as: composition)

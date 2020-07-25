@@ -5,7 +5,10 @@ internal struct PearsonsProductMomentCalculator: LinearCorrelationCalculator {
     and Y: KeyPath<C.Element, U>,
     in collection: C,
     as composition: DataSetComposition) -> Double
-    where T: ConvertibleToReal, U: ConvertibleToReal, C: Collection {
+    where
+    T: ConvertibleToReal,
+    U: ConvertibleToReal,
+    C: Collection {
       
       guard X != Y else { return 1 }
       
