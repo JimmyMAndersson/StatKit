@@ -1,6 +1,6 @@
 /// A helper object for calculating the Pearson Correlation Coefficient.
-struct PearsonsProductMomentCalculator: LinearCorrelationCalculator {
-  func compute<T, U, C>(
+internal struct PearsonsProductMomentCalculator: LinearCorrelationCalculator {
+  internal func compute<T, U, C>(
     for X: KeyPath<C.Element, T>,
     and Y: KeyPath<C.Element, U>,
     in collection: C,

@@ -6,6 +6,7 @@ extension AveragesTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__AveragesTests = [
+        ("testBigNumberIntegerArithmeticMean", testBigNumberIntegerArithmeticMean),
         ("testDoubleSetMode", testDoubleSetMode),
         ("testEmptySetArithmeticMean", testEmptySetArithmeticMean),
         ("testEmptySetGeometricMean", testEmptySetGeometricMean),
@@ -16,7 +17,6 @@ extension AveragesTests {
         ("testFloatingPointMedian", testFloatingPointMedian),
         ("testIntArrayMode", testIntArrayMode),
         ("testIntegerArithmeticMean", testIntegerArithmeticMean),
-        ("testBigNumberIntegerArithmeticMean", testBigNumberIntegerArithmeticMean),
         ("testIntegerGeometricMean", testIntegerGeometricMean),
         ("testIntMedian", testIntMedian),
         ("testObjectArithmeticMean", testObjectArithmeticMean),
@@ -148,6 +148,8 @@ extension VariabilityTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__VariabilityTests = [
+        ("testEmptySetSampleStandardDeviation", testEmptySetSampleStandardDeviation),
+        ("testEmptySetSampleVariance", testEmptySetSampleVariance),
         ("testFloatingPointPopulationStandardDeviation", testFloatingPointPopulationStandardDeviation),
         ("testFloatingPointPopulationVariance", testFloatingPointPopulationVariance),
         ("testFloatingPointSampleStandardDeviation", testFloatingPointSampleStandardDeviation),
@@ -156,6 +158,8 @@ extension VariabilityTests {
         ("testIntegerPopulationVariance", testIntegerPopulationVariance),
         ("testIntegerSampleStandardDeviation", testIntegerSampleStandardDeviation),
         ("testIntegerSampleVariance", testIntegerSampleVariance),
+        ("testSingleEntrySetSampleStandardDeviation", testSingleEntrySetSampleStandardDeviation),
+        ("testSingleEntrySetSampleVariance", testSingleEntrySetSampleVariance),
     ]
 }
 

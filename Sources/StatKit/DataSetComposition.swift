@@ -4,5 +4,4 @@ public enum DataSetComposition {
   case population
   /// A data set containing a subset of the items under study.
   case sample
-  
 }

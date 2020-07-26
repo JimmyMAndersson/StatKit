@@ -10,9 +10,10 @@ protocol RankingStrategyProtocol {
   /// - parameter strategy: The calculation method to use.
   /// - returns: An array with the rank of each original element,
   /// where the index of a rank corresponds to the index of the element in the original array.
-  func rank<T, S>(_ X: KeyPath<S.Element, T>,
-                  in sequence: S,
-                  by order: (_ lhs: T, _ rhs: T) -> Bool) -> [Double]
+  func rank<T, S>(
+    _ X: KeyPath<S.Element, T>,
+    in sequence: S,
+    by order: (_ lhs: T, _ rhs: T) -> Bool) -> [Double]
     where T: Comparable & Hashable, S: Sequence
 }
 

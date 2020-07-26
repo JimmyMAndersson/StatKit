@@ -5,7 +5,8 @@ internal struct ModifiedCompetitionRanker: RankingStrategyProtocol {
                   by order: (_ lhs: T, _ rhs: T) -> Bool) -> [Double]
     where T: Comparable, T: Hashable, S: Sequence {
       
-      let ranks = sequence.lazy.map { element in element[keyPath: X] }
+      let ranks = sequence.lazy
+        .map { element in element[keyPath: X] }
         .sorted(by: order)
         .enumerated()
         .reduce(into: [T: Double]()) { (result, enumeration) in

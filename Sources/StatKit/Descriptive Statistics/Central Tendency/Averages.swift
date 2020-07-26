@@ -6,7 +6,9 @@ extension Collection {
   /// - returns: The mean of all items.
   /// Since the arithmetic mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
-  public func mean<T: ConvertibleToReal>(_ mean: MeanType = .arithmetic, of variable: KeyPath<Element, T>) -> Double {
+  public func mean<T: ConvertibleToReal>(_ mean: MeanType = .arithmetic,
+                                         of variable: KeyPath<Element, T>) -> Double {
+    
     guard !isEmpty else {
       return .nan
     }
@@ -20,7 +22,8 @@ extension Collection {
   /// The time complexity of this method is O(n).
   @inlinable
   public func median<T: ConvertibleToReal & Comparable>(of variable: KeyPath<Element, T>) -> Double {
-    guard count > 0 else {
+    
+    guard !isEmpty else {
       return .nan
     }
     
@@ -56,17 +59,15 @@ extension Sequence {
   /// The time complexity of this method is O(n).
   @inlinable
   public func mode<T: Hashable>(of variable: KeyPath<Element, T>) -> Set<T> {
+    
     let dictionary = lazy.reduce(into: [T: Int]()) { result, element in
       result[element[keyPath: variable], default: 0] += 1
     }
     let maximumOccurence = dictionary.values.max() ?? 0
     
     let result = dictionary.lazy
-      .filter { variableCount in
-        variableCount.value == maximumOccurence
-    }
-    .map { variableCount in
-      variableCount.key
+      .compactMap { (key, count) in
+        count == maximumOccurence ? key : .none
     }
     
     return Set(result)
