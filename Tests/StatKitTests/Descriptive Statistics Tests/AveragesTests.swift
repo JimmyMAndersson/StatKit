@@ -47,9 +47,49 @@ final class AveragesTests: XCTestCase {
     XCTAssertTrue(calculatedMean.isNaN)
   }
   
-  func testIntMedian() {
+  func testEvenCountMeanMedian() {
+    let intArray = [-1, 4, 2, 20, 3, 6]
+    let calculatedMedian = intArray.median(.mean, of: \.self)
+    let expectedMedian = 3.5
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testOddCountMeanMedian() {
     let intArray = [-1, 4, 2, 20, 3]
-    let calculatedMedian = intArray.median(of: \.self)
+    let calculatedMedian = intArray.median(.mean, of: \.self)
+    let expectedMedian = 3.0
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testEvenCountLowMedian() {
+    let intArray = [-1, 4, 2, 20, 3, 6]
+    let calculatedMedian = intArray.median(.low, of: \.self)
+    let expectedMedian = 3.0
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testOddCountLowMedian() {
+    let intArray = [-1, 4, 2, 20, 3]
+    let calculatedMedian = intArray.median(.low, of: \.self)
+    let expectedMedian = 3.0
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testEvenCountHighMedian() {
+    let intArray = [-1, 4, 2, 20, 3, 6]
+    let calculatedMedian = intArray.median(.high, of: \.self)
+    let expectedMedian = 4.0
+    
+    XCTAssertEqual(calculatedMedian, expectedMedian)
+  }
+  
+  func testOddCountHighMedian() {
+    let intArray = [-1, 4, 2, 20, 3]
+    let calculatedMedian = intArray.median(.high, of: \.self)
     let expectedMedian = 3.0
     
     XCTAssertEqual(calculatedMedian, expectedMedian)
