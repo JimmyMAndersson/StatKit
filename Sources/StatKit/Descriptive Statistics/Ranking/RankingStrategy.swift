@@ -17,6 +17,7 @@ protocol RankingStrategyProtocol {
     where T: Comparable & Hashable, S: Sequence
 }
 
+/// A calculation strategy for ranking comparable variables.
 public enum RankingStrategy {
   /// The Fractional ranking strategy.
   case fractional
