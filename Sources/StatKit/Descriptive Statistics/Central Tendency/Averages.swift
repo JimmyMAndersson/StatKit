@@ -1,18 +1,21 @@
 extension Collection {
   
   /// Calculates the selected mean of the selected variable.
-  ///
+  /// - parameter strategy: The strategy used to compute the mean.
   /// - parameter variable: The variable over which to calculate the mean.
   /// - returns: The mean of all items.
   /// Since the arithmetic mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
-  public func mean<T: ConvertibleToReal>(_ mean: MeanType = .arithmetic,
-                                         of variable: KeyPath<Element, T>) -> Double {
-    
-    guard !isEmpty else {
-      return .nan
-    }
-    return mean.compute(for: variable, in: self)
+  @inlinable
+  public func mean<T>(
+    _ strategy: MeanStrategy = .arithmetic,
+    of variable: KeyPath<Element, T>) -> Double
+    where T: ConvertibleToReal {
+      
+      guard !isEmpty else {
+        return .nan
+      }
+      return strategy.compute(for: variable, in: self)
   }
   
   /// Calculates the median of the selected variable.
@@ -21,30 +24,16 @@ extension Collection {
   /// Since the median has no meaning on an empty set, this method returns a NaN if the collection is empty.
   /// The time complexity of this method is O(n).
   @inlinable
-  public func median<T: ConvertibleToReal & Comparable>(of variable: KeyPath<Element, T>) -> Double {
-    
-    guard !isEmpty else {
-      return .nan
-    }
-    
-    let isEvenNumberOfElements = count.isMultiple(of: 2)
-    let sortedElements = lazy.sorted(by: { smaller, greater in
-      smaller[keyPath: variable] < greater[keyPath: variable]
-    })
-    
-    let index = (count - 1) / 2
-    
-    var median: Double
-    
-    if isEvenNumberOfElements {
-      let firstValue = sortedElements[index][keyPath: variable].realValue
-      let secondValue = sortedElements[index + 1][keyPath: variable].realValue
-      median = (firstValue + secondValue) / 2
-    } else {
-      median = sortedElements[index][keyPath: variable].realValue
-    }
-    
-    return median
+  public func median<T>(
+    _ strategy: MedianStrategy = .mean,
+    of variable: KeyPath<Element, T>) -> Double
+    where T: Comparable & ConvertibleToReal {
+      
+      guard !isEmpty else {
+        return .nan
+      }
+      
+      return strategy.compute(for: variable, in: self)
   }
 }
 
