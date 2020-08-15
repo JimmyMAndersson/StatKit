@@ -8,8 +8,8 @@ extension Sequence {
   /// - parameter method: The computation method used to estimate the sample quantile.
   ///
   /// The time complexity of this method is O(n * log(n)).
-  /// Since quantiles have no meaning on empty collections or probabilities that diverge from the [0, 1] range in any way,
-  /// this method returns a NaN for calls under such conditions.
+  /// Since quantiles have no meaning on empty collections or probabilities outside of range [0, 1],
+  /// this method returns a NaN for calls under any such conditions.
   public func quantile<T>(
     _ probability: Double,
     of X: KeyPath<Element, T>,
