@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                       = "StatKit"
-  spec.version                    = "0.1.2"
+  spec.version                    = "0.2.0"
   spec.summary                    = "StatKit adds statistical analysis tools to your Swift projects."
   spec.homepage                   = "https://github.com/JimmyMAndersson/StatKit"
   spec.license                    = { :type => "MIT", :file => "LICENSE" }
@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
   spec.watchos.deployment_target  = "6.0"
   spec.tvos.deployment_target     = "13.0"
   spec.swift_version              = '5.2'
-  spec.source                     = { :git => "https://github.com/JimmyMAndersson/StatKit.git", :tag => "v#{spec.version}" }
+  spec.source                     = { :git => "https://github.com/JimmyMAndersson/StatKit.git", :tag => "#{spec.version}" }
   spec.source_files               = "Sources/StatKit/**/*.swift"
   spec.cocoapods_version          = '>= 1.9.0'
 end
