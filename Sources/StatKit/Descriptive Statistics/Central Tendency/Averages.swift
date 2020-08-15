@@ -13,7 +13,7 @@ extension Collection {
     where T: ConvertibleToReal {
       
       guard !isEmpty else {
-        return .nan
+        return .signalingNaN
       }
       return strategy.compute(for: variable, in: self)
   }
@@ -30,7 +30,7 @@ extension Collection {
     where T: Comparable & ConvertibleToReal {
       
       guard !isEmpty else {
-        return .nan
+        return .signalingNaN
       }
       
       return strategy.compute(for: variable, in: self)

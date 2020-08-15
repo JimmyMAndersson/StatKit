@@ -29,11 +29,17 @@ extension Sequence {
       guard !ordered.isEmpty else { return .signalingNaN }
       
       if probability == 1 {
-        return ordered.last?[keyPath: X].realValue ?? .signalingNaN
+        guard let element = ordered.last else {
+          fatalError("Could not fetch last element of Sequence.")
+        }
+        return element[keyPath: X].realValue
       }
       
       if probability == 0 {
-        return ordered.first?[keyPath: X].realValue ?? .signalingNaN
+        guard let element = ordered.first else {
+          fatalError("Could not fetch first element of Sequence.")
+        }
+        return element[keyPath: X].realValue
       }
       
       switch method {

@@ -34,7 +34,7 @@ internal struct KendallsTauCalculator: RankCorrelationCalculator {
           let numerator = (concordant - discordant).realValue
           let tieProduct = (combinations - tiesX) * (combinations - tiesY)
           let denominator = sqrt(tieProduct.realValue)
-          guard !denominator.isZero else { return .nan }
+          guard !denominator.isZero else { return .signalingNaN }
           
           return numerator / denominator
       }

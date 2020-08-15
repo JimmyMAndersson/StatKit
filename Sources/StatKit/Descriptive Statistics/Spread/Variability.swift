@@ -8,7 +8,7 @@ extension Collection {
   @inlinable
   public func variance<T: ConvertibleToReal>(of variable: KeyPath<Element, T>,
                                              from composition: DataSetComposition) -> Double {
-    guard !isEmpty else { return .nan }
+    guard !isEmpty else { return .signalingNaN }
     guard count > 1 else { return 0 }
     
     let mean = self.mean(of: variable)

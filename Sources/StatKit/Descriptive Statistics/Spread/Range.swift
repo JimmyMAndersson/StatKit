@@ -16,7 +16,7 @@ extension Sequence {
         high = Swift.max(element[keyPath: X].realValue, high)
       }
       
-      guard low.isFinite, high.isFinite else { return .nan }
+      guard low.isFinite, high.isFinite else { return .signalingNaN }
       
       return high - low
   }
