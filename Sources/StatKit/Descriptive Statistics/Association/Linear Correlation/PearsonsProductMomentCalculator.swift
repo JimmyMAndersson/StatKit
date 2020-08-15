@@ -16,7 +16,7 @@ internal struct PearsonsProductMomentCalculator: LinearCorrelationCalculator {
       let YStdDev = collection.standardDeviation(of: Y, from: composition)
       let stdDevProduct = XStdDev * YStdDev
       if stdDevProduct.isZero {
-        return .nan
+        return .signalingNaN
       }
       
       switch composition {

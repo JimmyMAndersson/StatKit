@@ -17,7 +17,7 @@ extension Collection {
     T: ConvertibleToReal,
     U: ConvertibleToReal {
       
-      guard count > 1 else { return .nan }
+      guard count > 1 else { return .signalingNaN }
       
       let meanX = lazy.mean(of: X)
       let meanY = lazy.mean(of: Y)
@@ -52,7 +52,7 @@ extension Collection {
     T: ConvertibleToReal,
     U: ConvertibleToReal {
       
-      guard count > 1 else { return .nan }
+      guard count > 1 else { return .signalingNaN }
       return method.calculator.compute(for: X, and: Y, in: self, as: composition)
   }
   
@@ -75,7 +75,7 @@ extension Collection {
     T: Comparable & Hashable & ConvertibleToReal,
     U: Comparable & Hashable & ConvertibleToReal {
       
-      guard count > 1 else { return .nan }
+      guard count > 1 else { return .signalingNaN }
       return method.calculator.compute(for: X, and: Y, in: self, as: composition)
   }
 }
