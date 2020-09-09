@@ -13,6 +13,9 @@ public enum MeanStrategy {
   /// A case specifying the geometric mean.
   case geometric
   #endif
+  
+  /// A case specifying the harmonic mean.
+  case harmonic
 }
 
 extension MeanStrategy {
@@ -39,7 +42,7 @@ extension MeanStrategy {
         
         #if canImport(Darwin) || canImport(Glibc)
         case .geometric:
-          let product = collection.lazy.reduce(into: 1) { product, term in
+          let product = collection.reduce(into: 1) { product, term in
             product *= term[keyPath: variable]
           }.realValue
           
@@ -47,6 +50,14 @@ extension MeanStrategy {
           return pow(product, power)
         
         #endif
+        
+        case .harmonic:
+          let reciprocalSum = collection.reduce(into: 0) { sum, element in
+            sum += 1 / element[keyPath: variable].realValue
+          }
+        
+          guard reciprocalSum.isNormal else { return .signalingNaN }
+          return collection.count.realValue / reciprocalSum
       }
   }
 }

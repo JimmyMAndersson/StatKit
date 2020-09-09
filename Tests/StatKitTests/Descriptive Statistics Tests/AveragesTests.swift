@@ -159,7 +159,7 @@ final class AveragesTests: XCTestCase {
     let calculatedMean = fpArray.mean(.geometric, of: \.self)
     let expectedMean = 3.1793248391
     
-    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 0.000001)
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 0.00001)
   }
   
   func testObjectGeometricMean() {
@@ -169,13 +169,47 @@ final class AveragesTests: XCTestCase {
     let calculatedYMean = objectArray.mean(.geometric, of: \.y)
     let expectedYMean = 9.0
     
-    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 0.000000001)
-    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 0.000000001)
+    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 0.00001)
+    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 0.00001)
   }
   
   func testEmptySetGeometricMean() {
     let emptySet = [Int]()
     let calculatedMean = emptySet.mean(.geometric, of: \.self)
+    
+    XCTAssertTrue(calculatedMean.isNaN)
+  }
+  
+  func testIntegerHarmonicMean() {
+    let intArray = [1, 2, 3, 4, 5]
+    let calculatedMean = intArray.mean(.harmonic, of: \.self)
+    let expectedMean = 2.18978
+    
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 0.00001)
+  }
+  
+  func testFloatingPointGHarmonicMean() {
+    let fpArray = [1.5, 2.5, 3.5, 4.5, 5.5]
+    let calculatedMean = fpArray.mean(.harmonic, of: \.self)
+    let expectedMean = 2.8467
+    
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 0.00001)
+  }
+  
+  func testObjectHarmonicMean() {
+    let objectArray = [CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9)]
+    let calculatedXMean = objectArray.mean(.harmonic, of: \.x)
+    let expectedXMean = 3.0
+    let calculatedYMean = objectArray.mean(.harmonic, of: \.y)
+    let expectedYMean = 9.0
+    
+    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 0.00001)
+    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 0.00001)
+  }
+  
+  func testEmptySetHarmonicMean() {
+    let emptySet = [Int]()
+    let calculatedMean = emptySet.mean(.harmonic, of: \.self)
     
     XCTAssertTrue(calculatedMean.isNaN)
   }
