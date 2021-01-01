@@ -1,5 +1,3 @@
-public typealias UniformDistribution = ContinuousUniformDistribution
-
 public struct ContinuousUniformDistribution: ContinuousDistribution {
   public let lowerBound: Double
   public let upperBound: Double
@@ -51,7 +49,8 @@ public struct ContinuousUniformDistribution: ContinuousDistribution {
   }
   
   public func sample(_ numberOfElements: Int) -> [Double] {
-    return (0 ..< numberOfElements)
-      .map { _ in Double.random(in: lowerBound ... upperBound) }
+    return (0 ..< numberOfElements).map { _ in
+      .random(in: lowerBound ... upperBound)
+    }
   }
 }
