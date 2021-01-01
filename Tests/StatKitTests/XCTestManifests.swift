@@ -40,6 +40,7 @@ extension ContinuousUniformDistributionTests {
     // to regenerate.
     static let __allTests__ContinuousUniformDistributionTests = [
         ("testCDF", testCDF),
+        ("testExcessKurtosis", testExcessKurtosis),
         ("testKurtosis", testKurtosis),
         ("testMean", testMean),
         ("testSkewness", testSkewness),
@@ -84,6 +85,7 @@ extension ExponentialDistributionTests {
     // to regenerate.
     static let __allTests__ExponentialDistributionTests = [
         ("testCDF", testCDF),
+        ("testExcessKurtosis", testExcessKurtosis),
         ("testKurtosis", testKurtosis),
         ("testMean", testMean),
         ("testSkewness", testSkewness),
