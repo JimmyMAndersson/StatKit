@@ -25,3 +25,9 @@ public protocol Distribution {
   /// - returns: An array of sampled values.
   func sample(_ numberOfElements: Int) -> [Value]
 }
+
+public extension Distribution {
+  var excessKurtosis: Double {
+    return kurtosis - 3
+  }
+}

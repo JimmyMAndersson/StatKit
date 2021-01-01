@@ -36,6 +36,14 @@ final class ContinuousUniformDistributionTests: XCTestCase {
     XCTAssertEqual(offsetDistribution.kurtosis, 9 / 5, accuracy: 0.00001)
   }
   
+  func testExcessKurtosis() {
+    let standardDistribution = ContinuousUniformDistribution(0, 1)
+    XCTAssertEqual(standardDistribution.excessKurtosis, -6 / 5, accuracy: 0.00001)
+    
+    let offsetDistribution = ContinuousUniformDistribution(-4, 9)
+    XCTAssertEqual(offsetDistribution.excessKurtosis, -6 / 5, accuracy: 0.00001)
+  }
+  
   func testCDF() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
     XCTAssertEqual(standardDistribution.cdf(x: 1), 1, accuracy: 0.00001)
