@@ -43,6 +43,7 @@ extension ContinuousUniformDistributionTests {
         ("testExcessKurtosis", testExcessKurtosis),
         ("testKurtosis", testKurtosis),
         ("testMean", testMean),
+        ("testSampling", testSampling),
         ("testSkewness", testSkewness),
         ("testVariance", testVariance),
     ]
@@ -88,6 +89,7 @@ extension ExponentialDistributionTests {
         ("testExcessKurtosis", testExcessKurtosis),
         ("testKurtosis", testKurtosis),
         ("testMean", testMean),
+        ("testSampling", testSampling),
         ("testSkewness", testSkewness),
         ("testVariance", testVariance),
     ]

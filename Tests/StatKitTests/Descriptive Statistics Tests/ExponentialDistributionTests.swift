@@ -55,6 +55,21 @@ final class ExponentialDistributionTests: XCTestCase {
     XCTAssertEqual(secondExpDistribution.cdf(x: -8), 0, accuracy: 0.00001)
     XCTAssertEqual(secondExpDistribution.cdf(x: 0), 0, accuracy: 0.00001)
   }
+  
+  func testSampling() {
+    let numberOfSamples = 100000
+    let distribution = ExponentialDistribution(rate: 0.2)
+    let samples = distribution.sample(numberOfSamples)
+    var proportions = samples.reduce(into: [Int: Double]()) { result, number in result[Int(number), default: 0] += 1 }
+    
+    for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
+    
+    XCTAssertEqual(samples.count, numberOfSamples)
+    XCTAssertEqual(proportions[0] ?? -1, 0.18126, accuracy: 0.01)
+    XCTAssertEqual(proportions[1] ?? -1, 0.14841, accuracy: 0.01)
+    XCTAssertEqual(proportions[2] ?? -1, 0.12150, accuracy: 0.01)
+    XCTAssertEqual(proportions[3] ?? -1, 0.09948, accuracy: 0.01)
+  }
 }
 
 #endif
