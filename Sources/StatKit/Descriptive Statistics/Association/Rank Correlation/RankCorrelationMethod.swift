@@ -23,13 +23,11 @@ public enum RankCorrelationMethod {
   /// Spearman's Rho coefficient.
   case spearmansRho
   
-  #if canImport(Darwin) || canImport(Glibc)
   /// Kendall's Tau coefficient.
   ///
   /// This method calculates the Tau-B coefficient, which takes ties into account.
   /// The time complexity is O(n * log(n)).
   case kendallsTau
-  #endif
   
   /// A calculator object that can be used to compute the specified measure of association.
   @usableFromInline
@@ -38,10 +36,8 @@ public enum RankCorrelationMethod {
       case .spearmansRho:
         return SpearmansRhoCalculator()
       
-      #if canImport(Darwin) || canImport(Glibc)
       case .kendallsTau:
         return KendallsTauCalculator()
-      #endif
     }
   }
 }

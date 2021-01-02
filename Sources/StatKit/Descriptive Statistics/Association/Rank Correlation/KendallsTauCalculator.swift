@@ -1,10 +1,9 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
+#if os(Linux)
 import Glibc
+#else
+import Darwin
 #endif
 
-#if canImport(Darwin) || canImport(Glibc)
 /// A helper object for calculating Kendall's Tau Coefficient.
 internal struct KendallsTauCalculator: RankCorrelationCalculator {
   internal func compute<T, U, C>(
@@ -153,4 +152,3 @@ private extension ArraySlice {
       return discordant
   }
 }
-#endif
