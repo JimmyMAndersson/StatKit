@@ -1,7 +1,7 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
+#if os(Linux)
 import Glibc
+#else
+import Darwin
 #endif
 
 /// An enumeration specififying a type of mean value calculation..
@@ -9,10 +9,8 @@ public enum MeanStrategy {
   /// A case specifying the arithmetic mean.
   case arithmetic
   
-  #if canImport(Darwin) || canImport(Glibc)
   /// A case specifying the geometric mean.
   case geometric
-  #endif
   
   /// A case specifying the harmonic mean.
   case harmonic
@@ -40,7 +38,6 @@ extension MeanStrategy {
               result += (element[keyPath: variable].realValue - result) / count.realValue
         }
         
-        #if canImport(Darwin) || canImport(Glibc)
         case .geometric:
           let product = collection.reduce(into: 1) { product, term in
             product *= term[keyPath: variable]
@@ -48,8 +45,6 @@ extension MeanStrategy {
           
           let power = 1 / Double(collection.count)
           return pow(product, power)
-        
-        #endif
         
         case .harmonic:
           let reciprocalSum = collection.reduce(into: 0) { sum, element in

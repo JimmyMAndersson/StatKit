@@ -1,7 +1,7 @@
-#if canImport(Darwin)
-import Darwin
-#elseif canImport(Glibc)
+#if os(Linux)
 import Glibc
+#else
+import Darwin
 #endif
 
 public struct ExponentialDistribution: ContinuousDistribution {
