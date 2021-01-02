@@ -65,10 +65,4 @@ public struct PoissonDistribution: DiscreteDistribution {
     
     return arrivals
   }
-  
-  public func sample(_ numberOfElements: Int) -> [Int] {
-    (0 ..< numberOfElements).map { _ in
-      sample()
-    }
-  }
 }

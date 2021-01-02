@@ -47,10 +47,4 @@ public struct ContinuousUniformDistribution: ContinuousDistribution {
   public func sample() -> Double {
     return .random(in: lowerBound ... upperBound)
   }
-  
-  public func sample(_ numberOfElements: Int) -> [Double] {
-    return (0 ..< numberOfElements).map { _ in
-      .random(in: lowerBound ... upperBound)
-    }
-  }
 }
