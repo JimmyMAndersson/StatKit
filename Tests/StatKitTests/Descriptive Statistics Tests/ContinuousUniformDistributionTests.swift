@@ -55,6 +55,30 @@ final class ContinuousUniformDistributionTests: XCTestCase {
     XCTAssertEqual(offsetDistribution.cdf(x: -8), 0, accuracy: 0.00001)
     XCTAssertEqual(offsetDistribution.cdf(x: 0), 4 / 13, accuracy: 0.00001)
   }
+  
+  func testSampling() {
+    let numberOfSamples = 100000
+    let distribution = ContinuousUniformDistribution(0, 1)
+    let samples = distribution.sample(numberOfSamples)
+    var proportions = samples.reduce(into: [Double: Double]()) { result, number in
+      let index = (number * 10).rounded(.down) / 10
+      result[index, default: 0] += 1
+    }
+    
+    for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
+    
+    XCTAssertEqual(samples.count, numberOfSamples)
+    XCTAssertEqual(proportions[0.0] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.1] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.2] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.3] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.4] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.5] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.6] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.7] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.8] ?? -1, 0.1, accuracy: 0.01)
+    XCTAssertEqual(proportions[0.9] ?? -1, 0.1, accuracy: 0.01)
+  }
 }
 
 #endif
