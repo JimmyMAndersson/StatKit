@@ -54,10 +54,4 @@ public struct ExponentialDistribution: ContinuousDistribution {
     let uniformSample = Double.random(in: 0 ..< 1)
     return log(1 - uniformSample) / -rate
   }
-  
-  public func sample(_ numberOfElements: Int) -> [Double] {
-    (0 ..< numberOfElements).map { _ in
-      sample()
-    }
-  }
 }
