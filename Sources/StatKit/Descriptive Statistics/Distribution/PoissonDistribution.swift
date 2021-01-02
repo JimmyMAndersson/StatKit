@@ -8,9 +8,11 @@ public struct PoissonDistribution: DiscreteDistribution {
   public let rate: Double
   
   public init(rate: Double) {
-    guard 0 < rate else {
-      fatalError("The rate of an Exponential Distribution must be strictly greater than 0 (\(rate) was used).")
-    }
+    precondition(
+      0 < rate,
+      "The rate of an Exponential Distribution must be strictly greater than 0 (\(rate) was used)."
+    )
+    
     self.rate = rate
   }
   
@@ -31,9 +33,7 @@ public struct PoissonDistribution: DiscreteDistribution {
   }
   
   public func pmf(x: Int) -> Double {
-    guard 0 < x else {
-      fatalError("Poisson distributions only support non-negative integers (\(x) provided).")
-    }
+    precondition(0 <= x, "Poisson distributions only support non-negative integers (\(x) provided).")
     
     let nominator = pow(rate, Double(x)) * exp(-rate)
     let denominator = Double(factorial(x))

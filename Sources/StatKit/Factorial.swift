@@ -1,8 +1,7 @@
 public func factorial(_ x: Int) -> Int {
+  precondition(0 <= x, "The factorial function is only defined for non-negative integers (\(x) was provided).")
+  
   switch x {
-    case ..<0:
-      fatalError("The factorial function is only defined for non-negative integers (\(x) was provided).")
-      
     case 0:
       return 1
       
