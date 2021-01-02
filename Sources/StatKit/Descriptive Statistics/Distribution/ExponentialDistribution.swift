@@ -8,9 +8,11 @@ public struct ExponentialDistribution: ContinuousDistribution {
   public let rate: Double
   
   public init(rate: Double) {
-    guard 0 < rate else {
-      fatalError("The rate of an Exponential Distribution must be strictly greater than 0 (\(rate) was used).")
-    }
+    precondition(
+      0 < rate,
+      "The rate of an Exponential Distribution must be strictly greater than 0 (\(rate) was used)."
+    )
+    
     self.rate = rate
   }
   
@@ -18,7 +20,7 @@ public struct ExponentialDistribution: ContinuousDistribution {
     switch x {
       case ..<0:
         return 0
-      
+        
       default:
         return rate * exp(-rate * x)
     }

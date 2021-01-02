@@ -3,9 +3,8 @@ public struct ContinuousUniformDistribution: ContinuousDistribution {
   public let upperBound: Double
   
   public init(_ lowerBound: Double, _ upperBound: Double) {
-    guard lowerBound < upperBound else {
-      fatalError("The lower bound needs to be strictly less than the upper bound.")
-    }
+    precondition(lowerBound < upperBound, "The lower bound needs to be strictly less than the upper bound.")
+    
     self.lowerBound = lowerBound
     self.upperBound = upperBound
   }
