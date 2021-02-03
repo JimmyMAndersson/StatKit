@@ -8,7 +8,7 @@ public struct NormalDistribution: ContinuousDistribution {
   public let mean: Double
   public let variance: Double
   
-  init(mean: Double, variance: Double) {
+  public init(mean: Double, variance: Double) {
     precondition(
       0 < variance,
       "The variance of a normal distribution must be positive (\(variance) was used)."
@@ -18,7 +18,7 @@ public struct NormalDistribution: ContinuousDistribution {
     self.variance = variance
   }
   
-  init(mean: Double, standardDeviation: Double) {
+  public init(mean: Double, standardDeviation: Double) {
     precondition(
       0 < standardDeviation,
       "The standard deviation of a normal distribution must be positive (\(standardDeviation) was used)."
