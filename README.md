@@ -29,6 +29,9 @@ StatKit extends the Swift standard library to include relevant functionality for
 * **Correlation**  
 *Find linear tendencies and covariance of measurements.* 
 
+* **Distributions**  
+*Make computations using several common distribution types.* 
+
 A simple example would be to calculate the modes of an integer array, which can be done easily with the following piece of code:
 
 ```swift
@@ -82,11 +85,18 @@ measurements.standardDeviation(of: \.litersPer10Km, from: .sample)
 
 As you can see, using KeyPath's makes the StatKit API easy to use and reusable across completely arbitrary custom structures. This example also exposes two other recuring patterns.
 
-## Specifying calculation methods and bias functions
+## Distributions
 
-Firstly, the possibility to pick between different calculation methods that is seen in the `mean(_:of:)` method. Since there are often multiple methods of calculating the same type of statistic, StatKit provides parameters for you to choose which method you would like to use. If deemed a better fit for the problem at hand, the `.arithmetic` argument could be exchanged for `.geometric`. This change, rather obviously, results in computation of the geometric mean, instead of the arithmetic mean.
+StatKit provides multiple discrete and continuous distribution types for you to work with. These allow you to compute probabilities, calculate common moments such as the skewness and kurtosis, and sample random numbers from a specific data distribution.
 
-Secondly, the possibility of specifying whether your data constitues an entire population or whether it should be considered a sample. Since many estimators use different techniques to reduce the bias of their results, you are able to provide the library with important hints about the data sets composition to get better calculations. In the fuel consumption example, the `standardDeviation(of:from:)` method gives you the opportunity to specify whether your measurements consitute the entire population, or merely a sample of the population that is under investigation.
+```swift
+let normal = NormalDistribution(mean: 0, variance: 1)
+print(normal.cdf(x: 0))
+// Prints 0.5
+
+let normalRandomVariables = normal.sample(10)
+// Generates 10 samples from the normal distribution
+```
 
 ## System Requirements
 To use StatKit, make sure that your system has Swift 5.2 (or later) installed. If you’re using a Mac, also make sure that `xcode-select` points at an Xcode installation that includes a valid version of Swift and that you’re running macOS Catalina (10.15) or later.
@@ -103,7 +113,7 @@ To install StatKit using the [Swift Package Manager](https://swift.org/package-m
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.1.0")
+        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.3.0")
     ],
     ...
 )
@@ -127,8 +137,9 @@ end
 
 ## Contributions and support
 
-StatKit is a young project that is under active development, and is likely to have limitations. These limitations are most likely to be discovered and uncovered as more people starts using it, since use cases may vary greatly between developers.
+StatKit is a young project that is under active development. Our vision is to create the go-to statistics library for Swift developers, much like SciPy and NumPy are for the Python language.
 
-If you would like to see some missing feature in the library, feel free to open an issue and open a Pull Request. Every Pull Request - from documentation additions to advanced computational functionality - is welcome.
+[:heart: Consider becoming a sponsor](https://github.com/sponsors/JimmyMAndersson) to support the development of this library.\
+You could cover an afternoon coffee or a meal to keep my neurons firing.
 
-Enjoy using **StatKit**!
+Thank you for your contribution, and enjoy using **StatKit**!
