@@ -43,10 +43,10 @@ public struct NormalDistribution: ContinuousDistribution {
         return 0.5
         
       case ...0:
-        return 0.5 - 0.5 * erfApproximation(-erfParameter)
+        return 0.5 - 0.5 * GaussErrorFunction.erf(-erfParameter)
         
       default:
-        return 0.5 + 0.5 * erfApproximation(erfParameter)
+        return 0.5 + 0.5 * GaussErrorFunction.erf(erfParameter)
     }
   }
   
@@ -59,24 +59,5 @@ public struct NormalDistribution: ContinuousDistribution {
     let u1 = Double.random(in: 0 ... 1)
     let u2 = Double.random(in: 0 ... 1)
     return mean + sqrt(-2 * variance * log(u1)) * sin(2 * .pi * u2)
-  }
-}
-
-private extension NormalDistribution {
-  /// Approximates the Gauss Error Function according to Abramovitz and Stegrun's work.
-  /// - parameter z: The parameter for which to approximate the error function (must be greater than 0).
-  /// - returns: A sample from the distribution.
-  func erfApproximation(_ z: Double) -> Double {
-    let expansion = erfCoefficients
-      .enumerated()
-      .reduce(into: 1.0) { (result, element) in
-        result += element.element * pow(z, Double(element.offset + 1))
-      }
-    return 1 - 1 / pow(expansion, 16)
-  }
-  
-  /// Coefficients used when approximating the Gauss Error Function according to Abramovitz and Stegrun's work.
-  var erfCoefficients: [Double] {
-    [0.0705230784, 0.0422820123, 0.0092705272, 0.0001520143, 0.0002765672, 0.0000430638]
   }
 }
