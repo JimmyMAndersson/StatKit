@@ -28,10 +28,10 @@ final class RangeTests: XCTestCase {
   }
   
   func testObjectArrayRange() {
-    let array = [CGPoint(x: 1, y: 2),
-                 CGPoint(x: 6, y: -5),
-                 CGPoint(x: 10, y: 19),
-                 CGPoint(x: 28, y: 2)]
+    let array = [SIMD2(x: 1, y: 2),
+                 SIMD2(x: 6, y: -5),
+                 SIMD2(x: 10, y: 19),
+                 SIMD2(x: 28, y: 2)]
     
     let calculatedRange = array.range(of: \.y)
     let expectedRange = 24.0

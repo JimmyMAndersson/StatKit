@@ -54,16 +54,16 @@ extension CovarianceTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__CovarianceTests = [
-        ("testCGPointNegativePopulationCovariance", testCGPointNegativePopulationCovariance),
-        ("testCGPointNegativeSampleCovariance", testCGPointNegativeSampleCovariance),
-        ("testCGPointPopulationCovariancePerformance", testCGPointPopulationCovariancePerformance),
-        ("testCGPointPositivePopulationCovariance", testCGPointPositivePopulationCovariance),
-        ("testCGPointPositiveSampleCovariance", testCGPointPositiveSampleCovariance),
-        ("testCGPointSampleCovariancePerformance", testCGPointSampleCovariancePerformance),
         ("testPopulationCovarianceCommutativity", testPopulationCovarianceCommutativity),
         ("testPopulationCovarianceWithSingleVariable", testPopulationCovarianceWithSingleVariable),
         ("testSampleCovariancecommutativity", testSampleCovariancecommutativity),
         ("testSampleCovarianceWithSingleVariable", testSampleCovarianceWithSingleVariable),
+        ("testSIMD2NegativePopulationCovariance", testSIMD2NegativePopulationCovariance),
+        ("testSIMD2NegativeSampleCovariance", testSIMD2NegativeSampleCovariance),
+        ("testSIMD2PopulationCovariancePerformance", testSIMD2PopulationCovariancePerformance),
+        ("testSIMD2PositivePopulationCovariance", testSIMD2PositivePopulationCovariance),
+        ("testSIMD2PositiveSampleCovariance", testSIMD2PositiveSampleCovariance),
+        ("testSIMD2SampleCovariancePerformance", testSIMD2SampleCovariancePerformance),
     ]
 }
 

@@ -1,18 +1,29 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/JimmyMAndersson/StatKit/master/StatKit%20Logo.png" width="500" max-width="90%" alt="StatKit" />
+    <img src="https://raw.githubusercontent.com/JimmyMAndersson/StatKit/master/StatKit%20Logo.png" width="500" max-width="90%" alt="StatKit" />
+</p>
+
+***
+<p align="center">
+    <img src="https://img.shields.io/github/workflow/status/JimmyMAndersson/StatKit/Test%20Suite?label=test%20suite" />
+    <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="Platform Support" />
 </p>
 
 <p align="center">
-    <img src="https://github.com/JimmyMAndersson/StatKit/workflows/Quality%20Assurance/badge.svg" />
-    <img src="https://img.shields.io/badge/Swift-5.2-blue.svg" />
-    <a href="https://swift.org/package-manager">
-        <img src="https://img.shields.io/badge/swiftpm-compatible-orange.svg?style=flat" alt="Swift Package Manager" />
-    </a>
-     <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="macOS + iOS + iPadOS" />
     <a href="https://twitter.com/jimmymandersson">
         <img src="https://img.shields.io/badge/twitter-@jimmymandersson-blue.svg?style=flat" alt="Twitter: @jimmymandersson" />
     </a>
+    <a href="https://github.com/sponsors/JimmyMAndersson">
+        <img src="https://img.shields.io/badge/%E2%9D%A4-sponsor this project-blue.svg?style=flat" alt="Sponsor this project" />
+    </a>
 </p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/swift-5.2-blueviolet.svg" />
+    <img src="https://img.shields.io/badge/swift pm-compatible-blueviolet.svg?style=flat" alt="Swift PM Compatible" />
+    <img src="https://img.shields.io/badge/cocoapods-compatible-blueviolet.svg?style=flat" alt="Cocoapods Compatible" />
+</p>
+
+***
 
 Welcome to **StatKit**, a collection of statistical analysis tools for Swift developers. StatKit adds tools for statistical analysis directly to the Swift types you use every day, such as Array, Set, and Dictionary. 
 
