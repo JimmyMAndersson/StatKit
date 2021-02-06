@@ -1,4 +1,6 @@
+#if canImport(CoreGraphics)
 import CoreGraphics
+#endif
 
 /// A protocol marking types that are directly convertible to a real number type.
 public protocol ConvertibleToReal: Numeric {
@@ -21,7 +23,10 @@ extension ConvertibleToReal where Self: BinaryFloatingPoint {
 // - MARK: Floating Point Types
 extension Double: ConvertibleToReal {}
 extension Float: ConvertibleToReal {}
+
+#if canImport(CoreGraphics)
 extension CGFloat: ConvertibleToReal {}
+#endif
 
 #if !(arch(arm) || arch(arm64) || os(watchOS))
 extension Float80: ConvertibleToReal {}
