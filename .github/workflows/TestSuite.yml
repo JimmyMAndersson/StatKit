@@ -1,0 +1,28 @@
+name: Test Suite
+
+on:
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  macOS:
+    runs-on: macos-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Run macOS Rests
+      run: swift test --parallel
+      
+  Linux:
+    runs-on: ubuntu-latest
+    
+    container:
+      image: swift:5.2
+      options: --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --security-opt apparmor=unconfined
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run Linux Tests
+        run: swift test --parallel

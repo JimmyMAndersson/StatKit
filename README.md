@@ -1,18 +1,28 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/JimmyMAndersson/StatKit/master/StatKit%20Logo.png" width="500" max-width="90%" alt="StatKit" />
+    <img src="https://raw.githubusercontent.com/JimmyMAndersson/StatKit/master/StatKit%20Logo.png" width="500" max-width="90%" alt="StatKit" />
+</p>
+
+***
+
+<p align="center">
+    <img src="https://github.com/JimmyMAndersson/StatKit/workflows/Test%20Suite/badge.svg" />
+    <img src="https://img.shields.io/badge/Swift-5.2-blueviolet.svg" />
+    <a href="https://swift.org/package-manager">
+        <img src="https://img.shields.io/badge/Swift PM-compatible-blueviolet.svg?style=flat" alt="Swift Package Manager" />
+    </a>
+    <img src="https://img.shields.io/badge/Platforms-Mac + Linux-blueviolet.svg?style=flat" alt="Platform Support" />
 </p>
 
 <p align="center">
-    <img src="https://github.com/JimmyMAndersson/StatKit/workflows/Quality%20Assurance/badge.svg" />
-    <img src="https://img.shields.io/badge/Swift-5.2-blue.svg" />
-    <a href="https://swift.org/package-manager">
-        <img src="https://img.shields.io/badge/swiftpm-compatible-orange.svg?style=flat" alt="Swift Package Manager" />
-    </a>
-     <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="macOS + iOS + iPadOS" />
     <a href="https://twitter.com/jimmymandersson">
-        <img src="https://img.shields.io/badge/twitter-@jimmymandersson-blue.svg?style=flat" alt="Twitter: @jimmymandersson" />
+        <img src="https://img.shields.io/badge/Twitter-@JimmyMAndersson-blue.svg?style=flat&logo=Twitter" alt="Twitter: @jimmymandersson" />
+    </a>
+    <a href="https://github.com/sponsors/JimmyMAndersson">
+        <img src="https://img.shields.io/badge/%E2%9D%A4-Sponsor This Project-blue.svg?style=flat" alt="Sponsor this project" />
     </a>
 </p>
+
+***
 
 Welcome to **StatKit**, a collection of statistical analysis tools for Swift developers. StatKit adds tools for statistical analysis directly to the Swift types you use every day, such as Array, Set, and Dictionary. 
 

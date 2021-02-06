@@ -11,7 +11,7 @@ final class AveragesTests: XCTestCase {
     
     XCTAssertEqual(calculatedMean, expectedMean)
   }
-
+  
   func testBigNumberIntegerArithmeticMean() {
     let value = Int.max / 9
     let bigIntArray = [9 * value, 6 * value, 3 * value]
@@ -30,7 +30,7 @@ final class AveragesTests: XCTestCase {
   }
   
   func testObjectArithmeticMean() {
-    let objectArray = [CGPoint(x: 0, y: 1), CGPoint(x: 1, y: 2), CGPoint(x: 2, y: 3)]
+    let objectArray = [SIMD2(x: 0, y: 1), SIMD2(x: 1, y: 2), SIMD2(x: 2, y: 3)]
     let calculatedXMean = objectArray.mean(of: \.x)
     let expectedXMean = 1.0
     let calculatedYMean = objectArray.mean(of: \.y)
@@ -163,7 +163,7 @@ final class AveragesTests: XCTestCase {
   }
   
   func testObjectGeometricMean() {
-    let objectArray = [CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9)]
+    let objectArray = [SIMD2(x: 3, y: 9), SIMD2(x: 3, y: 9), SIMD2(x: 3, y: 9)]
     let calculatedXMean = objectArray.mean(.geometric, of: \.x)
     let expectedXMean = 3.0
     let calculatedYMean = objectArray.mean(.geometric, of: \.y)
@@ -197,7 +197,7 @@ final class AveragesTests: XCTestCase {
   }
   
   func testObjectHarmonicMean() {
-    let objectArray = [CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9), CGPoint(x: 3, y: 9)]
+    let objectArray = [SIMD2(x: 3, y: 9), SIMD2(x: 3, y: 9), SIMD2(x: 3, y: 9)]
     let calculatedXMean = objectArray.mean(.harmonic, of: \.x)
     let expectedXMean = 3.0
     let calculatedYMean = objectArray.mean(.harmonic, of: \.y)
