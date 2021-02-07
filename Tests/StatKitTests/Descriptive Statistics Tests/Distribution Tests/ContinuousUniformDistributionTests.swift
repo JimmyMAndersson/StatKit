@@ -1,7 +1,7 @@
 #if !os(watchOS)
 
 import XCTest
-@testable import StatKit
+import StatKit
 
 final class ContinuousUniformDistributionTests: XCTestCase {
   func testMean() {
@@ -59,7 +59,12 @@ final class ContinuousUniformDistributionTests: XCTestCase {
   func testSampling() {
     let numberOfSamples = 100000
     let distribution = ContinuousUniformDistribution(0, 1)
-    let samples = distribution.sample(numberOfSamples)
+    var samples = [Double]()
+    
+    measure {
+      samples = distribution.sample(numberOfSamples)
+    }
+    
     var proportions = samples.reduce(into: [Double: Double]()) { result, number in
       let index = (number * 10).rounded(.down) / 10
       result[index, default: 0] += 1

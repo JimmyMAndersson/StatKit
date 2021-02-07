@@ -1,7 +1,7 @@
 #if !os(watchOS)
 
 import XCTest
-@testable import StatKit
+import StatKit
 
 final class ExponentialDistributionTests: XCTestCase {
   func testMean() {
@@ -59,7 +59,12 @@ final class ExponentialDistributionTests: XCTestCase {
   func testSampling() {
     let numberOfSamples = 100000
     let distribution = ExponentialDistribution(rate: 0.2)
-    let samples = distribution.sample(numberOfSamples)
+    var samples = [Double]()
+    
+    measure {
+      samples = distribution.sample(numberOfSamples)
+    }
+    
     var proportions = samples.reduce(into: [Int: Double]()) { result, number in result[Int(number), default: 0] += 1 }
     
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }

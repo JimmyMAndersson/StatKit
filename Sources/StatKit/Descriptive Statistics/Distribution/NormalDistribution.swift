@@ -60,4 +60,15 @@ public struct NormalDistribution: ContinuousDistribution {
     let u2 = Double.random(in: 0 ... 1)
     return mean + sqrt(-2 * variance * log(u1)) * sin(2 * .pi * u2)
   }
+  
+  public func sample(_ numberOfElements: Int) -> [Double] {
+    precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
+    
+    var uniformGenerator = Xoroshiro256StarStar()
+    return (1 ... numberOfElements).map { _ in
+      let u1 = Double.random(in: 0 ... 1, using: &uniformGenerator)
+      let u2 = Double.random(in: 0 ... 1, using: &uniformGenerator)
+      return mean + sqrt(-2 * variance * log(u1)) * sin(2 * .pi * u2)
+    }
+  }
 }

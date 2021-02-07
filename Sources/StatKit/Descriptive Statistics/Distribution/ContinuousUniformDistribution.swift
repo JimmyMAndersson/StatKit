@@ -47,6 +47,16 @@ public struct ContinuousUniformDistribution: ContinuousDistribution {
   }
   
   public func sample() -> Double {
-    return .random(in: lowerBound ... upperBound)
+    return Double.random(in: lowerBound ... upperBound)
+  }
+  
+  public func sample(_ numberOfElements: Int) -> [Double] {
+    precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
+    
+    var uniformGenerator = Xoroshiro256StarStar()
+    
+    return (1 ... numberOfElements).map { _ in
+      Double.random(in: lowerBound ... upperBound, using: &uniformGenerator)
+    }
   }
 }

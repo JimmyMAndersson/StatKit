@@ -1,7 +1,7 @@
 #if !os(watchOS)
 
 import XCTest
-@testable import StatKit
+import StatKit
 
 final class LinearCorrelationTests: XCTestCase {
   func testPopulationPearsonCorrelation() {

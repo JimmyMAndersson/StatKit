@@ -1,7 +1,7 @@
 #if !os(watchOS)
 
 import XCTest
-@testable import StatKit
+import StatKit
 
 final class PoissonDistributionTests: XCTestCase {
   func testMean() {
@@ -59,7 +59,12 @@ final class PoissonDistributionTests: XCTestCase {
   func testSampling() {
     let numberOfSamples = 100000
     let distribution = PoissonDistribution(rate: 2)
-    let samples = distribution.sample(numberOfSamples)
+    var samples = [Int]()
+    
+    measure {
+      samples = distribution.sample(numberOfSamples)
+    }
+    
     var proportions = samples.reduce(into: [Int: Double]()) { result, number in result[number, default: 0] += 1 }
     
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }

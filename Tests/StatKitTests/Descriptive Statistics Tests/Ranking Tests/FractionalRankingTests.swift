@@ -1,7 +1,7 @@
 #if !os(watchOS)
 
 import XCTest
-@testable import StatKit
+import StatKit
 
 final class FractionalRankingTests: XCTestCase {
   func testDistinctDataSetByDescendingOrder() {
