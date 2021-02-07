@@ -53,7 +53,16 @@ public struct ExponentialDistribution: ContinuousDistribution {
   }
   
   public func sample() -> Double {
-    let uniformSample = Double.random(in: 0 ..< 1)
-    return log(1 - uniformSample) / -rate
+    return log(1 - Double.random(in: 0 ..< 1)) / -rate
+  }
+  
+  public func sample(_ numberOfElements: Int) -> [Double] {
+    precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
+
+    var uniformGenerator = Xoroshiro256StarStar()
+
+    return (1 ... numberOfElements).map { _ in
+      log(1 - Double.random(in: 0 ..< 1, using: &uniformGenerator)) / -rate
+    }
   }
 }

@@ -20,20 +20,16 @@ public protocol Distribution {
   /// Samples a single value from the distribution.
   /// - returns: A sample from the distribution.
   func sample() -> Value
+  
+  /// Samples a specified number of values from the distribution.
+  /// - parameter numberOfElements: The number of samples to generate.
+  /// - returns: An array of sampled values.
+  func sample(_ numberOfElements: Int) -> [Value]
 }
 
 public extension Distribution {
   /// The excess kurtosis of the distribution.
   var excessKurtosis: Double {
     return kurtosis - 3
-  }
-  
-  /// Samples a specified number of values from the distribution.
-  /// - parameter numberOfElements: The number of samples to generate.
-  /// - returns: An array of sampled values.
-  func sample(_ numberOfElements: Int) -> [Value] {
-    (0 ..< numberOfElements).map { _ in
-      sample()
-    }
   }
 }

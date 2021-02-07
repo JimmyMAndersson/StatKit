@@ -7,7 +7,7 @@ import Darwin
 #endif
 
 import XCTest
-@testable import StatKit
+import StatKit
 
 final class CovarianceTests: XCTestCase {
   func testSIMD2PositivePopulationCovariance() {

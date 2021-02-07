@@ -54,15 +54,36 @@ public struct PoissonDistribution: DiscreteDistribution {
   }
   
   public func sample() -> Int {
+    var uniformGenerator = Xoroshiro256StarStar()
     let limit = exp(-rate)
+    
     var arrivals = 0
-    var uniformProduct = Double.random(in: 0 ... 1)
+    var uniformProduct = Double.random(in: 0 ... 1, using: &uniformGenerator)
     
     while limit < uniformProduct {
       arrivals += 1
-      uniformProduct *= Double.random(in: 0 ... 1)
+      uniformProduct *= Double.random(in: 0 ... 1, using: &uniformGenerator)
     }
     
     return arrivals
+  }
+  
+  public func sample(_ numberOfElements: Int) -> [Int] {
+    precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
+    
+    var uniformGenerator = Xoroshiro256StarStar()
+    let limit = exp(-rate)
+    
+    return (1 ... numberOfElements).map { _ in
+      var arrivals = 0
+      var uniformProduct = Double.random(in: 0 ... 1, using: &uniformGenerator)
+      
+      while limit < uniformProduct {
+        arrivals += 1
+        uniformProduct *= Double.random(in: 0 ... 1, using: &uniformGenerator)
+      }
+      
+      return arrivals
+    }
   }
 }
