@@ -94,7 +94,7 @@ measurements.mean(.arithmetic, of: \.litersPer10Km)
 measurements.standardDeviation(of: \.litersPer10Km, from: .sample)
 ```
 
-As you can see, using KeyPath's makes the StatKit API easy to use and reusable across completely arbitrary custom structures. This example also exposes two other recuring patterns.
+As you can see, using KeyPath's makes the StatKit API easy to use and reusable across completely arbitrary custom structures.
 
 ## Distributions
 
