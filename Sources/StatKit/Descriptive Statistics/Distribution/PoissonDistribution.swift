@@ -4,9 +4,13 @@ import Glibc
 import Darwin
 #endif
 
+/// A type modelling a Poisson Distribution.
 public struct PoissonDistribution: DiscreteDistribution {
+  /// The rate of events.
   public let rate: Double
   
+  /// Creates a Poisson Distribution with a specified rate of events.
+  /// - parameter rate: The rate of events for this distribution.
   public init(rate: Double) {
     precondition(
       0 < rate,

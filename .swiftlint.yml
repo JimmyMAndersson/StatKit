@@ -1,12 +1,15 @@
+opt_in_rules:
+  - missing_docs
+
 included:
   - Sources
-  - Tests
 
 excluded:
   - .git
   - .github
   - .swiftpm
   - Package.swift
+  - Tests
 
 analyzer_rules:
   - unused_declaration

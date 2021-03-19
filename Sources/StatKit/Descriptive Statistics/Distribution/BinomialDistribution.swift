@@ -32,6 +32,11 @@ public struct BinomialDistribution: DiscreteDistribution {
     3 + (1 - 6 * probability * (1 - probability)) / variance
   }
   
+  /// Creates a Binomial Distribution for a specified number of trials and a probability.
+  /// - parameter probability: The probability of a successful trial.
+  /// - parameter trials: The number of trials under investigation.
+  ///
+  /// The `probability` and `trials` are also commonly known as `p` and `n`, respectively.
   public init(probability: Double, trials: Int) {
     precondition(
       0 <= probability && probability <= 1,
