@@ -4,9 +4,13 @@ import Glibc
 import Darwin
 #endif
 
+/// A type modelling an Exponential Distribution.
 public struct ExponentialDistribution: ContinuousDistribution {
+  /// The rate of events.
   public let rate: Double
   
+  /// Creates an Exponential Distribution with a specified rate of events.
+  /// - parameter rate: The rate of events for this distribution.
   public init(rate: Double) {
     precondition(
       0 < rate,

@@ -72,6 +72,7 @@ extension Sequence {
   }
 }
 
+/// A method for computing quantiles.
 public enum QuantileEstimationMethod {
   /// Computes the quantile usign the inverse empirical CDF.
   case inverseEmpiricalCDF

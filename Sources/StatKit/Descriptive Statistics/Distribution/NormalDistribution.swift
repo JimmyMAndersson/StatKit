@@ -4,10 +4,14 @@ import Glibc
 import Darwin
 #endif
 
+/// A type modelling a Normal Distribution.
 public struct NormalDistribution: ContinuousDistribution {
   public let mean: Double
   public let variance: Double
   
+  /// Create a Normal DIstribution with a specified mean and variance.
+  /// - parameter mean: The mean value of this distribution.
+  /// - parameter variance: The variance for this distribution.
   public init(mean: Double, variance: Double) {
     precondition(
       0 < variance,
