@@ -22,7 +22,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .population)
     let expectedAssociation = 1.0
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testSampleSpearmanAssociation() {
@@ -43,7 +43,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .sample)
     let expectedAssociation = -0.16514
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testPearsonCorrelationWithSingleVariable() {
@@ -64,7 +64,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .population)
     let expectedAssociation = 1.0
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testPearsonCorrelationWithEmptyCollection() {
@@ -99,7 +99,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .population)
     let expectedAssociation = 0.66666
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testSampleKendallsTau() {
@@ -120,7 +120,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .sample)
     let expectedAssociation = -0.24444
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testSampleKendallsTauWithTies() {
@@ -136,7 +136,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .sample)
     let expectedAssociation = 0.11952
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testPopulationKendallsTauWithTies() {
@@ -152,7 +152,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .population)
     let expectedAssociation = 0.1
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testSampleKendallsTauWithAllTies() {
@@ -188,7 +188,7 @@ final class RankCorrelationTests: XCTestCase {
                                                        for: .sample)
     let expectedAssociation = 1.0
     
-    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 0.00001)
+    XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-5)
   }
   
   func testKendallsTauWithEmptyCollection() {

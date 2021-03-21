@@ -6,67 +6,67 @@ import StatKit
 final class NormalDistributionTests: XCTestCase {
   func testMean() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.mean, 0, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.mean, 0, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.mean, -4, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.mean, -4, accuracy: 1e-5)
   }
   
   func testVariance() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.variance, 1, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.variance, 1, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.variance, 9, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.variance, 9, accuracy: 1e-5)
   }
   
   func testSkewness() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.skewness, 0, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.skewness, 0, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 1e-5)
   }
   
   func testKurtosis() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.kurtosis, 3, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.kurtosis, 3, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.kurtosis, 3, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.kurtosis, 3, accuracy: 1e-5)
   }
   
   func testExcessKurtosis() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.excessKurtosis, 0, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.excessKurtosis, 0, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.excessKurtosis, 0, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.excessKurtosis, 0, accuracy: 1e-5)
   }
   
   func testCDF() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.cdf(x: 1), 0.84134, accuracy: 0.00001)
-    XCTAssertEqual(standardDistribution.cdf(x: 0), 0.5, accuracy: 0.00001)
-    XCTAssertEqual(standardDistribution.cdf(x: 0.4), 0.65542, accuracy: 0.00001)
-    XCTAssertEqual(standardDistribution.cdf(x: -20), 2.753624e-89, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.cdf(x: 1), 0.84134, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.cdf(x: 0), 0.5, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.cdf(x: 0.4), 0.65542, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.cdf(x: -20), 2.753624e-89, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.cdf(x: 10), 0.99999, accuracy: 0.00001)
-    XCTAssertEqual(offsetDistribution.cdf(x: -8), 0.09121, accuracy: 0.00001)
-    XCTAssertEqual(offsetDistribution.cdf(x: 0), 0.90878, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.cdf(x: 10), 0.99999, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.cdf(x: -8), 0.09121, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.cdf(x: 0), 0.90878, accuracy: 1e-5)
   }
   
   func testPDF() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.pdf(x: 1), 0.24197, accuracy: 0.00001)
-    XCTAssertEqual(standardDistribution.pdf(x: 0), 0.39894, accuracy: 0.00001)
-    XCTAssertEqual(standardDistribution.pdf(x: 0.4), 0.36827, accuracy: 0.00001)
+    XCTAssertEqual(standardDistribution.pdf(x: 1), 0.24197, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.pdf(x: 0), 0.39894, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.pdf(x: 0.4), 0.36827, accuracy: 1e-5)
     
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.pdf(x: 0), 0.05467, accuracy: 0.00001)
-    XCTAssertEqual(offsetDistribution.pdf(x: -2), 0.10648, accuracy: 0.00001)
-    XCTAssertEqual(offsetDistribution.pdf(x: 4), 0.00379, accuracy: 0.00001)
+    XCTAssertEqual(offsetDistribution.pdf(x: 0), 0.05467, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.pdf(x: -2), 0.10648, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.pdf(x: 4), 0.00379, accuracy: 1e-5)
   }
   
   func testSampling() {
