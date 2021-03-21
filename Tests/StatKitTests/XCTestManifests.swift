@@ -39,7 +39,8 @@ extension BetaFunctionTests {
     //   `swift test --generate-linuxmain`
     // to regenerate.
     static let __allTests__BetaFunctionTests = [
-        ("testPositiveBetaFunction", testPositiveBetaFunction),
+        ("testBetaFunction", testBetaFunction),
+        ("testLogBetaFunction", testLogBetaFunction),
     ]
 }
 
