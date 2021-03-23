@@ -12,6 +12,9 @@ final class BetaFunctionTests: XCTestCase {
     XCTAssertEqual(betaFunction(alpha: 1, beta: 10), 0.1, accuracy: 1e-5)
     XCTAssertEqual(betaFunction(alpha: 10, beta: 50), 1.591638e-12, accuracy: 1e-5)
     XCTAssertEqual(betaFunction(alpha: 100, beta: 100), 2.208761e-61, accuracy: 1e-5)
+    XCTAssertEqual(betaFunction(alpha: 500, beta: 500), 1.479902e-302, accuracy: 1e-5)
+    XCTAssertEqual(betaFunction(alpha: 7000, beta: 2), 2.040525e-08, accuracy: 1e-5)
+    XCTAssertEqual(betaFunction(alpha: 50000, beta: 2), 3.99992e-10, accuracy: 1e-5)
   }
   
   func testLogBetaFunction() {
