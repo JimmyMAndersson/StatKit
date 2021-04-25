@@ -37,7 +37,7 @@ public struct PoissonDistribution: DiscreteDistribution {
   }
   
   public func pmf(x: Int) -> Double {
-    guard 0 < x else { return 0 }
+    guard 0 <= x else { return 0 }
     
     let nominator = pow(rate, Double(x)) * exp(-rate)
     let denominator = Double(factorial(x))
