@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  linux-tests:
+    container_name: linux-tests
+    image: swift:5.4
+    volumes:
+      - ./:/statkit
+    working_dir: /statkit
+    command: swift test -c release --parallel
+  
+  linter:
+    container_name: linter
+    image: norionomura/swiftlint:0.43.1_swift-5.4.0
+    volumes:
+      - ./:/statkit
+    working_dir: /statkit
+    command: swiftlint
