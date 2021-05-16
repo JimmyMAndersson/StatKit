@@ -16,7 +16,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(1, of: \.self, method: .inverseEmpiricalCDF)
     let expectedQuantile = 6.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testMinQuantile() {
@@ -24,7 +24,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0, of: \.self, method: .inverseEmpiricalCDF)
     let expectedQuantile = 1.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testEvenCountInverseEmpiricalCDF() {
@@ -32,7 +32,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .inverseEmpiricalCDF)
     let expectedQuantile = 5.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testOddCountInverseEmpiricalCDF() {
@@ -40,7 +40,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .inverseEmpiricalCDF)
     let expectedQuantile = 5.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testEvenCountAveragedInverseEmpiricalCDF() {
@@ -48,7 +48,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .averagedInverseEmpiricalCDF)
     let expectedQuantile = 5.5
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testOddCountAveragedInverseEmpiricalCDF() {
@@ -56,7 +56,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .averagedInverseEmpiricalCDF)
     let expectedQuantile = 5.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testEvenCountClosestOrOddIndexed() {
@@ -64,7 +64,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .closestOrOddIndexed)
     let expectedQuantile = 5.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testOddCountClosestOrOddIndexed() {
@@ -72,7 +72,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .closestOrOddIndexed)
     let expectedQuantile = 4.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testEvenCountLerpInverseEmpiricalCDF() {
@@ -80,7 +80,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .lerpInverseEmpiricalCDF)
     let expectedQuantile = 5.0
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
   
   func testOddCountLerpInverseEmpiricalCDF() {
@@ -88,7 +88,7 @@ final class QuantileTests: XCTestCase {
     let calculatedQuantile = data.quantile(0.5, of: \.self, method: .lerpInverseEmpiricalCDF)
     let expectedQuantile = 4.5
     
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-5)
+    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
   }
 }
 

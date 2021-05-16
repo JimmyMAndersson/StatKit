@@ -9,7 +9,7 @@ final class RangeTests: XCTestCase {
     let calculatedRange = array.range(of: \.self)
     let expectedRange = 4.0
     
-    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-5)
+    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
   }
   
   func testFloatingPointArrayRange() {
@@ -17,7 +17,7 @@ final class RangeTests: XCTestCase {
     let calculatedRange = array.range(of: \.self)
     let expectedRange = 21.3
     
-    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-5)
+    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
   }
   
   func testEmptyArrayRange() {
@@ -36,7 +36,7 @@ final class RangeTests: XCTestCase {
     let calculatedRange = array.range(of: \.y)
     let expectedRange = 24.0
     
-    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-5)
+    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
   }
 }
 

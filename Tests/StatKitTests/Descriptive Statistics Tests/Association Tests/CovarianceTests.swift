@@ -25,7 +25,7 @@ final class CovarianceTests: XCTestCase {
     let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .population)
     let expectedCovariance = 51.5
     
-    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
   
   func testSIMD2NegativePopulationCovariance() {
@@ -43,7 +43,7 @@ final class CovarianceTests: XCTestCase {
     let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .population)
     let expectedCovariance = -27.2
     
-    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
   
   func testPopulationCovarianceWithSingleVariable() {
@@ -61,7 +61,7 @@ final class CovarianceTests: XCTestCase {
     let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.x, from: .population)
     let expectedCovariance = simd2Array.variance(of: \.x, from: .population)
     
-    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
   
   func testSIMD2PopulationCovariancePerformance() {
@@ -98,7 +98,7 @@ final class CovarianceTests: XCTestCase {
     let firstCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .population)
     let secondCovariance = simd2Array.covariance(of: \.y, and: \.x, from: .population)
     
-    XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 1e-5)
+    XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 1e-6)
   }
   
   func testSIMD2PositiveSampleCovariance() {
@@ -114,9 +114,9 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 10, y: 69)]
     
     let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
-    let expectedCovariance = 57.22222
+    let expectedCovariance = 57.222222222
     
-    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
   
   func testSIMD2NegativeSampleCovariance() {
@@ -132,9 +132,9 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 30, y: 1)]
     
     let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
-    let expectedCovariance = -30.22222
+    let expectedCovariance = -30.222222222
     
-    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
   
   func testSampleCovarianceWithSingleVariable() {
@@ -152,7 +152,7 @@ final class CovarianceTests: XCTestCase {
     let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.x, from: .sample)
     let expectedCovariance = simd2Array.variance(of: \.x, from: .sample)
     
-    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
   
   func testSIMD2SampleCovariancePerformance() {
@@ -189,7 +189,7 @@ final class CovarianceTests: XCTestCase {
     let firstCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
     let secondCovariance = simd2Array.covariance(of: \.y, and: \.x, from: .sample)
     
-    XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 1e-5)
+    XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 1e-6)
   }
 }
 

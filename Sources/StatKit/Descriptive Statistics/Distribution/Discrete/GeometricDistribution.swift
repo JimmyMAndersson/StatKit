@@ -57,34 +57,18 @@ public struct GeometricDistribution: DiscreteDistribution {
   }
   
   public func sample() -> Int {
-    var trials = 1
-    var cumulativeProbability = pmf(x: trials)
-    let uniform = Double.random(in: 0 ..< 1)
-    
-    while cumulativeProbability < uniform {
-      trials += 1
-      cumulativeProbability += pmf(x: trials)
-    }
-    
-    return trials
+    let inverseMapping = log(1 - .random(in: 0 ..< 1)) / log(1 - probability)
+    let sample = inverseMapping.rounded(.up)
+    return Swift.min(Int(sample), Int.max)
   }
   
   public func sample(_ numberOfElements: Int) -> [Int] {
     var uniformGenerator = Xoroshiro256StarStar()
     let samples: [Int] = (1 ... numberOfElements).lazy
-      .map { _ -> Double in
-        Double.random(in: 0 ..< 1, using: &uniformGenerator)
-      }
-      .map { uniform -> Int in
-        var trials = 1
-        var cumulativeProbability = pmf(x: trials)
-        
-        while cumulativeProbability < uniform {
-          trials += 1
-          cumulativeProbability += pmf(x: trials)
-        }
-        
-        return trials
+      .map { _ -> Int in
+        let inverseMapping = log(1 - .random(in: 0 ..< 1, using: &uniformGenerator)) / log(1 - probability)
+        let sample = inverseMapping.rounded(.up)
+        return Swift.min(Int(sample), Int.max)
       }
     
     return samples

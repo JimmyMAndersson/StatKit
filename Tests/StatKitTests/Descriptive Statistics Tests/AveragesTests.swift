@@ -18,7 +18,7 @@ final class AveragesTests: XCTestCase {
     let calculatedMean = bigIntArray.mean(of: \.self)
     let expectedMean = Double(value * 6)
     
-    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-6)
   }
   
   func testFloatingPointArithmeticMean() {
@@ -151,7 +151,7 @@ final class AveragesTests: XCTestCase {
     let calculatedMean = intArray.mean(.geometric, of: \.self)
     let expectedMean = 2.6051710847
     
-    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-6)
   }
   
   func testFloatingPointGeometricMean() {
@@ -159,7 +159,7 @@ final class AveragesTests: XCTestCase {
     let calculatedMean = fpArray.mean(.geometric, of: \.self)
     let expectedMean = 3.1793248391
     
-    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-6)
   }
   
   func testObjectGeometricMean() {
@@ -169,8 +169,8 @@ final class AveragesTests: XCTestCase {
     let calculatedYMean = objectArray.mean(.geometric, of: \.y)
     let expectedYMean = 9.0
     
-    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 1e-5)
-    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 1e-6)
+    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 1e-6)
   }
   
   func testEmptySetGeometricMean() {
@@ -183,17 +183,17 @@ final class AveragesTests: XCTestCase {
   func testIntegerHarmonicMean() {
     let intArray = [1, 2, 3, 4, 5]
     let calculatedMean = intArray.mean(.harmonic, of: \.self)
-    let expectedMean = 2.18978
+    let expectedMean = 2.1897810218978
     
-    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-6)
   }
   
   func testFloatingPointGHarmonicMean() {
     let fpArray = [1.5, 2.5, 3.5, 4.5, 5.5]
     let calculatedMean = fpArray.mean(.harmonic, of: \.self)
-    let expectedMean = 2.8467
+    let expectedMean = 2.8466973381531
     
-    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedMean, expectedMean, accuracy: 1e-6)
   }
   
   func testObjectHarmonicMean() {
@@ -203,8 +203,8 @@ final class AveragesTests: XCTestCase {
     let calculatedYMean = objectArray.mean(.harmonic, of: \.y)
     let expectedYMean = 9.0
     
-    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 1e-5)
-    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 1e-5)
+    XCTAssertEqual(calculatedXMean, expectedXMean, accuracy: 1e-6)
+    XCTAssertEqual(calculatedYMean, expectedYMean, accuracy: 1e-6)
   }
   
   func testEmptySetHarmonicMean() {

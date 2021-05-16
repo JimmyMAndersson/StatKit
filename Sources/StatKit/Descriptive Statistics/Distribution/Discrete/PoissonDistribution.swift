@@ -39,9 +39,8 @@ public struct PoissonDistribution: DiscreteDistribution {
   public func pmf(x: Int) -> Double {
     guard 0 <= x else { return 0 }
     
-    let nominator = pow(rate, Double(x)) * exp(-rate)
-    let denominator = Double(factorial(x))
-    return nominator / denominator
+    let logPMF = log(pow(rate, x.realValue)) - rate - gammaFunction(x: x.realValue + 1, log: true)
+    return exp(logPMF)
   }
   
   public func cdf(x: Int) -> Double {
@@ -51,9 +50,9 @@ public struct PoissonDistribution: DiscreteDistribution {
         
       default:
         let sum = (0 ... x).reduce(into: 0) { result, number in
-          result += pow(rate, Double(number)) / Double(factorial(number))
+          result += pmf(x: number)
         }
-        return exp(-rate) * sum
+        return sum
     }
   }
   

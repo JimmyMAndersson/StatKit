@@ -6,58 +6,58 @@ import StatKit
 final class ContinuousUniformDistributionTests: XCTestCase {
   func testMean() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.mean, 0.5, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.mean, 0.5, accuracy: 1e-6)
     
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.mean, 2.5, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.mean, 2.5, accuracy: 1e-6)
   }
   
   func testVariance() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.variance, 1 / 12, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.variance, 1 / 12, accuracy: 1e-6)
     
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.variance, 14.08333, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.variance, 14.083333333, accuracy: 1e-6)
   }
   
   func testSkewness() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.skewness, 0, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.skewness, 0, accuracy: 1e-6)
     
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 1e-6)
   }
   
   func testKurtosis() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.kurtosis, 9 / 5, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.kurtosis, 9 / 5, accuracy: 1e-6)
     
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.kurtosis, 9 / 5, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.kurtosis, 9 / 5, accuracy: 1e-6)
   }
   
   func testExcessKurtosis() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.excessKurtosis, -6 / 5, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.excessKurtosis, -6 / 5, accuracy: 1e-6)
     
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.excessKurtosis, -6 / 5, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.excessKurtosis, -6 / 5, accuracy: 1e-6)
   }
   
   func testCDF() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.cdf(x: 1), 1, accuracy: 1e-5)
-    XCTAssertEqual(standardDistribution.cdf(x: 0), 0, accuracy: 1e-5)
-    XCTAssertEqual(standardDistribution.cdf(x: 0.4), 0.4, accuracy: 1e-5)
+    XCTAssertEqual(standardDistribution.cdf(x: 1), 1, accuracy: 1e-6)
+    XCTAssertEqual(standardDistribution.cdf(x: 0), 0, accuracy: 1e-6)
+    XCTAssertEqual(standardDistribution.cdf(x: 0.4), 0.4, accuracy: 1e-6)
     
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.cdf(x: 10), 1, accuracy: 1e-5)
-    XCTAssertEqual(offsetDistribution.cdf(x: -8), 0, accuracy: 1e-5)
-    XCTAssertEqual(offsetDistribution.cdf(x: 0), 4 / 13, accuracy: 1e-5)
+    XCTAssertEqual(offsetDistribution.cdf(x: 10), 1, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.cdf(x: -8), 0, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.cdf(x: 0), 4 / 13, accuracy: 1e-6)
   }
   
   func testSampling() {
-    let numberOfSamples = 100000
+    let numberOfSamples = 1000000
     let distribution = ContinuousUniformDistribution(0, 1)
     var samples = [Double]()
     
