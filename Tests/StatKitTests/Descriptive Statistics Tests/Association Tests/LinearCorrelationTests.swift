@@ -20,9 +20,9 @@ final class LinearCorrelationTests: XCTestCase {
                                                        of: \.x,
                                                        and: \.y,
                                                        for: .population)
-    let expectedCorrelation = 0.9933
+    let expectedCorrelation = 0.99329456
     
-    XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-6)
   }
   
   func testSamplePearsonCorrelation() {
@@ -41,9 +41,9 @@ final class LinearCorrelationTests: XCTestCase {
                                                        of: \.x,
                                                        and: \.y,
                                                        for: .sample)
-    let expectedCorrelation = 0.99329
+    let expectedCorrelation = 0.99329456
     
-    XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-6)
   }
   
   func testPearsonCorrelationWithSingleVariable() {
@@ -64,7 +64,7 @@ final class LinearCorrelationTests: XCTestCase {
                                                        for: .population)
     let expectedCorrelation = 1.0
     
-    XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-5)
+    XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-6)
   }
   
   func testPearsonCorrelationWithEmptyCollection() {
