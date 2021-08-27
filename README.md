@@ -124,7 +124,7 @@ To install StatKit using the [Swift Package Manager](https://swift.org/package-m
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.3.0")
+        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.4.0")
     ],
     ...
 )
