@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 /// A type modelling a Poisson Distribution.
-public struct PoissonDistribution: DiscreteDistribution {
+public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution {
   /// The rate of events.
   public let rate: Double
   

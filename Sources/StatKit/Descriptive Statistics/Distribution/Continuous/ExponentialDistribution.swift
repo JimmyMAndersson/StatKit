@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 /// A type modelling an Exponential Distribution.
-public struct ExponentialDistribution: ContinuousDistribution {
+public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistribution {
   /// The rate of events.
   public let rate: Double
   

@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 /// A type modelling a discrete Uniform Distribution.
-public struct DiscreteUniformDistribution: DiscreteDistribution {
+public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistribution {
   /// The lower inclusive bound.
   public let lowerBound: Int
   

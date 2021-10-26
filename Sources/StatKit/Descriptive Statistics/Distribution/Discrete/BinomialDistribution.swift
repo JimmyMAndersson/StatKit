@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 /// A type modelling a Binomial Distribution.
-public struct BinomialDistribution: DiscreteDistribution {
+public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution {
   /// The probability of a successful trial.
   ///
   /// This property models what is commonly referred to as `p`.
