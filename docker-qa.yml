@@ -14,4 +14,4 @@ services:
     volumes:
       - ./:/statkit
     working_dir: /statkit
-    command: swiftlint
+    command: swiftlint lint --strict

@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 /// A type modelling a Normal Distribution.
-public struct NormalDistribution: ContinuousDistribution {
+public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution {
   public let mean: Double
   public let variance: Double
   
@@ -42,16 +42,7 @@ public struct NormalDistribution: ContinuousDistribution {
   
   public func cdf(x: Double) -> Double {
     let erfParameter = (x - mean) / sqrt(2 * variance)
-    switch erfParameter {
-      case 0:
-        return 0.5
-        
-      case ...0:
-        return 0.5 - 0.5 * GaussErrorFunction.erf(-erfParameter)
-        
-      default:
-        return 0.5 + 0.5 * GaussErrorFunction.erf(erfParameter)
-    }
+    return 0.5 + 0.5 * erf(erfParameter)
   }
   
   public func pdf(x: Double) -> Double {

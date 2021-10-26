@@ -1,5 +1,5 @@
 /// A type modelling a continuous Uniform Distribution.
-public struct ContinuousUniformDistribution: ContinuousDistribution {
+public struct ContinuousUniformDistribution: ContinuousDistribution, UnivariateDistribution {
   /// The lower inclusive bound.
   public let lowerBound: Double
   

@@ -5,7 +5,7 @@ import Darwin
 #endif
 
 /// A type modelling a Geometric Distribution.
-public struct GeometricDistribution: DiscreteDistribution {
+public struct GeometricDistribution: DiscreteDistribution, UnivariateDistribution {
   /// The probability of a successful trial.
   ///
   /// This property models what is commonly referred to as `p`.
