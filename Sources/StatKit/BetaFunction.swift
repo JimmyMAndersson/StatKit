@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// Computes the Beta function.
 /// - parameter alpha: The first argument.
@@ -21,10 +17,10 @@ public func betaFunction<RealType: BinaryFloatingPoint>(
   let maximum = Double(Swift.max(alpha, beta))
   let minimum = Double(Swift.min(alpha, beta))
   
-  let logMinTerm = gammaFunction(x: minimum, log: true)
-  let logMaxTerm = gammaFunction(x: maximum, log: true)
-  let logSumTerm = gammaFunction(x: minimum + maximum, log: true)
+  let logMinTerm: Double = .logGamma(minimum)
+  let logMaxTerm: Double = .logGamma(maximum)
+  let logSumTerm: Double = .logGamma(minimum + maximum)
   let logBeta = logMaxTerm + logMinTerm - logSumTerm
   
-  return RealType(log ? logBeta : exp(logBeta))
+  return RealType(log ? logBeta : .exp(logBeta))
 }

@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// A type modelling a Geometric Distribution.
 public struct GeometricDistribution: DiscreteDistribution, UnivariateDistribution {
@@ -16,15 +12,15 @@ public struct GeometricDistribution: DiscreteDistribution, UnivariateDistributio
   }
   
   public var variance: Double {
-    (1 - probability) / pow(probability, 2)
+    (1 - probability) / .pow(probability, 2)
   }
   
   public var skewness: Double {
-    (2 - probability) / sqrt(1 - probability)
+    (2 - probability) / (1 - probability).squareRoot()
   }
   
   public var kurtosis: Double {
-    9 + pow(probability, 2) / (1 - probability)
+    9 + .pow(probability, 2) / (1 - probability)
   }
   
   /// Creates a Geometric Distribution for a specified probability.
@@ -43,7 +39,7 @@ public struct GeometricDistribution: DiscreteDistribution, UnivariateDistributio
       case ...0:
         return 0
       default:
-        return pow(1 - probability, (x - 1).realValue) * probability
+        return .pow(1 - probability, (x - 1).realValue) * probability
     }
   }
   
@@ -52,12 +48,12 @@ public struct GeometricDistribution: DiscreteDistribution, UnivariateDistributio
       case ...0:
         return 0
       default:
-        return 1 - pow(1 - probability, x.realValue)
+        return 1 - .pow(1 - probability, x.realValue)
     }
   }
   
   public func sample() -> Int {
-    let inverseMapping = log(1 - .random(in: 0 ..< 1)) / log(1 - probability)
+    let inverseMapping = .log(1 - .random(in: 0 ..< 1)) / .log(1 - probability)
     let sample = inverseMapping.rounded(.up)
     return Swift.min(Int(sample), Int.max)
   }
@@ -66,7 +62,7 @@ public struct GeometricDistribution: DiscreteDistribution, UnivariateDistributio
     var uniformGenerator = Xoroshiro256StarStar()
     let samples: [Int] = (1 ... numberOfElements).lazy
       .map { _ -> Int in
-        let inverseMapping = log(1 - .random(in: 0 ..< 1, using: &uniformGenerator)) / log(1 - probability)
+        let inverseMapping = .log(1 - .random(in: 0 ..< 1, using: &uniformGenerator)) / .log(1 - probability)
         let sample = inverseMapping.rounded(.up)
         return Swift.min(Int(sample), Int.max)
       }

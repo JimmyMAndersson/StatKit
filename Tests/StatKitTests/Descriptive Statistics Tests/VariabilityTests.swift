@@ -2,6 +2,7 @@
 
 import XCTest
 import StatKit
+import RealModule
 
 final class VariabilityTests: XCTestCase {
   func testIntegerSampleVariance() {

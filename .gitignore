@@ -26,3 +26,4 @@ DerivedData/
 *.dSYM
 
 .build/
+Package.resolved

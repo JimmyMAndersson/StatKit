@@ -1,3 +1,5 @@
+import RealModule
+
 extension Collection {
   
   /// Calculates the variance of the selected variable.

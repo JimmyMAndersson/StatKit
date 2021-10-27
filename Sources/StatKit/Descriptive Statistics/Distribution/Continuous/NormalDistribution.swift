@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// A type modelling a Normal Distribution.
 public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution {
@@ -29,7 +25,7 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
     )
     
     self.mean = mean
-    self.variance = pow(standardDeviation, 2)
+    self.variance = .pow(standardDeviation, 2)
   }
   
   public var skewness: Double {
@@ -41,19 +37,19 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
   }
   
   public func cdf(x: Double) -> Double {
-    let erfParameter = (x - mean) / sqrt(2 * variance)
-    return 0.5 + 0.5 * erf(erfParameter)
+    let erfParameter = (x - mean) / (2 * variance).squareRoot()
+    return 0.5 + 0.5 * .erf(erfParameter)
   }
   
   public func pdf(x: Double) -> Double {
-    let exponent = -0.5 * pow((x - mean) / sqrt(variance), 2)
-    return exp(exponent) / sqrt(variance * 2 * .pi)
+    let exponent = -0.5 * .pow((x - mean) / variance.squareRoot(), 2)
+    return .exp(exponent) / (variance * 2 * .pi).squareRoot()
   }
   
   public func sample() -> Double {
     let u1 = Double.random(in: 0 ... 1)
     let u2 = Double.random(in: 0 ... 1)
-    return mean + sqrt(-2 * variance * log(u1)) * sin(2 * .pi * u2)
+    return mean + (-2 * variance * .log(u1)).squareRoot() * .sin(2 * .pi * u2)
   }
   
   public func sample(_ numberOfElements: Int) -> [Double] {
@@ -63,7 +59,7 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
     return (1 ... numberOfElements).map { _ in
       let u1 = Double.random(in: 0 ... 1, using: &uniformGenerator)
       let u2 = Double.random(in: 0 ... 1, using: &uniformGenerator)
-      return mean + sqrt(-2 * variance * log(u1)) * sin(2 * .pi * u2)
+      return mean + (-2 * variance * .log(u1)).squareRoot() * .sin(2 * .pi * u2)
     }
   }
 }

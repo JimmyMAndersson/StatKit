@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// A type modelling a Poisson Distribution.
 public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution {
@@ -29,7 +25,7 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
   }
   
   public var skewness: Double {
-    return 1 / sqrt(rate)
+    return 1 / rate.squareRoot()
   }
   
   public var kurtosis: Double {
@@ -39,8 +35,8 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
   public func pmf(x: Int) -> Double {
     guard 0 <= x else { return 0 }
     
-    let logPMF = log(pow(rate, x.realValue)) - rate - gammaFunction(x: x.realValue + 1, log: true)
-    return exp(logPMF)
+    let logPMF = .log(.pow(rate, x.realValue)) - rate - .logGamma(x.realValue + 1)
+    return .exp(logPMF)
   }
   
   public func cdf(x: Int) -> Double {
@@ -58,7 +54,7 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
   
   public func sample() -> Int {
     var uniformGenerator = Xoroshiro256StarStar()
-    let limit = exp(-rate)
+    let limit = Double.exp(-rate)
     
     var arrivals = 0
     var uniformProduct = Double.random(in: 0 ... 1, using: &uniformGenerator)
@@ -75,7 +71,7 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
     precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
     
     var uniformGenerator = Xoroshiro256StarStar()
-    let limit = exp(-rate)
+    let limit = Double.exp(-rate)
     
     return (1 ... numberOfElements).map { _ in
       var arrivals = 0

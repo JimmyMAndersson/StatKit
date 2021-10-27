@@ -1,11 +1,4 @@
 #if !os(watchOS)
-
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
-
 import XCTest
 import StatKit
 

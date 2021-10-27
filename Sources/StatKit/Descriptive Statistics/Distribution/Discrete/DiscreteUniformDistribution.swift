@@ -1,9 +1,3 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
-
 /// A type modelling a discrete Uniform Distribution.
 public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistribution {
   /// The lower inclusive bound.
@@ -38,7 +32,7 @@ public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistr
   }
   
   public var variance: Double {
-    return (pow(Double(integerCount), 2) - 1) / 12
+    return (.pow(Double(integerCount), 2) - 1) / 12
   }
   
   public var skewness: Double {
@@ -46,8 +40,8 @@ public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistr
   }
   
   public var kurtosis: Double {
-    let numerator = 6 * pow(Double(integerCount), 2) + 6
-    let denominator = 5 * pow(Double(integerCount), 2) - 5
+    let numerator = 6 * .pow(Double(integerCount), 2) + 6
+    let denominator = 5 * .pow(Double(integerCount), 2) - 5
     return 3 - numerator / denominator
   }
   

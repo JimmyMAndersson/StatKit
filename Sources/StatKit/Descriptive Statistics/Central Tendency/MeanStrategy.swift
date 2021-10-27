@@ -1,9 +1,3 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
-
 /// An enumeration specififying a type of mean value calculation..
 public enum MeanStrategy {
   /// A case specifying the arithmetic mean.
@@ -44,7 +38,7 @@ extension MeanStrategy {
           }.realValue
           
           let power = 1 / Double(collection.count)
-          return pow(product, power)
+          return .pow(product, power)
         
         case .harmonic:
           let reciprocalSum = collection.reduce(into: 0) { sum, element in
