@@ -4,19 +4,9 @@ public protocol Distribution {
   associatedtype DomainType
   /// The type used to describe a distributions mean (for example reals, integers, or some vector of numerals).
   associatedtype MeanType
-  /// The type used to describe a distributions skewness (for example reals, integers, or some vector of numerals).
-  associatedtype SkewnessType
-  /// The type used to describe a distributions kurtosis (for example reals, integers, or some vector of numerals).
-  associatedtype KurtosisType
   
   /// The distributions expected value.
   var mean: MeanType { get }
-  /// The distributions skewness.
-  var skewness: SkewnessType { get }
-  /// The kurtosis of the distribution.
-  var kurtosis: KurtosisType { get }
-  /// The excess kurtosis of the distribution.
-  var excessKurtosis: KurtosisType { get }
   
   /// Calculates the cumulative density for a value in the distribution.
   /// - parameter x: The value used to compute the cumulative density.

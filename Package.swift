@@ -12,10 +12,19 @@ let package = Package(
       name: "StatKit",
       targets: ["StatKit"]),
   ],
+  dependencies: [
+    .package(
+      url: "https://github.com/apple/swift-numerics.git",
+      from: "1.0.0"
+    )
+  ],
   targets: [
     .target(
       name: "StatKit",
-      dependencies: []),
+      dependencies: [
+        .product(name: "RealModule", package: "swift-numerics")
+      ]
+    ),
     .testTarget(
       name: "StatKitTests",
       dependencies: ["StatKit"]),

@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// A type modelling a Binomial Distribution.
 public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution {
@@ -25,7 +21,7 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
   }
   
   public var skewness: Double {
-    (1 - 2 * probability) / sqrt(variance)
+    (1 - 2 * probability) / (variance).squareRoot()
   }
   
   public var kurtosis: Double {
@@ -53,8 +49,8 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
   
   public func pmf(x: Int) -> Double {
     let coefficient = Double(choose(n: trials, k: x))
-    let successes = pow(probability, Double(x))
-    let failures = pow(1 - probability, Double(trials - x))
+    let successes: Double = .pow(probability, Double(x))
+    let failures: Double = .pow(1 - probability, Double(trials - x))
     return coefficient * successes * failures
   }
   

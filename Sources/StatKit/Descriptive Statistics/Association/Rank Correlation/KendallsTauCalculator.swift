@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// A helper object for calculating Kendall's Tau Coefficient.
 internal struct KendallsTauCalculator: RankCorrelationCalculator {
@@ -32,7 +28,7 @@ internal struct KendallsTauCalculator: RankCorrelationCalculator {
         case .sample:
           let numerator = (concordant - discordant).realValue
           let tieProduct = (combinations - tiesX) * (combinations - tiesY)
-          let denominator = sqrt(tieProduct.realValue)
+          let denominator = tieProduct.realValue.squareRoot()
           guard !denominator.isZero else { return .signalingNaN }
           
           return numerator / denominator

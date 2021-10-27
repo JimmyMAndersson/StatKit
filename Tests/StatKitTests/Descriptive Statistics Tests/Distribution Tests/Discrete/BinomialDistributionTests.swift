@@ -2,6 +2,7 @@
 
 import XCTest
 import StatKit
+import RealModule
 
 final class BinomialDistributionTests: XCTestCase {
   func testMean() {
@@ -36,14 +37,6 @@ final class BinomialDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.kurtosis, 2.938095, accuracy: 1e-6)
   }
   
-  func testExcessKurtosis() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.excessKurtosis, -0.1, accuracy: 1e-6)
-    
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.excessKurtosis, -0.061905, accuracy: 1e-6)
-  }
-  
   func testCDF() {
     let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
     XCTAssertEqual(firstDistribution.cdf(x: 1), 0.0000200271606, accuracy: 1e-6)
@@ -70,8 +63,8 @@ final class BinomialDistributionTests: XCTestCase {
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
     
     XCTAssertEqual(samples.count, numberOfSamples)
-    let lowerBound = Swift.max(0, Int(distribution.mean - 3 * sqrt(distribution.variance)))
-    let upperBound = Swift.min(distribution.trials, Int(distribution.mean + 3 * sqrt(distribution.variance)))
+    let lowerBound = Swift.max(0, Int(distribution.mean - 3 * (distribution.variance).squareRoot()))
+    let upperBound = Swift.min(distribution.trials, Int(distribution.mean + 3 * (distribution.variance).squareRoot()))
     let testRange =  lowerBound ... upperBound
     for successes in testRange {
       XCTAssertEqual(proportions[successes] ?? -1, distribution.pmf(x: successes), accuracy: 0.01)

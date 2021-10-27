@@ -1,8 +1,4 @@
-#if os(Linux)
-import Glibc
-#else
-import Darwin
-#endif
+import RealModule
 
 /// A type modelling an Exponential Distribution.
 public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistribution {
@@ -26,7 +22,7 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
         return 0
         
       default:
-        return rate * exp(-rate * x)
+        return rate * .exp(-rate * x)
     }
   }
   
@@ -35,7 +31,7 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
   }
   
   public var variance: Double {
-    return 1 / pow(rate, 2)
+    return 1 / .pow(rate, 2)
   }
   
   public var skewness: Double {
@@ -52,21 +48,21 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
         return 0
         
       default:
-        return 1 - exp(-rate * x)
+        return 1 - .exp(-rate * x)
     }
   }
   
   public func sample() -> Double {
-    return log(1 - Double.random(in: 0 ..< 1)) / -rate
+    return .log(1 - Double.random(in: 0 ..< 1)) / -rate
   }
   
   public func sample(_ numberOfElements: Int) -> [Double] {
     precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
-
+    
     var uniformGenerator = Xoroshiro256StarStar()
-
+    
     return (1 ... numberOfElements).map { _ in
-      log(1 - Double.random(in: 0 ..< 1, using: &uniformGenerator)) / -rate
+        .log(1 - Double.random(in: 0 ..< 1, using: &uniformGenerator)) / -rate
     }
   }
 }

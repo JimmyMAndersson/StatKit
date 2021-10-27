@@ -1,7 +1,3 @@
-#if canImport(CoreGraphics)
-import CoreGraphics
-#endif
-
 /// A protocol marking types that are directly convertible to a real number type.
 public protocol ConvertibleToReal: Numeric {
   /// The real number representation of the value.
@@ -25,6 +21,7 @@ extension Double: ConvertibleToReal {}
 extension Float: ConvertibleToReal {}
 
 #if canImport(CoreGraphics)
+import CoreGraphics
 extension CGFloat: ConvertibleToReal {}
 #endif
 
