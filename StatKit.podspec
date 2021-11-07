@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
   spec.ios.deployment_target      = "13.0"
   spec.osx.deployment_target      = "10.15"
   spec.tvos.deployment_target     = "13.0"
-  spec.swift_version              = '5.2'
+  spec.swift_version              = '5.5'
   spec.source                     = { :git => "https://github.com/JimmyMAndersson/StatKit.git", :tag => "#{spec.version}" }
   spec.source_files               = "Sources/StatKit/**/*.swift"
   spec.cocoapods_version          = '>= 1.9.0'
