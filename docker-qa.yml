@@ -2,7 +2,7 @@ version: "3.8"
 services:
   linux-tests:
     container_name: linux-tests
-    image: swift:5.4
+    image: swift:5.5
     volumes:
       - ./:/statkit
     working_dir: /statkit
@@ -10,7 +10,7 @@ services:
   
   linter:
     container_name: linter
-    image: norionomura/swiftlint:0.43.1_swift-5.4.0
+    image: norionomura/swiftlint:0.45.0_swift-5.5.1
     volumes:
       - ./:/statkit
     working_dir: /statkit
