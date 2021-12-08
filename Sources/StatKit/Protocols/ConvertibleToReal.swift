@@ -1,5 +1,5 @@
 /// A protocol marking types that are directly convertible to a real number type.
-public protocol ConvertibleToReal: Numeric {
+public protocol ConvertibleToReal {
   /// The real number representation of the value.
   var realValue: Double { get }
 }

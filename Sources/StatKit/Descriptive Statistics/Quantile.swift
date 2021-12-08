@@ -63,11 +63,11 @@ public func quantile<C: Sequence, T: Comparable & ConvertibleToReal>(
         let h = Double(ordered.count) * probability
         let firstIndex = Int(h.rounded(.down)) - 1
         let secondIndex = Int(h.rounded(.up)) - 1
-        let firstElement = ordered[firstIndex][keyPath: variable]
-        let secondElement = ordered[secondIndex][keyPath: variable]
+        let firstElement = ordered[firstIndex][keyPath: variable].realValue
+        let secondElement = ordered[secondIndex][keyPath: variable].realValue
         let difference = secondElement - firstElement
         let lerpRatio = h - h.rounded(.down)
-        return firstElement.realValue + difference.realValue * lerpRatio
+        return firstElement + difference * lerpRatio
     }
   }
 

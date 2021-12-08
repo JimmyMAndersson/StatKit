@@ -34,7 +34,7 @@ extension MeanStrategy {
         
         case .geometric:
           let product = collection.reduce(into: 1) { product, term in
-            product *= term[keyPath: variable]
+            product *= term[keyPath: variable].realValue
           }.realValue
           
           let power = 1 / Double(collection.count)
