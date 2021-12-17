@@ -1,4 +1,4 @@
-/// An enumeration specififying a type of mean value calculation..
+/// An enumeration specififying a type of mean value calculation.
 public enum MeanStrategy {
   /// A case specifying the arithmetic mean.
   case arithmetic
