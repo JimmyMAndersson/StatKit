@@ -1,4 +1,4 @@
-/// Calculates the selected mean of the selected variable.
+/// Calculate the mean of the selected variable.
 /// - parameter collection: The collection under investigation.
 /// - parameter variable: The variable over which to calculate the mean.
 /// - parameter strategy: The strategy used to compute the mean.
@@ -15,7 +15,7 @@ public func mean<C: Collection, T: ConvertibleToReal>(
   return strategy.compute(for: variable, in: collection)
 }
 
-/// Calculates the median of the selected variable.
+/// Calculate the median of the selected variable.
 /// - parameter collection: The collection under investigation.
 /// - parameter variable: The variable over which to calculate the median.
 /// - parameter strategy: The strategy used to compute the median.
@@ -36,7 +36,7 @@ public func median<C: Collection, T: Comparable & ConvertibleToReal>(
   return strategy.compute(for: variable, in: collection)
 }
 
-/// Finds the mode(s) of the sequence.
+/// Find the mode(s) of the sequence.
 /// - parameter sequence: The sequence under investigation.
 /// - parameter variable: The variable over which to calculate the mode(s).
 /// - returns: A set containing the mode(s) sorted in ascending order.

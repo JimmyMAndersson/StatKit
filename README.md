@@ -109,6 +109,9 @@ let normalRandomVariables = normal.sample(10)
 // Generates 10 samples from the normal distribution
 ```
 
+## Documentation
+StatKit is documented using Swift-DocC, which means that the documentation pages can be built by Xcode and viewed in the Developer Documentation panel. Build it by clicking `Product > Build Documentation` or hitting `Shift + Ctrl + Cmd + D`.
+
 ## System Requirements
 To use StatKit, make sure that your system has Swift 5.5 (or later) installed. If you’re using a Mac, also make sure that `xcode-select` points at an Xcode installation that includes a valid version of Swift and that you’re running macOS Catalina (10.15) or later.
 
