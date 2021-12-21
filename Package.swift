@@ -22,12 +22,12 @@ let package = Package(
     .target(
       name: "StatKit",
       dependencies: [
-        .product(name: "RealModule", package: "swift-numerics")
+        .product(name: "Numerics", package: "swift-numerics")
       ]
     ),
     .testTarget(
       name: "StatKitTests",
-      dependencies: ["StatKit"]),
+      dependencies: ["StatKit"])
   ],
   swiftLanguageVersions: [
     .v5
