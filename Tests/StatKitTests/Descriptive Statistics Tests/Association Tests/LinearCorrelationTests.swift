@@ -16,10 +16,13 @@ final class LinearCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCorrelation = simd2Array.correlation(.pearsonsProductMoment,
-                                                       of: \.x,
-                                                       and: \.y,
-                                                       for: .population)
+    let calculatedCorrelation = correlation(
+      simd2Array,
+      of: \.x,
+      and: \.y,
+      for: .population,
+      method: .pearsonsProductMoment
+    )
     let expectedCorrelation = 0.99329456
     
     XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-6)
@@ -37,10 +40,13 @@ final class LinearCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCorrelation = simd2Array.correlation(.pearsonsProductMoment,
-                                                       of: \.x,
-                                                       and: \.y,
-                                                       for: .sample)
+    let calculatedCorrelation = correlation(
+      simd2Array,
+      of: \.x,
+      and: \.y,
+      for: .sample,
+      method: .pearsonsProductMoment
+    )
     let expectedCorrelation = 0.99329456
     
     XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-6)
@@ -58,10 +64,13 @@ final class LinearCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCorrelation = simd2Array.correlation(.pearsonsProductMoment,
-                                                       of: \.x,
-                                                       and: \.x,
-                                                       for: .population)
+    let calculatedCorrelation = correlation(
+      simd2Array,
+      of: \.x,
+      and: \.x,
+      for: .population,
+      method: .pearsonsProductMoment
+    )
     let expectedCorrelation = 1.0
     
     XCTAssertEqual(calculatedCorrelation, expectedCorrelation, accuracy: 1e-6)
@@ -69,10 +78,13 @@ final class LinearCorrelationTests: XCTestCase {
   
   func testPearsonCorrelationWithEmptyCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedCorrelation = simd2Array.correlation(.pearsonsProductMoment,
-                                                       of: \.x,
-                                                       and: \.y,
-                                                       for: .sample)
+    let calculatedCorrelation = correlation(
+      simd2Array,
+      of: \.x,
+      and: \.y,
+      for: .sample,
+      method: .pearsonsProductMoment
+    )
     
     XCTAssert(calculatedCorrelation.isNaN)
   }
@@ -88,10 +100,13 @@ final class LinearCorrelationTests: XCTestCase {
                       SIMD2(x: 8, y: 6),
                       SIMD2(x: 9, y: 6),
                       SIMD2(x: 10, y: 6)]
-    let calculatedCorrelation = simd2Array.correlation(.pearsonsProductMoment,
-                                                       of: \.x,
-                                                       and: \.y,
-                                                       for: .sample)
+    let calculatedCorrelation = correlation(
+      simd2Array,
+      of: \.x,
+      and: \.y,
+      for: .sample,
+      method: .pearsonsProductMoment
+    )
     
     XCTAssert(calculatedCorrelation.isNaN)
   }
