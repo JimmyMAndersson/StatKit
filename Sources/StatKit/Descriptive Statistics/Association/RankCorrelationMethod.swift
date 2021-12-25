@@ -1,6 +1,6 @@
 /// An internal protocol defining the methods required by association measure calculator types.
 @usableFromInline
-internal protocol RankCorrelationCalculator {
+internal protocol CorrelationCalculator {
   /// Computes the measure of association for two variables in a collection.
   /// - parameter X: The first variable.
   /// - parameter Y: The second variable.
@@ -12,14 +12,17 @@ internal protocol RankCorrelationCalculator {
     and Y: KeyPath<C.Element, U>,
     in collection: C,
     as composition: DataSetComposition) -> Double
-    where
-    T: Comparable & Hashable & ConvertibleToReal,
-    U: Comparable & Hashable & ConvertibleToReal,
-    C: Collection
+  where
+T: Comparable & Hashable & ConvertibleToReal,
+U: Comparable & Hashable & ConvertibleToReal,
+C: Collection
 }
 
 /// Different methods of calculating the association measure between arbitrary comparable variables.
-public enum RankCorrelationMethod {
+public enum CorrelationMethod {
+  /// Pearson's product-moment correlation coefficient.
+  case pearsonsProductMoment
+  
   /// Spearman's Rho coefficient.
   case spearmansRho
   
@@ -31,11 +34,14 @@ public enum RankCorrelationMethod {
   
   /// A calculator object that can be used to compute the specified measure of association.
   @usableFromInline
-  internal var calculator: RankCorrelationCalculator {
+  internal var calculator: CorrelationCalculator {
     switch self {
+      case .pearsonsProductMoment:
+        return PearsonsProductMomentCalculator()
+        
       case .spearmansRho:
         return SpearmansRhoCalculator()
-      
+        
       case .kendallsTau:
         return KendallsTauCalculator()
     }
