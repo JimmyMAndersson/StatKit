@@ -4,7 +4,8 @@
 
 ***
 <p align="center">
-    <img src="https://img.shields.io/github/workflow/status/JimmyMAndersson/StatKit/Test%20Suite?label=test%20suite" />
+    <img src="https://img.shields.io/github/workflow/status/JimmyMAndersson/StatKit/Test%20Suite?label=test%20suite&branch=master" />
+    <img src="https://img.shields.io/github/workflow/status/JimmyMAndersson/StatKit/Code%20Style?label=code%20style&branch=master" />
     <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="Platform Support" />
 </p>
 
