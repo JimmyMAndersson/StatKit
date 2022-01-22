@@ -48,6 +48,18 @@ final class ExponentialDistributionTests: XCTestCase {
     XCTAssertEqual(secondExpDistribution.cdf(x: 0), 0, accuracy: 1e-6)
   }
   
+  func testLogCDF() {
+    let firstExpDistribution = ExponentialDistribution(rate: 1)
+    XCTAssertEqual(firstExpDistribution.cdf(x: 1, logarithmic: true), -0.4586751, accuracy: 1e-6)
+    XCTAssertEqual(firstExpDistribution.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(firstExpDistribution.cdf(x: 0.4, logarithmic: true), -1.1096329, accuracy: 1e-6)
+    
+    let secondExpDistribution = ExponentialDistribution(rate: 57)
+    XCTAssertEqual(secondExpDistribution.cdf(x: 0.1, logarithmic: true), -0.003351576, accuracy: 1e-6)
+    XCTAssertEqual(secondExpDistribution.cdf(x: -8, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(secondExpDistribution.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
+  }
+  
   func testSampling() {
     let numberOfSamples = 1000000
     let distribution = ExponentialDistribution(rate: 0.2)

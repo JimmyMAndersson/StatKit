@@ -19,9 +19,14 @@ public struct ContinuousUniformDistribution: ContinuousDistribution, UnivariateD
     self.upperBound = upperBound
   }
   
-  public func pdf(x: Double) -> Double {
-    guard lowerBound <= x && x <= upperBound else { return 0 }
-    return 1 / (upperBound - lowerBound)
+  public func pdf(x: Double, logarithmic: Bool = false) -> Double {
+    guard lowerBound <= x && x <= upperBound else {
+      return logarithmic ? -.infinity : 0
+    }
+    
+    return logarithmic
+    ? -.log(upperBound - lowerBound)
+    : 1 / (upperBound - lowerBound)
   }
   
   public var mean: Double {
@@ -42,14 +47,18 @@ public struct ContinuousUniformDistribution: ContinuousDistribution, UnivariateD
     return 9 / 5
   }
   
-  public func cdf(x: Double) -> Double {
+  public func cdf(x: Double, logarithmic: Bool = false) -> Double {
     switch x {
       case ..<lowerBound:
-        return 0
-      case lowerBound...upperBound:
-        return (x - lowerBound) / (upperBound - lowerBound)
+        return logarithmic ? -.infinity : 0
+      
+      case lowerBound ..< upperBound:
+        return logarithmic
+        ? .log(x - lowerBound) - .log(upperBound - lowerBound)
+        : (x - lowerBound) / (upperBound - lowerBound)
+        
       default:
-        return 1
+        return logarithmic ? 0 : 1
     }
   }
   

@@ -11,7 +11,7 @@ public protocol Distribution {
   /// Calculates the cumulative density for a value in the distribution.
   /// - parameter x: The value used to compute the cumulative density.
   /// - returns: A number in [0, 1] specifying the proportion of values that are less than or equal to x.
-  func cdf(x: DomainType) -> Double
+  func cdf(x: DomainType, logarithmic: Bool) -> Double
   
   /// Samples a single value from the distribution.
   /// - returns: A sample from the distribution.

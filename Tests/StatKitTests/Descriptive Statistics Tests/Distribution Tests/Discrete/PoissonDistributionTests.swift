@@ -48,6 +48,18 @@ final class PoissonDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.cdf(x: 6), 0.31337428, accuracy: 1e-6)
   }
   
+  func testLogCDF() {
+    let firstDistribution = PoissonDistribution(rate: 1)
+    XCTAssertEqual(firstDistribution.cdf(x: 1, logarithmic: true), -0.30685281944, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.cdf(x: 0, logarithmic: true), -1.00000000000, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.cdf(x: 6, logarithmic: true), -0.00008324461, accuracy: 1e-6)
+    
+    let secondDistribution = PoissonDistribution(rate: 8)
+    XCTAssertEqual(secondDistribution.cdf(x: 1, logarithmic: true), -5.802775, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.cdf(x: 0, logarithmic: true), -8.000000, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.cdf(x: 6, logarithmic: true), -1.160357, accuracy: 1e-6)
+  }
+  
   func testSampling() {
     let numberOfSamples = 1000000
     let distribution = PoissonDistribution(rate: 2)

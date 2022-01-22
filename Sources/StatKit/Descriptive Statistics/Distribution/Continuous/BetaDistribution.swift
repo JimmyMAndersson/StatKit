@@ -47,24 +47,34 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
     return 3 + (numerator / denominator)
   }
   
-  public func pdf(x: Double) -> Double {
+  public func pdf(x: Double, logarithmic: Bool = false) -> Double {
     switch x {
-      case ...0:
-        return 0
-      case 1...:
-        return 0
+      case ...0, 1...:
+        return logarithmic ? -.infinity : 0
+      
       default:
         let logBeta = .logGamma(alpha + beta) - .logGamma(alpha) - .logGamma(beta)
         let logX = (alpha - 1) * .log(x) + (beta - 1) * .log(1 - x)
-        return .exp(logBeta + logX)
+        return logarithmic ? logBeta + logX : .exp(logBeta + logX)
     }
   }
   
-  public func cdf(x: Double) -> Double {
-    if x <= 0 { return 0 }
-    if 1 <= x { return 1 }
+  public func cdf(x: Double, logarithmic: Bool = false) -> Double {
+    if x <= 0 { return logarithmic ? -.infinity : 0 }
+    if 1 <= x { return logarithmic ? 0 : 1 }
     
-    return regularizedIncompleteBeta(x: x, alpha: alpha, beta: beta)
+    let result = regularizedIncompleteBeta(x: x, alpha: alpha, beta: beta)
+    
+    switch result {
+      case ...0:
+        return logarithmic ? -.infinity : 0
+      
+      case 1...:
+        return logarithmic ? 0 : 1
+        
+      default:
+        return logarithmic ? .log(result) : result
+    }
   }
   
   /// Samples a single value from the distribution.

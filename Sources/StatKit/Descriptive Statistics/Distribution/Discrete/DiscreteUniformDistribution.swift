@@ -23,8 +23,12 @@ public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistr
     self.integerCount = upperBound - lowerBound + 1
   }
   
-  public func pmf(x: Int) -> Double {
-    return 1 / Double(integerCount)
+  public func pmf(x: Int, logarithmic: Bool = false) -> Double {
+    if x < lowerBound || upperBound < x {
+      return logarithmic ? -.infinity : 0
+    }
+    
+    return logarithmic ? -.log(Double(integerCount)) : 1 / Double(integerCount)
   }
   
   public var mean: Double {
@@ -45,16 +49,18 @@ public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistr
     return 3 - numerator / denominator
   }
   
-  public func cdf(x: Int) -> Double {
+  public func cdf(x: Int, logarithmic: Bool = false) -> Double {
     switch x {
       case ..<lowerBound:
-        return 0
+        return logarithmic ? -.infinity : 0
       
       case upperBound...:
-        return 1
+        return logarithmic ? 0 : 1
         
       default:
-        return Double(x - lowerBound + 1) / Double(integerCount)
+        return logarithmic
+        ? .log(Double(x - lowerBound + 1)) - .log(Double(integerCount))
+        : Double(x - lowerBound + 1) / Double(integerCount)
     }
   }
   

@@ -49,6 +49,18 @@ final class BinomialDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.cdf(x: 15), 0.76249222, accuracy: 1e-6)
   }
   
+  func testLogCDF() {
+    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
+    XCTAssertEqual(firstDistribution.cdf(x: 1, logarithmic: true), -10.8184212, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.cdf(x: 0, logarithmic: true), -13.8629436, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.cdf(x: 10, logarithmic: true), -0.5308608, accuracy: 1e-6)
+    
+    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
+    XCTAssertEqual(secondDistribution.cdf(x: 10, logarithmic: true), -3.037348, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.cdf(x: 7, logarithmic: true), -6.661771, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.cdf(x: 15, logarithmic: true), -0.271163, accuracy: 1e-6)
+  }
+  
   func testSampling() {
     let numberOfSamples = 1000000
     let distribution = BinomialDistribution(probability: 0.7, trials: 20)

@@ -47,16 +47,38 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
     self.trials = trials
   }
   
-  public func pmf(x: Int) -> Double {
+  public func pmf(x: Int, logarithmic: Bool = false) -> Double {
     let coefficient = Double(choose(n: trials, k: x))
     let successes: Double = .pow(probability, Double(x))
     let failures: Double = .pow(1 - probability, Double(trials - x))
-    return coefficient * successes * failures
+    let result = coefficient * successes * failures
+    
+    switch result {
+      case ...0:
+        return logarithmic ? -.infinity : 0
+      
+      case 1...:
+        return logarithmic ? 0 : 1
+        
+      default:
+        return logarithmic ? .log(result) : result
+    }
   }
   
-  public func cdf(x: Int) -> Double {
-    return (0 ... x).reduce(into: 0) { (result, successes) in
+  public func cdf(x: Int, logarithmic: Bool = false) -> Double {
+    let result = (0 ... x).reduce(into: 0) { (result, successes) in
       result += pmf(x: successes)
+    }
+    
+    switch result {
+      case ...0:
+        return logarithmic ? -.infinity : 0
+      
+      case 1...:
+        return logarithmic ? 0 : 1
+        
+      default:
+        return logarithmic ? .log(result) : result
     }
   }
   

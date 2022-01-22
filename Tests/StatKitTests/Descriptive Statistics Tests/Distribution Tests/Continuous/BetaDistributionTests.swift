@@ -90,6 +90,35 @@ final class BetaDistributionTests: XCTestCase {
     XCTAssertEqual(sixth.cdf(x: 2), 1, accuracy: 1e-6)
   }
   
+  func testLogCDF() {
+    let first = BetaDistribution(alpha: 1, beta: 1)
+    XCTAssertEqual(first.cdf(x: -1, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(first.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(first.cdf(x: 0.1, logarithmic: true), -2.3025851, accuracy: 1e-6)
+    XCTAssertEqual(first.cdf(x: 0.9, logarithmic: true), -0.1053605, accuracy: 1e-6)
+    XCTAssertEqual(first.cdf(x: 0.4, logarithmic: true), -0.9162907, accuracy: 1e-6)
+    XCTAssertEqual(first.cdf(x: 1, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(first.cdf(x: 2, logarithmic: true), 0, accuracy: 1e-6)
+    
+    let second = BetaDistribution(alpha: 5, beta: 2)
+    XCTAssertEqual(second.cdf(x: -1, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(second.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(second.cdf(x: 0.1, logarithmic: true), -9.8081774, accuracy: 1e-6)
+    XCTAssertEqual(second.cdf(x: 0.9, logarithmic: true), -0.1213375, accuracy: 1e-6)
+    XCTAssertEqual(second.cdf(x: 0.4, logarithmic: true), -3.1951593, accuracy: 1e-6)
+    XCTAssertEqual(second.cdf(x: 1, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(second.cdf(x: 2, logarithmic: true), 0, accuracy: 1e-6)
+    
+    let third = BetaDistribution(alpha: 0.1, beta: 5000)
+    XCTAssertEqual(third.cdf(x: -1, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(third.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(third.cdf(x: 0.1, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(third.cdf(x: 0.9, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(third.cdf(x: 0.4, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(third.cdf(x: 1, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(third.cdf(x: 2, logarithmic: true), 0, accuracy: 1e-6)
+  }
+  
   func testPDF() {
     let firstDistribution = BetaDistribution(alpha: 1, beta: 1)
     XCTAssertEqual(firstDistribution.pdf(x: 0.1), 1, accuracy: 1e-6)
@@ -100,6 +129,23 @@ final class BetaDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.pdf(x: 0.1), 0.0027, accuracy: 1e-6)
     XCTAssertEqual(secondDistribution.pdf(x: 0.9), 1.9683, accuracy: 1e-6)
     XCTAssertEqual(secondDistribution.pdf(x: 0.4), 0.4608, accuracy: 1e-6)
+  }
+  
+  func testLogPDF() {
+    let firstDistribution = BetaDistribution(alpha: 1, beta: 1)
+    XCTAssertEqual(firstDistribution.pdf(x: -1, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.pdf(x: 0.9, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.pdf(x: 0.4, logarithmic: true), 0, accuracy: 1e-6)
+    
+    let secondDistribution = BetaDistribution(alpha: 5, beta: 2)
+    XCTAssertEqual(secondDistribution.pdf(x: -1, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.pdf(x: 0.9, logarithmic: true), 0.6771702, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.pdf(x: 0.4, logarithmic: true), -0.7747912, accuracy: 1e-6)
+    
+    let thirdDistribution = BetaDistribution(alpha: 0.1, beta: 5000)
+    XCTAssertEqual(thirdDistribution.pdf(x: -1, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(thirdDistribution.pdf(x: 0.9, logarithmic: true), -11511.929057, accuracy: 1e-6)
+    XCTAssertEqual(thirdDistribution.pdf(x: 0.4, logarithmic: true), -2554.193633, accuracy: 1e-6)
   }
   
   func testSampling() {

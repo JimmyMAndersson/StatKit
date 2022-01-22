@@ -36,14 +36,27 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
     return 3
   }
   
-  public func cdf(x: Double) -> Double {
+  public func cdf(x: Double, logarithmic: Bool = false) -> Double {
     let erfParameter = (x - mean) / (2 * variance).squareRoot()
-    return 0.5 + 0.5 * .erf(erfParameter)
+    let result = 0.5 + 0.5 * .erf(erfParameter)
+    
+    switch result {
+      case ...0:
+        return logarithmic ? -.infinity : 0
+      
+      case 1...:
+        return logarithmic ? 0 : 1
+        
+      default:
+        return logarithmic ? .log(result) : result
+    }
   }
   
-  public func pdf(x: Double) -> Double {
+  public func pdf(x: Double, logarithmic: Bool = false) -> Double {
     let exponent = -0.5 * .pow((x - mean) / variance.squareRoot(), 2)
-    return .exp(exponent) / (variance * 2 * .pi).squareRoot()
+    return logarithmic
+    ? exponent - .log((variance * 2 * .pi).squareRoot())
+    : .exp(exponent) / (variance * 2 * .pi).squareRoot()
   }
   
   public func sample() -> Double {

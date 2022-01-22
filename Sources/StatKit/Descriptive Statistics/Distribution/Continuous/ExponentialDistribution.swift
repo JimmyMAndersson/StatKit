@@ -16,13 +16,13 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
     self.rate = rate
   }
   
-  public func pdf(x: Double) -> Double {
+  public func pdf(x: Double, logarithmic: Bool = false) -> Double {
     switch x {
       case ..<0:
-        return 0
+        return logarithmic ? -.infinity : 0
         
       default:
-        return rate * .exp(-rate * x)
+        return logarithmic ? .log(rate) + rate * x : rate * .exp(-rate * x)
     }
   }
   
@@ -42,13 +42,13 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
     return 9
   }
   
-  public func cdf(x: Double) -> Double {
+  public func cdf(x: Double, logarithmic: Bool = false) -> Double {
     switch x {
       case ...0:
-        return 0
+        return logarithmic ? -.infinity : 0
         
       default:
-        return 1 - .exp(-rate * x)
+        return logarithmic ? .log(1 - .exp(-rate * x)) : 1 - .exp(-rate * x)
     }
   }
   

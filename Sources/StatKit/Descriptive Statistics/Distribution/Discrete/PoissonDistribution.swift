@@ -32,24 +32,23 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
     return 3 + 1 / rate
   }
   
-  public func pmf(x: Int) -> Double {
+  public func pmf(x: Int, logarithmic: Bool = false) -> Double {
     guard 0 <= x else { return 0 }
     
     let logPMF = .log(.pow(rate, x.realValue)) - rate - .logGamma(x.realValue + 1)
-    return .exp(logPMF)
+    return logarithmic ? logPMF : .exp(logPMF)
   }
   
-  public func cdf(x: Int) -> Double {
-    switch x {
-      case ..<0:
-        return 0
-        
-      default:
-        let sum = (0 ... x).reduce(into: 0) { result, number in
-          result += pmf(x: number)
-        }
-        return sum
+  public func cdf(x: Int, logarithmic: Bool = false) -> Double {
+    if x < 0 { return logarithmic ? -.infinity : 0 }
+    
+    let result = (0 ... x).reduce(into: 0) { result, number in
+      result += pmf(x: number)
     }
+    
+    if result <= 0 { return logarithmic ? -.infinity : 0 }
+    
+    return logarithmic ? .log(result) : result
   }
   
   public func sample() -> Int {
