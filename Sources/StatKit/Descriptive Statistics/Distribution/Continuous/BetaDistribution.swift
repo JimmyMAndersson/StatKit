@@ -99,8 +99,8 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
     var acceptance = Double.infinity
     
     repeat {
-      let u1 = Double.random(in: .leastNonzeroMagnitude ... .greatestFiniteMagnitude)
-      let u2 = Double.random(in: .leastNonzeroMagnitude ... .greatestFiniteMagnitude)
+      let u1 = Double.random(in: .leastNonzeroMagnitude ..< 1)
+      let u2 = Double.random(in: .leastNonzeroMagnitude ..< 1)
       
       V = b * .log(u1 / (1 - u1))
       W = alpha * .exp(V)
@@ -140,8 +140,8 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
       var acceptance = Double.infinity
       
       repeat {
-        let u1 = Double.random(in: 0 ..< 1, using: &uniformRNG)
-        let u2 = Double.random(in: 0 ..< 1, using: &uniformRNG)
+        let u1 = Double.random(in: .leastNonzeroMagnitude ..< 1, using: &uniformRNG)
+        let u2 = Double.random(in: .leastNonzeroMagnitude ..< 1, using: &uniformRNG)
         
         V = b * .log(u1 / (1 - u1))
         W = alpha * .exp(V)
