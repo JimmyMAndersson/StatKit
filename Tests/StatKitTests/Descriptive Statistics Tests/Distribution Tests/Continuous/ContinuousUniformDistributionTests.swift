@@ -48,6 +48,18 @@ final class ContinuousUniformDistributionTests: XCTestCase {
     XCTAssertEqual(offsetDistribution.cdf(x: 0), 4 / 13, accuracy: 1e-6)
   }
   
+  func testLogCDF() {
+    let standardDistribution = ContinuousUniformDistribution(0, 1)
+    XCTAssertEqual(standardDistribution.cdf(x: 1, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(standardDistribution.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(standardDistribution.cdf(x: 0.4, logarithmic: true), -0.9162907319, accuracy: 1e-6)
+    
+    let offsetDistribution = ContinuousUniformDistribution(-4, 9)
+    XCTAssertEqual(offsetDistribution.cdf(x: 10, logarithmic: true), 0, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.cdf(x: -8, logarithmic: true), -.infinity, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.cdf(x: 0, logarithmic: true), -1.1786549963, accuracy: 1e-6)
+  }
+  
   func testSampling() {
     let numberOfSamples = 1000000
     let distribution = ContinuousUniformDistribution(0, 1)

@@ -48,6 +48,18 @@ final class GeometricDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.cdf(x: 7), 0.9997813, accuracy: 1e-6)
   }
   
+  func testLogCDF() {
+    let firstDistribution = GeometricDistribution(probability: 0.5)
+    XCTAssertEqual(firstDistribution.cdf(x: 1, logarithmic: true), -0.693147181, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.cdf(x: 3, logarithmic: true), -0.133531393, accuracy: 1e-6)
+    XCTAssertEqual(firstDistribution.cdf(x: 7, logarithmic: true), -0.007843177, accuracy: 1e-6)
+    
+    let secondDistribution = GeometricDistribution(probability: 0.7)
+    XCTAssertEqual(secondDistribution.cdf(x: 1, logarithmic: true), -0.3566749439, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.cdf(x: 3, logarithmic: true), -0.0273711968, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.cdf(x: 7, logarithmic: true), -0.0002187239, accuracy: 1e-6)
+  }
+  
   func testSampling() {
     let numberOfSamples = 1000000
     let distribution = GeometricDistribution(probability: 0.7)

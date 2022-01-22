@@ -34,22 +34,22 @@ public struct GeometricDistribution: DiscreteDistribution, UnivariateDistributio
     self.probability = probability
   }
   
-  public func pmf(x: Int) -> Double {
-    switch x {
-      case ...0:
-        return 0
-      default:
-        return .pow(1 - probability, (x - 1).realValue) * probability
-    }
+  public func pmf(x: Int, logarithmic: Bool = false) -> Double {
+    if x <= 0 { return logarithmic ? -.infinity : 0 }
+    
+    let result = .pow(1 - probability, (x - 1).realValue) * probability
+    if result <= 0 { return logarithmic ? -.infinity : 0 }
+    
+    return logarithmic ? .log(result) : result
   }
   
-  public func cdf(x: Int) -> Double {
-    switch x {
-      case ...0:
-        return 0
-      default:
-        return 1 - .pow(1 - probability, x.realValue)
-    }
+  public func cdf(x: Int, logarithmic: Bool = false) -> Double {
+    if x <= 0 { return logarithmic ? -.infinity : 0 }
+    
+    let result = 1 - .pow(1 - probability, x.realValue)
+    if result <= 0 { return logarithmic ? -.infinity : 0 }
+    
+    return logarithmic ? .log(result) : result
   }
   
   public func sample() -> Int {
