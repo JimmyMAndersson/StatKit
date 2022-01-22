@@ -28,6 +28,7 @@ These types define common distributions used to make theoretical calculations or
 - ``ContinuousUniformDistribution``
 - ``ExponentialDistribution``
 - ``NormalDistribution``
+- ``BetaDistribution``
 
 ### Discrete Multivariate Distributions
 
