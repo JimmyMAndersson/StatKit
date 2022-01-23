@@ -21,7 +21,6 @@
 <p align="center">
     <img src="https://img.shields.io/badge/swift-5.5-blueviolet.svg" />
     <img src="https://img.shields.io/badge/swift pm-compatible-blueviolet.svg?style=flat" alt="Swift PM Compatible" />
-    <img src="https://img.shields.io/badge/cocoapods-compatible-blueviolet.svg?style=flat" alt="Cocoapods Compatible" />
 </p>
 
 ***
@@ -128,7 +127,7 @@ To install StatKit using the [Swift Package Manager](https://swift.org/package-m
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.4.0")
+        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.5.0")
     ],
     ...
 )
@@ -138,16 +137,6 @@ Then import StatKit where you would like to use it:
 
 ```swift
 import StatKit
-```
-### Cocoapods
-
-To install StatKit using [Cocoapods](https://cocoapods.org/), simply add `pod 'StatKit'` to your Podfile. To use a specific version, check out the [Podfile reference](https://guides.cocoapods.org/using/the-podfile.html) for the appropriate syntax.
-
-```ruby
-target 'MyApp' do
-  use_frameworks!
-  pod 'StatKit'
-end
 ```
 
 ## Contributions and support
