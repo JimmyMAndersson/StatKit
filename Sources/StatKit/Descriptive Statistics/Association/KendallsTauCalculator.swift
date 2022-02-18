@@ -25,7 +25,9 @@ internal struct KendallsTauCalculator: CorrelationCalculator {
     
     switch composition {
       case .population:
-        return (concordant - discordant).realValue / combinations.realValue
+        let numerator = concordant.realValue - discordant.realValue
+        let denominator = combinations.realValue
+        return numerator / denominator
       case .sample:
         let numerator = (concordant - discordant).realValue
         let tieProduct = (combinations - tiesX) * (combinations - tiesY)
