@@ -83,6 +83,8 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
   /// Sampling is performed according to the work of R.C.H. Cheng in
   /// "Generating Beta Variates with Nonintegral Shape Parameters".
   public func sample() -> Double {
+    
+    var uniformRNG = Xoroshiro256StarStar()
     let a = alpha + beta
     let b: Double
     
@@ -97,10 +99,11 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
     var W = 0.0
     var test = Double.infinity
     var acceptance = Double.infinity
+    let sampleRange = Double.leastNonzeroMagnitude ..< 1
     
     repeat {
-      let u1 = Double.random(in: .leastNonzeroMagnitude ..< 1)
-      let u2 = Double.random(in: .leastNonzeroMagnitude ..< 1)
+      let u1 = Double.random(in: sampleRange, using: &uniformRNG)
+      let u2 = Double.random(in: sampleRange, using: &uniformRNG)
       
       V = b * .log(u1 / (1 - u1))
       W = alpha * .exp(V)
@@ -138,10 +141,11 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
       var W = 0.0
       var test = Double.infinity
       var acceptance = Double.infinity
+      let sampleRange = Double.leastNonzeroMagnitude ..< 1
       
       repeat {
-        let u1 = Double.random(in: .leastNonzeroMagnitude ..< 1, using: &uniformRNG)
-        let u2 = Double.random(in: .leastNonzeroMagnitude ..< 1, using: &uniformRNG)
+        let u1 = Double.random(in: sampleRange, using: &uniformRNG)
+        let u2 = Double.random(in: sampleRange, using: &uniformRNG)
         
         V = b * .log(u1 / (1 - u1))
         W = alpha * .exp(V)

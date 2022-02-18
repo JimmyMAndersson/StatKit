@@ -103,7 +103,10 @@ internal func incompleteBetaContinuedFraction<RealType: Real & BinaryFloatingPoi
     let fNumerator = (1 + n / alpha)
     let fDenominator = (c1 + 2 * n / alpha)
     let f = fNumerator / fDenominator
-    let b = n + t / s + f * (c + n * (2 - x))
+    let bFirstTerm = t / s
+    let bSecondTerm = f * c
+    let bThirdTerm = f * n * (2 - x)
+    let b = n + bFirstTerm + bSecondTerm + bThirdTerm
     p = 1 + n / alpha
     s += 2
     
