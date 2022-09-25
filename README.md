@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/swift-5.5-blueviolet.svg" />
+    <img src="https://img.shields.io/badge/swift-5.7-blueviolet.svg" />
     <img src="https://img.shields.io/badge/swift pm-compatible-blueviolet.svg?style=flat" alt="Swift PM Compatible" />
 </p>
 

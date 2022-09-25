@@ -33,7 +33,7 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
   }
   
   public func pmf(x: Int, logarithmic: Bool = false) -> Double {
-    guard 0 <= x else { return 0 }
+    guard 0 <= x else { return logarithmic ? -.infinity : 0 }
     
     let logPMF = .log(.pow(rate, x.realValue)) - rate - .logGamma(x.realValue + 1)
     return logarithmic ? logPMF : .exp(logPMF)

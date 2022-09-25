@@ -29,6 +29,7 @@ These types define common distributions used to make theoretical calculations or
 - ``ExponentialDistribution``
 - ``NormalDistribution``
 - ``BetaDistribution``
+- ``GammaDistribution``
 
 ### Discrete Multivariate Distributions
 

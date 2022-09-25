@@ -1,6 +1,5 @@
 if [ -x "$(command -v docker)" ]; then
-    docker-compose -f docker-qa.yml run linux-tests
-    docker-compose -f docker-qa.yml run linter
+    docker-compose -f docker-qa.yml up
 else
     echo "Install Docker to run Linux tests and linting..."
 fi
