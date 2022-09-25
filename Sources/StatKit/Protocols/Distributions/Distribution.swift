@@ -10,6 +10,7 @@ public protocol Distribution {
   
   /// Calculates the cumulative density for a value in the distribution.
   /// - parameter x: The value used to compute the cumulative density.
+  /// - parameter logarithmic: Whether to return the natural logarithm of the function.
   /// - returns: A number in [0, 1] specifying the proportion of values that are less than or equal to x.
   func cdf(x: DomainType, logarithmic: Bool) -> Double
   

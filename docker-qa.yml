@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  linux-tests:
-    container_name: linux-tests
-    image: swift:5.5
+  linux_5_7:
+    container_name: linux_5_7
+    image: swift:5.7.0-amazonlinux2
     volumes:
       - ./:/statkit
     working_dir: /statkit
@@ -10,7 +10,7 @@ services:
   
   linter:
     container_name: linter
-    image: norionomura/swiftlint:0.45.0_swift-5.5.1
+    image: norionomura/swiftlint:0.46.5_swift-5.5.1
     volumes:
       - ./:/statkit
     working_dir: /statkit
