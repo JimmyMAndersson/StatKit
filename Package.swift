@@ -23,11 +23,6 @@ let package = Package(
       name: "StatKit",
       dependencies: [
         .product(name: "Numerics", package: "swift-numerics")
-      ],
-      swiftSettings: [
-        .unsafeFlags(["-Xfrontend", "-warn-long-function-bodies=150"]),
-        .unsafeFlags(["-Xfrontend", "-warn-long-expression-type-checking=60"]),
-        .unsafeFlags(["-cross-module-optimization", "-O"])
       ]
     ),
     .testTarget(
