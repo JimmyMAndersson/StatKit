@@ -21,7 +21,8 @@ disabled_rules:
   - opening_brace
   - identifier_name
   - trailing_comma
+  - large_tuple
 
 function_body_length:
-  warning: 45
+  warning: 50
   error: 80
