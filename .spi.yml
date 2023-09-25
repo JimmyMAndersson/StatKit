@@ -1,4 +1,17 @@
 version: 1
 builder:
   configs:
+  - platform: macosspm
+    target: StatKit
+    swift_target: 5.7
+  - platform: ios
+    target: StatKit
+    swift_target: 5.7
+  - platform: tvos
+    target: StatKit
+    swift_target: 5.7
+  - platform: linux
+    target: StatKit
+    swift_target: 5.7
   - documentation_targets: [StatKit]
+    custom_documentation_parameters: [--include-extended-types]
