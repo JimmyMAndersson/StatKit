@@ -11,37 +11,37 @@ internal protocol CorrelationCalculator {
     for X: KeyPath<C.Element, T>,
     and Y: KeyPath<C.Element, U>,
     in collection: C,
-    as composition: DataSetComposition) -> Double
-  where
-T: Comparable & Hashable & ConvertibleToReal,
-U: Comparable & Hashable & ConvertibleToReal,
-C: Collection
+    as composition: DataSetComposition
+  ) -> Double
+  where T: Comparable & Hashable & ConvertibleToReal,
+        U: Comparable & Hashable & ConvertibleToReal,
+        C: Collection
 }
 
 /// Different methods of calculating the association measure between arbitrary comparable variables.
 public enum CorrelationMethod {
   /// Pearson's product-moment correlation coefficient.
   case pearsonsProductMoment
-  
+
   /// Spearman's Rho coefficient.
   case spearmansRho
-  
+
   /// Kendall's Tau coefficient.
   ///
   /// This method calculates the Tau-B coefficient, which takes ties into account.
   /// The time complexity is O(n * log(n)).
   case kendallsTau
-  
+
   /// A calculator object that can be used to compute the specified measure of association.
   @usableFromInline
-  internal var calculator: CorrelationCalculator {
+  internal var calculator: any CorrelationCalculator {
     switch self {
       case .pearsonsProductMoment:
         return PearsonsProductMomentCalculator()
-        
+
       case .spearmansRho:
         return SpearmansRhoCalculator()
-        
+
       case .kendallsTau:
         return KendallsTauCalculator()
     }

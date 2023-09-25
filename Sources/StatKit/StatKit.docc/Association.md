@@ -10,7 +10,7 @@ One of the most common ways of measuring association is by the Pearson Product M
 
 ### Functions
 
-- ``correlation(_:of:and:for:method:)``
+- ``StatKit/Swift/Collection/correlation(of:and:for:method:)``
 
 ### Methods of Computation
 
