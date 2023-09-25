@@ -12,4 +12,4 @@ Sum over variables in a data set.
 
 ### Functions
 
-- ``sum(of:over:)``
+- ``StatKit/Swift/Collection/sum(over:)``
