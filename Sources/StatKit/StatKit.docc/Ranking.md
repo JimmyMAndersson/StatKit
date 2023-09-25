@@ -10,7 +10,7 @@ There are several ways of ranking items. The most common ones are implemented as
 
 ### Functions
 
-- ``rank(_:variable:by:strategy:)``
+- ``StatKit/Swift/Collection/rank(variable:by:strategy:)``
 
 ### Strategies
 
