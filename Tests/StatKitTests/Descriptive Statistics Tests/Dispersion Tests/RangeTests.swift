@@ -6,7 +6,7 @@ import StatKit
 final class RangeTests: XCTestCase {
   func testIntegerArrayRange() {
     let array = [1, 2, 3, 4, 5]
-    let calculatedRange = range(in: array, of: \.self)
+    let calculatedRange = array.range(of: \.self)
     let expectedRange = 4.0
     
     XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
@@ -14,7 +14,7 @@ final class RangeTests: XCTestCase {
   
   func testFloatingPointArrayRange() {
     let array = [1.5, 22.8, 3.1, 4.0, 5.3]
-    let calculatedRange = range(in: array, of: \.self)
+    let calculatedRange = array.range(of: \.self)
     let expectedRange = 21.3
     
     XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
@@ -22,7 +22,7 @@ final class RangeTests: XCTestCase {
   
   func testEmptyArrayRange() {
     let array = [Int]()
-    let calculatedRange = range(in: array, of: \.self)
+    let calculatedRange = array.range(of: \.self)
     
     XCTAssertTrue(calculatedRange.isNaN)
   }
@@ -33,7 +33,7 @@ final class RangeTests: XCTestCase {
                  SIMD2(x: 10, y: 19),
                  SIMD2(x: 28, y: 2)]
     
-    let calculatedRange = range(in: array, of: \.y)
+    let calculatedRange = array.range(of: \.y)
     let expectedRange = 24.0
     
     XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)

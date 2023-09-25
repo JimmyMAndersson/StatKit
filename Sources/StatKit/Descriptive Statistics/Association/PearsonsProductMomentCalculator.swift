@@ -12,8 +12,15 @@ internal struct PearsonsProductMomentCalculator: CorrelationCalculator {
   
   guard X != Y else { return 1 }
   
-  let XStdDev = standardDeviation(of: collection, variable: X, from: composition)
-  let YStdDev = standardDeviation(of: collection, variable: Y, from: composition)
+  let XStdDev = collection.standardDeviation(
+    variable: X,
+    from: composition
+  )
+  let YStdDev = collection.standardDeviation(
+    variable: Y,
+    from: composition
+  )
+
   let stdDevProduct = XStdDev * YStdDev
   if stdDevProduct.isZero {
     return .signalingNaN
@@ -21,8 +28,12 @@ internal struct PearsonsProductMomentCalculator: CorrelationCalculator {
   
   switch composition {
     case .population:
-      return covariance(collection, of: X, and: Y, from: composition) / stdDevProduct
-      
+      return collection.covariance(
+        of: X,
+        and: Y,
+        from: composition
+      ) / stdDevProduct
+
     case .sample:
       let sumOfProducts = collection.reduce(into: 0) { result, element in
         result += element[keyPath: X].realValue * element[keyPath: Y].realValue

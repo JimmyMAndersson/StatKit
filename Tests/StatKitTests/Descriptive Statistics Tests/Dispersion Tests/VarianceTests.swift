@@ -7,7 +7,7 @@ import RealModule
 final class VariabilityTests: XCTestCase {
   func testIntegerSampleVariance() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedVariance = variance(of: intArray, variable: \.self, from: .sample)
+    let calculatedVariance = intArray.variance(variable: \.self, from: .sample)
     let expectedVariance = 2.5
     
     XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
@@ -15,7 +15,7 @@ final class VariabilityTests: XCTestCase {
   
   func testIntegerPopulationVariance() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedVariance = variance(of: intArray, variable: \.self, from: .population)
+    let calculatedVariance = intArray.variance(variable: \.self, from: .population)
     let expectedVariance = 2.0
     
     XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
@@ -23,7 +23,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointSampleVariance() {
     let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedVariance = variance(of: fpArray, variable: \.self, from: .sample)
+    let calculatedVariance = fpArray.variance(variable: \.self, from: .sample)
     let expectedVariance = 2.5
     
     XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
@@ -31,7 +31,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointPopulationVariance() {
     let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedVariance = variance(of: fpArray, variable: \.self, from: .population)
+    let calculatedVariance = fpArray.variance(variable: \.self, from: .population)
     let expectedVariance = 2.0
     
     XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
@@ -39,14 +39,14 @@ final class VariabilityTests: XCTestCase {
   
   func testEmptySetSampleVariance() {
     let emptySet = [Int]()
-    let calculatedVariance = variance(of: emptySet, variable: \.self, from: .sample)
+    let calculatedVariance = emptySet.variance(variable: \.self, from: .sample)
     
     XCTAssertTrue(calculatedVariance.isNaN)
   }
   
   func testSingleEntrySetSampleVariance() {
     let emptySet = [1]
-    let calculatedVariance = variance(of: emptySet, variable: \.self, from: .sample)
+    let calculatedVariance = emptySet.variance(variable: \.self, from: .sample)
     let expectedVariance = 0.0
     
     XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
@@ -54,7 +54,7 @@ final class VariabilityTests: XCTestCase {
   
   func testIntegerSampleStandardDeviation() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = standardDeviation(of: intArray, variable: \.self, from: .sample)
+    let calculatedStandardDeviation = intArray.standardDeviation(variable: \.self, from: .sample)
     let expectedStandardDeviation = (2.5).squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
@@ -62,7 +62,7 @@ final class VariabilityTests: XCTestCase {
   
   func testIntegerPopulationStandardDeviation() {
     let intArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = standardDeviation(of: intArray, variable: \.self, from: .population)
+    let calculatedStandardDeviation = intArray.standardDeviation(variable: \.self, from: .population)
     let expectedStandardDeviation = 2.0.squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
@@ -70,7 +70,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointSampleStandardDeviation() {
     let fpArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = standardDeviation(of: fpArray, variable: \.self, from: .sample)
+    let calculatedStandardDeviation = fpArray.standardDeviation(variable: \.self, from: .sample)
     let expectedStandardDeviation = 2.5.squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
@@ -78,7 +78,7 @@ final class VariabilityTests: XCTestCase {
   
   func testFloatingPointPopulationStandardDeviation() {
     let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedStandardDeviation = standardDeviation(of: fpArray, variable: \.self, from: .population)
+    let calculatedStandardDeviation = fpArray.standardDeviation(variable: \.self, from: .population)
     let expectedStandardDeviation = 2.0.squareRoot()
     
     XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
@@ -86,14 +86,14 @@ final class VariabilityTests: XCTestCase {
   
   func testEmptySetSampleStandardDeviation() {
     let emptySet = [Int]()
-    let calculatedVariance = standardDeviation(of: emptySet, variable: \.self, from: .sample)
+    let calculatedVariance = emptySet.standardDeviation(variable: \.self, from: .sample)
     
     XCTAssertTrue(calculatedVariance.isNaN)
   }
   
   func testSingleEntrySetSampleStandardDeviation() {
     let emptySet = [1]
-    let calculatedVariance = standardDeviation(of: emptySet, variable: \.self, from: .sample)
+    let calculatedVariance = emptySet.standardDeviation(variable: \.self, from: .sample)
     let expectedVariance = 0.0
     
     XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
