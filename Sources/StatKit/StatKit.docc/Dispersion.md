@@ -10,10 +10,10 @@ Dispersion measures put numbers on, for example, how much some variable(s) in a 
 
 ### Functions
 
-- ``variance(of:variable:from:)``
-- ``covariance(_:of:and:from:)``
-- ``standardDeviation(of:variable:from:)``
-- ``range(in:of:)``
+- ``StatKit/Swift/Collection/variance(variable:from:)``
+- ``StatKit/Swift/Collection/covariance(of:and:from:)``
+- ``StatKit/Swift/Collection/standardDeviation(variable:from:)``
+- ``StatKit/Swift/Collection/range(of:)``
 
 ### Strategies
 

@@ -10,7 +10,7 @@ Partitioning refers to the act of separating some elements into multiple subsets
 
 ### Functions
 
-- ``quantile(_:probability:of:method:)``
+- ``StatKit/Swift/Collection/quantile(probability:of:method:)``
 
 ### Methods of Computation
 

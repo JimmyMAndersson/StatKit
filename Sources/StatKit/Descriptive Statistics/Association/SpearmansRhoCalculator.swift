@@ -9,12 +9,19 @@ internal struct SpearmansRhoCalculator: CorrelationCalculator {
     
     guard X != Y else { return 1 }
     
-    let XRanks = rank(collection, variable: X, by: >, strategy: .fractional)
-    let YRanks = rank(collection, variable: Y, by: >, strategy: .fractional)
+    let XRanks = collection.rank(
+      variable: X,
+      by: >,
+      strategy: .fractional
+    )
+    let YRanks = collection.rank(
+      variable: Y,
+      by: >,
+      strategy: .fractional
+    )
     let ranks: [(X: Double, Y: Double)] = Array(zip(XRanks, YRanks))
     
-    return correlation(
-      ranks,
+    return ranks.correlation(
       of: \.X,
       and: \.Y,
       for: composition,

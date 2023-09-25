@@ -16,8 +16,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -40,8 +39,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 7),
                       SIMD2(x: 10, y: 1)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -64,8 +62,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -78,8 +75,7 @@ final class RankCorrelationTests: XCTestCase {
   
   func testPearsonCorrelationWithEmptyCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -91,8 +87,7 @@ final class RankCorrelationTests: XCTestCase {
   
   func testPearsonCorrelationWithSingleEntryCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -108,8 +103,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 3, y: 27),
                       SIMD2(x: 4, y: 30)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -132,8 +126,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: -2),
                       SIMD2(x: 10, y: -6)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -151,8 +144,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 2, y: 2),
                       SIMD2(x: 5, y: 7)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .sample,
@@ -170,8 +162,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 2, y: 2),
                       SIMD2(x: 5, y: 7)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .population,
@@ -189,8 +180,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 1, y: 2),
                       SIMD2(x: 1, y: 7)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .sample,
@@ -212,8 +202,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .sample,
@@ -226,8 +215,7 @@ final class RankCorrelationTests: XCTestCase {
   
   func testKendallsTauWithEmptyCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .sample,
@@ -239,8 +227,7 @@ final class RankCorrelationTests: XCTestCase {
   
   func testKendallsTauBWithSingleEntryCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = correlation(
-      simd2Array,
+    let calculatedAssociation = simd2Array.correlation(
       of: \.x,
       and: \.y,
       for: .sample,

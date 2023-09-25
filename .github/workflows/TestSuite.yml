@@ -2,10 +2,10 @@ name: Test Suite
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   push:
-    branches: [ master ]
-    
+    branches: [ main ]
+
 env:
   DEVELOPER_DIR: /Applications/Xcode_14.0.app
 

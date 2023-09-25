@@ -15,7 +15,7 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCovariance = covariance(simd2Array, of: \.x, and: \.y, from: .population)
+    let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .population)
     let expectedCovariance = 51.5
     
     XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
@@ -33,7 +33,7 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 27, y: 2),
                       SIMD2(x: 30, y: 1)]
     
-    let calculatedCovariance = covariance(simd2Array, of: \.x, and: \.y, from: .population)
+    let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .population)
     let expectedCovariance = -27.2
     
     XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
@@ -51,8 +51,8 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCovariance = covariance(simd2Array, of: \.x, and: \.x, from: .population)
-    let expectedCovariance = variance(of: simd2Array, variable: \.x, from: .population)
+    let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.x, from: .population)
+    let expectedCovariance = simd2Array.variance(variable: \.x, from: .population)
     
     XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
@@ -71,7 +71,7 @@ final class CovarianceTests: XCTestCase {
                           SIMD2(x: 9, y: 62),
                           SIMD2(x: 10, y: 69)]
         
-        _ = covariance(simd2Array, of: \.x, and: \.y, from: .population)
+        _ = simd2Array.covariance(of: \.x, and: \.y, from: .population)
       }
     }
   }
@@ -88,8 +88,8 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let firstCovariance = covariance(simd2Array, of: \.x, and: \.y, from: .population)
-    let secondCovariance = covariance(simd2Array, of: \.y, and: \.x, from: .population)
+    let firstCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .population)
+    let secondCovariance = simd2Array.covariance(of: \.y, and: \.x, from: .population)
     
     XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 1e-6)
   }
@@ -106,7 +106,7 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCovariance = covariance(simd2Array, of: \.x, and: \.y, from: .sample)
+    let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
     let expectedCovariance = 57.222222222
     
     XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
@@ -124,7 +124,7 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 27, y: 2),
                       SIMD2(x: 30, y: 1)]
     
-    let calculatedCovariance = covariance(simd2Array, of: \.x, and: \.y, from: .sample)
+    let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
     let expectedCovariance = -30.222222222
     
     XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
@@ -142,8 +142,8 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedCovariance = covariance(simd2Array, of: \.x, and: \.x, from: .sample)
-    let expectedCovariance = variance(of: simd2Array, variable: \.x, from: .sample)
+    let calculatedCovariance = simd2Array.covariance(of: \.x, and: \.x, from: .sample)
+    let expectedCovariance = simd2Array.variance(variable: \.x, from: .sample)
     
     XCTAssertEqual(calculatedCovariance, expectedCovariance, accuracy: 1e-6)
   }
@@ -162,7 +162,7 @@ final class CovarianceTests: XCTestCase {
                           SIMD2(x: 9, y: 62),
                           SIMD2(x: 10, y: 69)]
         
-        _ = covariance(simd2Array, of: \.x, and: \.y, from: .sample)
+        _ = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
       }
     }
   }
@@ -179,8 +179,8 @@ final class CovarianceTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let firstCovariance = covariance(simd2Array, of: \.x, and: \.y, from: .sample)
-    let secondCovariance = covariance(simd2Array, of: \.y, and: \.x, from: .sample)
+    let firstCovariance = simd2Array.covariance(of: \.x, and: \.y, from: .sample)
+    let secondCovariance = simd2Array.covariance(of: \.y, and: \.x, from: .sample)
     
     XCTAssertEqual(firstCovariance, secondCovariance, accuracy: 1e-6)
   }

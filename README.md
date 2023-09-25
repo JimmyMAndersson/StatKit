@@ -46,19 +46,19 @@ StatKit adds relevant functionality for statistical analysis for the types you u
 A simple example would be to calculate the modes of an integer array, which can be done easily with the following piece of code:
 
 ```swift
-print(mode(of: [1, 2, 3, 3, 2, 4], variable: \.self))
+print([1, 2, 3, 3, 2, 4].mode(variable: \.self))
 
 // Prints [3, 2]
 ```
 
-In this case, `mode(of:variable:)` takes a KeyPath argument which specifies the variable inside the array that you are interested in. In the example above, we specify the `\.self` keypath, which points to the array element itself (in this case, the integers).
+In this case, `Collection.mode(variable:)` takes a KeyPath argument which specifies the variable inside the array that you are interested in. In the example above, we specify the `\.self` keypath, which points to the array element itself (in this case, the integers).
 
 The pattern of specifying one or more variables to investigate is common throughout the StatKit library. It allows you to calculate similar statistics for a variety of different types using the same syntax. For example, both of the below examples produce valid results, even though the types under investigation are completely disparate:  
 
 **Calculating the mode of all characters in a `String`:**  
 
 ```swift
-print(mode(of: "StatKit", variable: \.self))
+print("StatKit".mode(variable: \.self))
 
 // Prints ["t"]
 ```  
@@ -72,7 +72,7 @@ let points = [CGPoint(x: 0, y: 1),
               CGPoint(x: 1, y: 3), 
               CGPoint(x: 3, y: 1)]
 
-print(mode(of: points, variable: \.y))
+print(points.mode(variable: \.y))
 // Prints [1.0]
 ```
 
@@ -90,8 +90,8 @@ struct FuelConsumption {
 
 let measurements: [FuelConsumption] = [...]
 
-mean(of: measurements, variable: \.litersPer10Km, strategy: .arithmetic)
-standardDeviation(of: measurements, variable: \.litersPer10Km, from: .sample)
+measurements.mean(variable: \.litersPer10Km, strategy: .arithmetic)
+measurements.standardDeviation(variable: \.litersPer10Km, from: .sample)
 ```
 
 As you can see, using KeyPath's makes the StatKit API easy to use and reusable across completely arbitrary custom structures.
@@ -113,7 +113,7 @@ let normalRandomVariables = normal.sample(10)
 StatKit is documented using Swift-DocC, which means that the documentation pages can be built by Xcode and viewed in the Developer Documentation panel. Build it by clicking `Product > Build Documentation` or hitting `Shift + Ctrl + Cmd + D`.
 
 ## System Requirements
-To use StatKit, make sure that your system has Swift 5.5 (or later) installed. If you’re using a Mac, also make sure that `xcode-select` points at an Xcode installation that includes a valid version of Swift and that you’re running macOS Catalina (10.15) or later.
+To use StatKit, make sure that your system has Swift 5.7 (or later) installed. If you’re using a Mac, also make sure that `xcode-select` points at an Xcode installation that includes a valid version of Swift and that you’re running macOS Monterey (12.5) or later.
 
 **IMPORTANT**  
 StatKit **does not** officially support any beta software, including beta versions of Xcode and macOS, or unreleased versions of Swift.
@@ -127,7 +127,7 @@ To install StatKit using the [Swift Package Manager](https://swift.org/package-m
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.5.0")
+        .package(url: "https://github.com/JimmyMAndersson/StatKit.git", from: "0.6.0")
     ],
     ...
 )
