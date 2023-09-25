@@ -10,9 +10,9 @@ The arithmetic mean is the most common example of a central tendency. However, S
 
 ### Functions
 
-- ``mean(of:variable:strategy:)``
-- ``median(of:variable:strategy:)``
-- ``mode(of:variable:)``
+- ``StatKit/Swift/Collection/mean(variable:strategy:)``
+- ``StatKit/Swift/Collection/median(variable:strategy:)``
+- ``StatKit/Swift/Collection/mode(variable:)``
 
 ### Strategies
 

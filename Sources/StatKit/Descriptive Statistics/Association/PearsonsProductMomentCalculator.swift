@@ -27,7 +27,7 @@ internal struct PearsonsProductMomentCalculator: CorrelationCalculator {
       let sumOfProducts = collection.reduce(into: 0) { result, element in
         result += element[keyPath: X].realValue * element[keyPath: Y].realValue
       }
-      let term = mean(of: collection, variable: X) * mean(of: collection, variable: Y)
+      let term = collection.mean(variable: X) * collection.mean(variable: Y)
       let numerator = sumOfProducts - collection.count.realValue * term
       let denominator = (collection.count - 1).realValue * stdDevProduct
       return numerator / denominator

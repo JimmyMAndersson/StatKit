@@ -16,7 +16,7 @@ public func variance<C: Collection, T: ConvertibleToReal>(
   guard !collection.isEmpty else { return .signalingNaN }
   guard collection.count > 1 else { return 0 }
   
-  let mean = mean(of: collection, variable: variable)
+  let mean = collection.mean(variable: variable)
   
   let squareDiff = collection.lazy.reduce(into: 0) { (squareSum, element) in
     squareSum += .pow(element[keyPath: variable].realValue - mean, 2)
@@ -66,8 +66,8 @@ where T: Comparable & Hashable & ConvertibleToReal,
   
   guard collection.count > 1 else { return .signalingNaN }
   
-  let meanX = mean(of: collection, variable: X)
-  let meanY = mean(of: collection, variable: Y)
+  let meanX = collection.mean(variable: X)
+  let meanY = collection.mean(variable: Y)
   let varXY = collection.reduce(into: 0) { result, element in
     result += (element[keyPath: X].realValue - meanX) * (element[keyPath: Y].realValue - meanY)
   }

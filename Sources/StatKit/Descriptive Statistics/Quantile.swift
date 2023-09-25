@@ -52,8 +52,8 @@ public func quantile<C: Sequence, T: Comparable & ConvertibleToReal>(
         let h = Double(ordered.count) * probability + 0.5
         let firstIndex = Int((h - 0.5).rounded(.up)) - 1
         let secondIndex = Int((h + 0.5).rounded(.down)) - 1
-        return mean(of: ordered[firstIndex...secondIndex], variable: variable)
-        
+        return ordered[firstIndex...secondIndex].mean(variable: variable)
+
       case .closestOrOddIndexed:
         let h = Double(ordered.count) * probability
         let index = Int(h.rounded(.toNearestOrEven)) - 1
