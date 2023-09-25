@@ -5,12 +5,15 @@ import PackageDescription
 let package = Package(
   name: "StatKit",
   platforms: [
-    .macOS(.v10_15), .iOS(.v13), .tvOS(.v13)
+    .macOS(.v12),
+    .iOS(.v15),
+    .tvOS(.v15)
   ],
   products: [
     .library(
       name: "StatKit",
-      targets: ["StatKit"]),
+      targets: ["StatKit"]
+    ),
   ],
   dependencies: [
     .package(
@@ -22,12 +25,13 @@ let package = Package(
     .target(
       name: "StatKit",
       dependencies: [
-        .product(name: "Numerics", package: "swift-numerics")
+        .product(name: "RealModule", package: "swift-numerics", condition: .none)
       ]
     ),
     .testTarget(
       name: "StatKitTests",
-      dependencies: ["StatKit"])
+      dependencies: ["StatKit"]
+    )
   ],
   swiftLanguageVersions: [
     .v5
