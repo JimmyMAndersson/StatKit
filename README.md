@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-    <a href="https://twitter.com/jimmymandersson">
-        <img src="https://img.shields.io/badge/twitter-@jimmymandersson-blue.svg?style=flat" alt="Twitter: @jimmymandersson" />
+    <a href="https://www.linkedin.com/in/jmandersson/">
+        <img src="https://img.shields.io/badge/linkedin-jimmy%20m%20andersson-blue.svg?style=flat" alt="LinkedIn: Jimmy M Andersson" />
     </a>
     <a href="https://github.com/sponsors/JimmyMAndersson">
         <img src="https://img.shields.io/badge/%E2%9D%A4-sponsor this project-blue.svg?style=flat" alt="Sponsor this project" />
