@@ -26,6 +26,9 @@ let package = Package(
       name: "StatKit",
       dependencies: [
         .product(name: "RealModule", package: "swift-numerics", condition: .none)
+      ],
+      resources: [
+        .process("Resources/PrivacyInfo.xcprivacy")
       ]
     ),
     .testTarget(
