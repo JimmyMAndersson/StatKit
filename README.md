@@ -4,8 +4,8 @@
 
 ***
 <p align="center">
-    <img src="https://img.shields.io/github/actions/workflow/status/JimmyMAndersson/StatKit/TestSuite.yml?label=test%20suite&branch=master" />
-    <img src="https://img.shields.io/github/actions/workflow/status/JimmyMAndersson/StatKit/CodeStyle.yml?label=code%20style&branch=master" />
+    <img src="https://img.shields.io/github/actions/workflow/status/JimmyMAndersson/StatKit/TestSuite.yml?label=test%20suite&branch=main" />
+    <img src="https://img.shields.io/github/actions/workflow/status/JimmyMAndersson/StatKit/CodeStyle.yml?label=code%20style&branch=main" />
     <img src="https://img.shields.io/badge/platforms-mac+linux-brightgreen.svg?style=flat" alt="Platform Support" />
 </p>
 
