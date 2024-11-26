@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/swift-5.7-blueviolet.svg" />
+    <img src="https://img.shields.io/badge/swift-5.9-blueviolet.svg" />
     <img src="https://img.shields.io/badge/swift pm-compatible-blueviolet.svg?style=flat" alt="Swift PM Compatible" />
 </p>
 
@@ -113,7 +113,7 @@ let normalRandomVariables = normal.sample(10)
 StatKit is documented using Swift-DocC, which means that the documentation pages can be built by Xcode and viewed in the Developer Documentation panel. Build it by clicking `Product > Build Documentation` or hitting `Shift + Ctrl + Cmd + D`.
 
 ## System Requirements
-To use StatKit, make sure that your system has Swift 5.7 (or later) installed. If you’re using a Mac, also make sure that `xcode-select` points at an Xcode installation that includes a valid version of Swift and that you’re running macOS Monterey (12.5) or later.
+To use StatKit, make sure that your system has Swift 5.9 (or later) installed. If you’re using a Mac, also make sure that `xcode-select` points at an Xcode installation that includes a valid version of Swift and that you’re running macOS 14 or later.
 
 **IMPORTANT**  
 StatKit **does not** officially support any beta software, including beta versions of Xcode and macOS, or unreleased versions of Swift.

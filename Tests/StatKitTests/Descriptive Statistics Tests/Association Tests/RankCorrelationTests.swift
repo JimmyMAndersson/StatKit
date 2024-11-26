@@ -16,12 +16,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .spearmansRho
-    )
+    let calculatedAssociation = simd2Array.spearmanR(of: \.x, and: \.y)
     let expectedAssociation = 1.0
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -39,12 +34,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 7),
                       SIMD2(x: 10, y: 1)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .spearmansRho
-    )
+    let calculatedAssociation = simd2Array.spearmanR(of: \.x, and: \.y)
     let expectedAssociation = -0.165144564768954
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -62,12 +52,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .spearmansRho
-    )
+    let calculatedAssociation = simd2Array.spearmanR(of: \.x, and: \.y)
     let expectedAssociation = 1.0
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -75,25 +60,15 @@ final class RankCorrelationTests: XCTestCase {
   
   func testPearsonCorrelationWithEmptyCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .spearmansRho
-    )
-    
+    let calculatedAssociation = simd2Array.spearmanR(of: \.x, and: \.y)
+
     XCTAssertTrue(calculatedAssociation.isNaN)
   }
   
   func testPearsonCorrelationWithSingleEntryCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .spearmansRho
-    )
-    
+    let calculatedAssociation = simd2Array.spearmanR(of: \.x, and: \.y)
+
     XCTAssertTrue(calculatedAssociation.isNaN)
   }
   
@@ -103,12 +78,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 3, y: 27),
                       SIMD2(x: 4, y: 30)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .kendallsTau
-    )
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .a)
     let expectedAssociation = 0.666666666
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -126,12 +96,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: -2),
                       SIMD2(x: 10, y: -6)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .kendallsTau
-    )
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .a)
     let expectedAssociation = -0.244444444
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -144,12 +109,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 2, y: 2),
                       SIMD2(x: 5, y: 7)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .sample,
-      method: .kendallsTau
-    )
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .b)
     let expectedAssociation = 0.119522861
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -162,12 +122,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 2, y: 2),
                       SIMD2(x: 5, y: 7)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .population,
-      method: .kendallsTau
-    )
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .a)
     let expectedAssociation = 0.1
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -180,13 +135,8 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 1, y: 2),
                       SIMD2(x: 1, y: 7)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .sample,
-      method: .kendallsTau
-    )
-    
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .b)
+
     XCTAssertTrue(calculatedAssociation.isNaN)
   }
   
@@ -202,12 +152,7 @@ final class RankCorrelationTests: XCTestCase {
                       SIMD2(x: 9, y: 62),
                       SIMD2(x: 10, y: 69)]
     
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .sample,
-      method: .kendallsTau
-    )
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .b)
     let expectedAssociation = 1.0
     
     XCTAssertEqual(calculatedAssociation, expectedAssociation, accuracy: 1e-6)
@@ -215,25 +160,15 @@ final class RankCorrelationTests: XCTestCase {
   
   func testKendallsTauWithEmptyCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .sample,
-      method: .kendallsTau
-    )
-    
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .b)
+
     XCTAssertTrue(calculatedAssociation.isNaN)
   }
   
   func testKendallsTauBWithSingleEntryCollection() {
     let simd2Array = [SIMD2<Double>]()
-    let calculatedAssociation = simd2Array.correlation(
-      of: \.x,
-      and: \.y,
-      for: .sample,
-      method: .kendallsTau
-    )
-    
+    let calculatedAssociation = simd2Array.kendallTau(of: \.x, and: \.y, variant: .b)
+
     XCTAssertTrue(calculatedAssociation.isNaN)
   }
 }
