@@ -31,7 +31,6 @@ public func beta<RealType: Real & BinaryFloatingPoint>(
 /// - parameter x: The value for which to evaluate the incomplete Beta function.
 /// - parameter alpha: The first shape argument.
 /// - parameter beta: The second shape argument.
-/// - parameter logarithmic: Whether to return the natural logarithm of the function.
 ///
 /// The Beta function only supports positive numbers `alpha` and `beta`.
 /// `x` is a value in the range [0, 1].

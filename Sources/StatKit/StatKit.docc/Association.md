@@ -10,12 +10,10 @@ One of the most common ways of measuring association is by the Pearson Product M
 
 ### Functions
 
-- ``StatKit/Swift/Collection/correlation(of:and:for:method:)``
-
-### Methods of Computation
-
-- ``CorrelationMethod``
+- ``StatKit/Swift/Collection/pearsonR(of:and:)``
+- ``StatKit/Swift/Collection/spearmanR(of:and:)``
+- ``StatKit/Swift/Collection/kendallTau(of:and:variant:)``
 
 ### Enums
 
-- ``DataSetComposition``
+- ``KendallTauVariant``

@@ -1,13 +1,13 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
   name: "StatKit",
   platforms: [
-    .macOS(.v12),
-    .iOS(.v15),
-    .tvOS(.v15)
+    .macOS(.v14),
+    .iOS(.v17),
+    .tvOS(.v17)
   ],
   products: [
     .library(

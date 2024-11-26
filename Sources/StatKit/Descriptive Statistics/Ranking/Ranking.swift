@@ -2,8 +2,6 @@ public extension Collection {
   /// Ranks the specified variable according to a specified strategy.
   /// - parameter variable: The variable to investigate.
   /// - parameter order: The order by which the variables should be ranked.
-  /// - parameter lhs: The left hand element.
-  /// - parameter rhs: The right hand element.
   /// - parameter strategy: The calculation method to use.
   /// - returns: An array with the rank of each original element,
   /// where the index of a rank corresponds to the index of the element in the original array.

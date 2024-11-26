@@ -11,4 +11,4 @@ StatKit allows developers to compute different extensions of combinatorial numbe
 ### Functions
 
 - ``choose(n:k:)``
-- ``betaFunction(alpha:beta:log:)``
+- ``beta(alpha:beta:logarithmic:)``
