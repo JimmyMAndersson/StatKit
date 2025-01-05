@@ -5,39 +5,39 @@ import StatKit
 
 final class GammaDistributionTests: XCTestCase {
   func testMean() {
-    let firstDistribution = GammaDistribution(alpha: 1, beta: 1)
+    let firstDistribution = GammaDistribution(shape: 1, scale: 1)
     XCTAssertEqual(firstDistribution.mean, 1.0, accuracy: 1e-6)
     
-    let secondDistribution = GammaDistribution(alpha: 0.5, beta: 10)
+    let secondDistribution = GammaDistribution(shape: 0.5, scale: 10)
     XCTAssertEqual(secondDistribution.mean, 5.0, accuracy: 1e-6)
   }
   
   func testVariance() {
-    let firstDistribution = GammaDistribution(alpha: 1, beta: 1)
+    let firstDistribution = GammaDistribution(shape: 1, scale: 1)
     XCTAssertEqual(firstDistribution.variance, 1.0, accuracy: 1e-6)
     
-    let secondDistribution = GammaDistribution(alpha: 0.5, beta: 10)
+    let secondDistribution = GammaDistribution(shape: 0.5, scale: 10)
     XCTAssertEqual(secondDistribution.variance, 50.0, accuracy: 1e-6)
   }
   
   func testSkewness() {
-    let firstDistribution = GammaDistribution(alpha: 1, beta: 1)
+    let firstDistribution = GammaDistribution(shape: 1, scale: 1)
     XCTAssertEqual(firstDistribution.skewness, 2.0, accuracy: 1e-6)
     
-    let secondDistribution = GammaDistribution(alpha: 0.5, beta: 10)
+    let secondDistribution = GammaDistribution(shape: 0.5, scale: 10)
     XCTAssertEqual(secondDistribution.skewness, 2.828427, accuracy: 1e-6)
   }
   
   func testKurtosis() {
-    let firstDistribution = GammaDistribution(alpha: 1, beta: 1)
+    let firstDistribution = GammaDistribution(shape: 1, scale: 1)
     XCTAssertEqual(firstDistribution.kurtosis, 9.0, accuracy: 1e-6)
     
-    let secondDistribution = GammaDistribution(alpha: 0.5, beta: 10)
+    let secondDistribution = GammaDistribution(shape: 0.5, scale: 10)
     XCTAssertEqual(secondDistribution.kurtosis, 15.0, accuracy: 1e-6)
   }
   
   func testCDF() {
-    let firstDistribution = GammaDistribution(alpha: 1, beta: 1)
+    let firstDistribution = GammaDistribution(shape: 1, scale: 1)
     XCTAssertEqual(firstDistribution.cdf(x: 1), 0.6321206, accuracy: 1e-6)
     XCTAssertEqual(firstDistribution.cdf(x: 0), 0, accuracy: 1e-6)
     XCTAssertEqual(firstDistribution.cdf(x: 0.4), 0.32968, accuracy: 1e-6)
@@ -47,7 +47,7 @@ final class GammaDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.cdf(x: 0.001), 0.1124629, accuracy: 1e-6)
     XCTAssertEqual(secondDistribution.cdf(x: 15), 1, accuracy: 1e-6)
     
-    let thirdDistribution = GammaDistribution(alpha: 1000, beta: 20)
+    let thirdDistribution = GammaDistribution(shape: 1000, rate: 20)
     XCTAssertEqual(thirdDistribution.cdf(x: 0.1), 0, accuracy: 1e-6)
     XCTAssertEqual(thirdDistribution.cdf(x: 0.001), 0, accuracy: 1e-6)
     XCTAssertEqual(thirdDistribution.cdf(x: 15), 0, accuracy: 1e-6)
@@ -55,7 +55,7 @@ final class GammaDistributionTests: XCTestCase {
   }
   
   func testLogCDF() {
-    let firstDistribution = GammaDistribution(alpha: 1, beta: 1)
+    let firstDistribution = GammaDistribution(shape: 1, scale: 1)
     XCTAssertEqual(firstDistribution.cdf(x: 1, logarithmic: true), -0.4586751, accuracy: 1e-6)
     XCTAssertEqual(firstDistribution.cdf(x: 0, logarithmic: true), -.infinity, accuracy: 1e-6)
     XCTAssertEqual(firstDistribution.cdf(x: 0.4, logarithmic: true), -1.1096329, accuracy: 1e-6)
@@ -74,7 +74,7 @@ final class GammaDistributionTests: XCTestCase {
   
   func testSamplingAlphaGreatherThanOne() {
     let numberOfSamples = 1000000
-    let distribution = GammaDistribution(alpha: 7.5, beta: 3)
+    let distribution = GammaDistribution(shape: 7.5, scale: 3)
     var samples = [Double]()
     
     measure {
@@ -86,18 +86,17 @@ final class GammaDistributionTests: XCTestCase {
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
     
     XCTAssertEqual(samples.count, numberOfSamples)
-    XCTAssertEqual(proportions[0] ?? -1, 0.020252253282, accuracy: 0.01)
-    XCTAssertEqual(proportions[1] ?? -1, 0.300718689627, accuracy: 0.01)
-    XCTAssertEqual(proportions[2] ?? -1, 0.416363496418, accuracy: 0.01)
-    XCTAssertEqual(proportions[3] ?? -1, 0.197572074273, accuracy: 0.01)
-    XCTAssertEqual(proportions[4] ?? -1, 0.053171990461, accuracy: 0.01)
-    XCTAssertEqual(proportions[5] ?? -1, 0.010153691185, accuracy: 0.01)
-    XCTAssertEqual(proportions[6] ?? -1, 0.001543052005, accuracy: 0.01)
+    XCTAssertEqual(proportions[1] ?? -1, 0.000001881561, accuracy: 0.01)
+    XCTAssertEqual(proportions[2] ?? -1, 0.000027759390, accuracy: 0.01)
+    XCTAssertEqual(proportions[3] ?? -1, 0.000162396697, accuracy: 0.01)
+    XCTAssertEqual(proportions[4] ?? -1, 0.000575600420, accuracy: 0.01)
+    XCTAssertEqual(proportions[5] ?? -1, 0.001495003753, accuracy: 0.01)
+    XCTAssertEqual(proportions[6] ?? -1, 0.003145153584, accuracy: 0.01)
   }
   
   func testSamplingAlphaLessThanOne() {
     let numberOfSamples = 1000000
-    let distribution = GammaDistribution(alpha: 0.5, beta: 1)
+    let distribution = GammaDistribution(shape: 0.5, scale: 1)
     var samples = [Double]()
     
     measure {
