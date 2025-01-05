@@ -11,7 +11,7 @@ public struct ChiSquaredDistribution: ContinuousDistribution, UnivariateDistribu
   /// Creates a Chi-Squared Distribution with a specified degrees of freedom.
   /// - parameter degreesOfFreedom: The distributions degrees of freedom parameter.
   public init(degreesOfFreedom: Int) {
-    precondition(0 <= degreesOfFreedom, "The degreesOfFreedom parameter needs to be greater than 0.")
+    precondition(0 < degreesOfFreedom, "The degreesOfFreedom parameter needs to be greater than 0.")
 
     self.degreesOfFreedom = degreesOfFreedom
     self.gamma = GammaDistribution(shape: degreesOfFreedom.realValue / 2, scale: 2)
