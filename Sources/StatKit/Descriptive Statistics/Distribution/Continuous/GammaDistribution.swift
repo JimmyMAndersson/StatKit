@@ -1,72 +1,77 @@
 /// A type modelling a Gamma Distribution.
 public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution {
   /// The Gamma distribution shape parameter.
-  public let alpha: Double
-  
+  public let shape: Double
+
   /// The Gamma distribution rate parameter.
-  public let beta: Double
-  
-  /// Creates a Gamma Distribution with a specified alpha and beta parameters.
-  /// - parameter alpha: The distribution shape parameter.
-  /// - parameter beta: The distribution rate parameter.
-  public init(alpha: Double, beta: Double) {
-    precondition(0 < alpha, "The alpha parameter needs to be greater than 0.")
-    precondition(0 < beta, "The beta parameter needs to be greater than 0.")
-    
-    self.alpha = alpha
-    self.beta = beta
+  public let scale: Double
+
+  public var rate: Double {
+    return 1 / self.scale
   }
-  
+
+  /// Creates a Gamma Distribution with a specified shape and scale parameters.
+  /// - parameter shape: The distribution shape parameter.
+  /// - parameter scale: The distribution scale parameter.
+  public init(shape: Double, scale: Double) {
+    precondition(0 < shape, "The shape parameter needs to be greater than 0.")
+    precondition(0 < scale, "The scale parameter needs to be greater than 0.")
+
+    self.shape = shape
+    self.scale = scale
+  }
+
   /// Creates a Gamma Distribution with a specified shape and rate parameters.
   /// - parameter shape: The distribution shape parameter.
   /// - parameter rate: The distribution rate parameter.
   public init(shape: Double, rate: Double) {
     precondition(0 < shape, "The shape parameter needs to be greater than 0.")
     precondition(0 < rate, "The rate parameter needs to be greater than 0.")
-    
-    self.alpha = shape
-    self.beta = rate
+
+    self.shape = shape
+    self.scale = 1 / rate
   }
-  
+
   public func pdf(x: Double, logarithmic: Bool = false) -> Double {
-    guard 0 < x else {
+    guard 0 <= x else {
       return logarithmic ? -.infinity : .zero
     }
-    
-    let logNumerator = (alpha - 1) * .log(x) - x / beta
-    let logDenominator = Double.logGamma(alpha) + alpha * .log(beta)
+
+    let epsilon = x == .zero ? 0.ulp : 0
+    let logNumerator = (self.shape - 1) * .log(x + epsilon) - x / self.scale
+    let logDenominator = Double.logGamma(self.shape) + self.shape * .log(self.scale)
     let logProbability = logNumerator - logDenominator
     
     return logarithmic ? logProbability : .exp(logProbability)
   }
   
   public var mean: Double {
-    return alpha * beta
+    return self.shape * self.scale
   }
   
   public var variance: Double {
-    return alpha * .pow(beta, 2)
+    return self.shape * .pow(self.scale, 2)
   }
   
   public var skewness: Double {
-    return 2 / alpha.squareRoot()
+    return 2 / self.shape.squareRoot()
   }
   
   public var kurtosis: Double {
-    return 6 / alpha + 3
+    return 6 / self.shape + 3
   }
   
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {
     guard 0 < x else {
       return logarithmic ? -.infinity : .zero
     }
-    return regularizedIncompleteGamma(lower: .zero, upper: beta * x, alpha: alpha, logarithmic: logarithmic)
+    return regularizedIncompleteGamma(lower: .zero, upper: self.rate * x, alpha: self.shape, logarithmic: logarithmic)
   }
   
   public func sample() -> Double {
     var uniformGenerator = Xoroshiro256StarStar()
     
-    switch alpha {
+    switch self.shape {
     case 0..<1:
       return kunduGuptaSampling(using: &uniformGenerator)
       
@@ -80,7 +85,7 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
     var uniformGenerator = Xoroshiro256StarStar()
     let sampleRange = 1 ... numberOfElements
     
-    switch alpha {
+    switch self.shape {
     case 0..<1:
       return sampleRange.map { _ in kunduGuptaSampling(using: &uniformGenerator) }
       
@@ -98,13 +103,13 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
   /// Inspired by and based on work by Kundu and Gupta in their paper
   /// '**A Convenient Way of Generating Gamma Random Variables Using Generalized Exponential Distribution**'.
   private func kunduGuptaSampling(using generator: inout some RandomNumberGenerator) -> Double {
-    let d = 1.0334 - 0.0766 * .exp(2.2942 * alpha)
+    let d = 1.0334 - 0.0766 * .exp(2.2942 * self.shape)
     
-    let firstFactorA = Double.pow(2.0, alpha)
-    let secondFactorA = Double.pow(1 - .exp(-d / 2), alpha)
+    let firstFactorA = Double.pow(2.0, self.shape)
+    let secondFactorA = Double.pow(1 - .exp(-d / 2), self.shape)
     let a = firstFactorA * secondFactorA
     
-    let b = alpha * .pow(d, alpha - 1) * .exp(-d)
+    let b = self.shape * .pow(d, self.shape - 1) * .exp(-d)
     
     let c = a + b
     
@@ -114,10 +119,10 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
       let X: Double
       
       if U <= a / c {
-        X = -2 * .log(1 - .pow(c * U, 1 / alpha) / 2)
+        X = -2 * .log(1 - .pow(c * U, 1 / self.shape) / 2)
       } else {
         let numerator = c * (1 - U)
-        let denominator = alpha * .pow(d, alpha - 1)
+        let denominator = self.shape * .pow(d, self.shape - 1)
         X = -.log(numerator / denominator)
       }
       
@@ -125,11 +130,11 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
       let threshold: Double
       
       if X <= d {
-        let thresholdNumerator = .pow(X, alpha - 1) * .exp(-X / 2)
-        let thresholdDenominator = .pow(2, alpha - 1) * .pow(1 - .exp(-X / 2), alpha - 1)
+        let thresholdNumerator = .pow(X, self.shape - 1) * .exp(-X / 2)
+        let thresholdDenominator = .pow(2, self.shape - 1) * .pow(1 - .exp(-X / 2), self.shape - 1)
         threshold = thresholdNumerator / thresholdDenominator
       } else {
-        threshold = .pow(d / X, 1 - alpha)
+        threshold = .pow(d / X, 1 - self.shape)
       }
       
       if V <= threshold {
@@ -150,19 +155,19 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
   /// Inspired by and based on work by Martino and Luengo in their paper
   /// '**Extremely Efficient Generation of Gamma Random Variables for `alpha` >= 1**'.
   private func martinoLuengoSampling(using generator: inout some RandomNumberGenerator) -> Double {
-    let proposalAlpha = alpha.rounded(.down)
-    
+    let proposalAlpha = self.shape.rounded(.down)
+
     let proposalBeta: Double
     let proposalK: Double
     
-    switch alpha {
+    switch self.shape {
     case 1..<2:
-      proposalBeta = beta / alpha
-      proposalK = .exp(1 - alpha) * .pow(alpha / beta, alpha - 1)
-      
+      proposalBeta = self.rate / self.shape
+      proposalK = .exp(1 - self.shape) * .pow(self.shape / self.rate, self.shape - 1)
+
     default:
-      proposalBeta = beta * (proposalAlpha - 1) / (alpha - 1)
-      proposalK = .exp(proposalAlpha - alpha) * .pow((alpha - 1) / beta, alpha - proposalAlpha)
+      proposalBeta = self.rate * (proposalAlpha - 1) / (self.shape - 1)
+      proposalK = .exp(proposalAlpha - self.shape) * .pow((self.shape - 1) / self.rate, self.shape - proposalAlpha)
     }
     
     for _ in 1 ... 50 {
@@ -174,7 +179,7 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
       
       let proposal = -.log(uniformProduct) / proposalBeta
       let random = Double.random(in: 0 ... 1, using: &generator)
-      let p = .pow(proposal, alpha - 1) * .exp(-beta * proposal)
+      let p = .pow(proposal, self.shape - 1) * .exp(-self.rate * proposal)
       let pi = proposalK * .pow(proposal, proposalAlpha - 1) * .exp(-proposalBeta * proposal)
       
       if random <= p / pi {
