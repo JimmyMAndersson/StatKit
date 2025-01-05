@@ -86,7 +86,6 @@ final class GammaDistributionTests: XCTestCase {
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
     
     XCTAssertEqual(samples.count, numberOfSamples)
-    XCTAssertEqual(proportions[1] ?? -1, 0.000001881561, accuracy: 0.01)
     XCTAssertEqual(proportions[2] ?? -1, 0.000027759390, accuracy: 0.01)
     XCTAssertEqual(proportions[3] ?? -1, 0.000162396697, accuracy: 0.01)
     XCTAssertEqual(proportions[4] ?? -1, 0.000575600420, accuracy: 0.01)

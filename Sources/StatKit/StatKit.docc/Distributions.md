@@ -30,6 +30,8 @@ These types define common distributions used to make theoretical calculations or
 - ``NormalDistribution``
 - ``BetaDistribution``
 - ``GammaDistribution``
+- ``ChiSquaredDistribution``
+- ``ErlangDistribution``
 
 ### Discrete Multivariate Distributions
 
