@@ -3,9 +3,10 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
   /// The Gamma distribution shape parameter.
   public let shape: Double
 
-  /// The Gamma distribution rate parameter.
+  /// The Gamma distribution scale parameter.
   public let scale: Double
 
+  /// The Gamma distribution rate parameter.
   public var rate: Double {
     return 1 / self.scale
   }
