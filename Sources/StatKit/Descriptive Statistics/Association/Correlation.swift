@@ -96,15 +96,14 @@ public extension Collection {
   where T: Comparable & Hashable & ConvertibleToReal,
         U: Comparable & Hashable & ConvertibleToReal
   {
-  guard X != Y else { return 1 }
-
   let tiesX = self.countTieRanks(of: X)
   let tiesY = self.countTieRanks(of: Y)
+  let jointTies = self.countJointTieRanks(of: X, and: Y)
 
   let count = self.count
   let discordant = self.discordantPairs(of: X, and: Y)
   let combinations = count * (count - 1) / 2
-  let concordant = combinations - discordant - tiesX - tiesY
+  let concordant = combinations - discordant - tiesX - tiesY + jointTies
 
   switch variant {
     case .a:
@@ -123,7 +122,7 @@ public extension Collection {
 }
 
 /// The different supported variants of the Kendall Tau coefficient.
-public enum KendallTauVariant {
+public enum KendallTauVariant: CaseIterable {
   /// The original Tau statistic defined in 1938.
   /// Tau-a does not make adjustments for rank ties.
   case a
@@ -147,6 +146,28 @@ private extension Collection {
       guard count > 1 else { return }
 
       tiesX += count * (count - 1) / 2
+    }
+  }
+
+  /// Counts the number of jointly tied variables within a collection of measurements.
+  /// - parameter X: The first variable under investigation.
+  /// - parameter Y: The second variable under investigation.
+  /// - returns: The number of tied measurements.
+  func countJointTieRanks<T: Hashable, U: Hashable>(of X: KeyPath<Element, T>, and Y: KeyPath<Element, U>) -> Int {
+    typealias TieMap = [T: [U: Int]]
+
+    let elementCount = reduce(into: TieMap()) { dictionary, element in
+      let x = element[keyPath: X]
+      let y = element[keyPath: Y]
+      dictionary[x, default: [:]][y, default: 0] += 1
+    }
+
+    return elementCount.values.reduce(into: 0) { ties, map in
+      ties += map.values.reduce(into: 0) { tiesX, count in
+        guard count > 1 else { return }
+
+        tiesX += count * (count - 1) / 2
+      }
     }
   }
 
