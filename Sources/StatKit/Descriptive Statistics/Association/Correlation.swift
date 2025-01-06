@@ -20,8 +20,6 @@ public extension Collection {
   typealias RComponents = (xSum: Double, ySum: Double, xySum: Double, xSquareSum: Double, ySquareSum: Double)
   guard self.count > 1 else { return .signalingNaN }
 
-  guard X != Y else { return 1 }
-
   let n = self.count.realValue
 
   let rComponents: RComponents = self.reduce(into: (0, 0, 0, 0, 0)) { partialResult, element in
@@ -41,7 +39,7 @@ public extension Collection {
     (n * rComponents.ySquareSum - rComponents.ySum * rComponents.ySum)
   ).squareRoot()
 
-  guard denominator != 0 else { return .signalingNaN }
+  guard denominator != 0 else { return .zero }
 
   return numerator / denominator
   }
@@ -51,7 +49,7 @@ public extension Collection {
   /// - parameter Y: The second variable.
   /// - returns: Spearmans rank-order correlation coefficient.
   ///
-  /// Since there is no notion of correlation in collections with less than two elements,
+  /// Since there is no notion of correlation in collections with less than two elements or when one of the variables are constant,
   /// this method returns NaN if the array count is less than two.
   /// The time complexity of this method is O(n).
   @inlinable
@@ -62,7 +60,8 @@ public extension Collection {
   where T: Comparable & Hashable & ConvertibleToReal,
         U: Comparable & Hashable & ConvertibleToReal
   {
-  guard X != Y else { return 1 }
+  guard !self.allSatisfy({ element in element[keyPath: X] == self.first?[keyPath: X] }) else { return .signalingNaN }
+  guard !self.allSatisfy({ element in element[keyPath: Y] == self.first?[keyPath: Y] }) else { return .signalingNaN }
 
   let XRanks = self.rank(
     variable: X,
@@ -74,6 +73,7 @@ public extension Collection {
     by: >,
     strategy: .fractional
   )
+
   let ranks: [(X: Double, Y: Double)] = Array(zip(XRanks, YRanks))
 
   return ranks.pearsonR(of: \.X, and: \.Y)
