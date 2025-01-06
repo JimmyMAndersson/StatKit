@@ -1,7 +1,7 @@
 import Testing
 import StatKit
 
-@Suite("Spearman R Tests", .tags(.spearmanR, .correlationCoefficient))
+@Suite("Spearman R Tests", .tags(.correlationCoefficient))
 struct SpearmanRTests {
   @Test("Monotonically increasing data yields a correlation of 1")
   func monotonicallyIncreasingData() async {

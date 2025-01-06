@@ -1,7 +1,7 @@
 import Testing
 import StatKit
 
-@Suite("Pearsons R Tests", .tags(.pearsonR, .correlationCoefficient))
+@Suite("Pearsons R Tests", .tags(.correlationCoefficient))
 struct PearsonRTests {
   @Test("Highly correlated variables yield high correlation coefficient")
   func highlyCorrelatedVariables() async {
@@ -38,21 +38,21 @@ struct PearsonRTests {
   }
 
   @Test("Correlation of one variable to itself is one")
-  func correlationToSelf() {
+  func correlationToSelf() async {
     let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     #expect(data.pearsonR(of: \.self, and: \.self) == 1)
   }
 
   @Test("Correlation of empty collection is undefined")
-  func emptyCollection() {
+  func emptyCollection() async {
     let data = [Int8]()
 
     #expect(data.pearsonR(of: \.self, and: \.self).isNaN)
   }
 
   @Test("Correlation where one variable is constant yields zero")
-  func constantValueCollection() {
+  func constantValueCollection() async {
     let data = [
       SIMD2(x: 1, y: 6),
       SIMD2(x: 2, y: 6),
