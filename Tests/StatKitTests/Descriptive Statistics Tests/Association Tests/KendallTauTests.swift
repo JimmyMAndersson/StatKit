@@ -1,31 +1,31 @@
 import Testing
 import StatKit
 
-@Suite("Kendall Tau Tests", .tags(.kendallTau, .correlationCoefficient))
+@Suite("Kendall Tau Tests", .tags(.correlationCoefficient))
 struct KendallTauTests {
   @Test("Monotonically increasing data yields a correlation of 1", arguments: KendallTauVariant.allCases)
-  func monotonicallyIncreasingData(variant: KendallTauVariant) {
+  func monotonicallyIncreasingData(variant: KendallTauVariant) async {
     let data = (1 ... 5).map({ data in SIMD2(x: data, y: 2 * data) })
 
     #expect(data.kendallTau(of: \.x, and: \.y, variant: variant) == 1)
   }
 
   @Test("Monotonically decreasing data yields a correlation of -1", arguments: KendallTauVariant.allCases)
-  func monotonicallyDecreasingData(variant: KendallTauVariant) {
+  func monotonicallyDecreasingData(variant: KendallTauVariant) async {
     let data = (1 ... 5).map({ data in SIMD2(x: data, y: -data) })
 
     #expect(data.kendallTau(of: \.x, and: \.y, variant: variant) == -1)
   }
 
   @Test("Correlation of a variable with respect to itself is 1", arguments: KendallTauVariant.allCases)
-  func correlationOfVariableWithRespectToItself(variant: KendallTauVariant) {
+  func correlationOfVariableWithRespectToItself(variant: KendallTauVariant) async {
     let data = [1, 2, 3, 4, 5]
     #expect(data.kendallTau(of: \.self, and: \.self, variant: variant) == 1)
   }
 
 
   @Test("Tau-a correlation of constant data is defined")
-  func tauAWithConstantData() {
+  func tauAWithConstantData() async {
     let data = [
       SIMD2(x: 1, y: 1),
       SIMD2(x: 2, y: 1),
@@ -38,7 +38,7 @@ struct KendallTauTests {
   }
 
   @Test("Tau-b correlation of constant data is undefined")
-  func tauBWithConstantData() {
+  func tauBWithConstantData() async {
     let data = [
       SIMD2(x: 1, y: 1),
       SIMD2(x: 2, y: 1),
@@ -51,7 +51,7 @@ struct KendallTauTests {
   }
 
   @Test("Valid data produces a valid correlation", arguments: KendallTauVariant.allCases)
-  func validData(variant: KendallTauVariant) {
+  func validData(variant: KendallTauVariant) async {
     let firstData = [
       SIMD2(x: 1, y: 5),
       SIMD2(x: 2, y: 1),
@@ -79,7 +79,7 @@ struct KendallTauTests {
   }
 
   @Test("Tau-a correlation with ties")
-  func tauAWithTies() {
+  func tauAWithTies() async {
     let data = [
       SIMD2(x: 1, y: 5),
       SIMD2(x: 2, y: 1),
@@ -92,7 +92,7 @@ struct KendallTauTests {
   }
 
   @Test("Tau-b correlation with ties")
-  func tauBWithTies() {
+  func tauBWithTies() async {
     let data = [
       SIMD2(x: 1, y: 5),
       SIMD2(x: 2, y: 1),
@@ -105,7 +105,7 @@ struct KendallTauTests {
   }
 
   @Test("Tau-a correlation with only ties")
-  func tauAWithOnlyTies() {
+  func tauAWithOnlyTies() async {
     let data = [
       SIMD2(x: 1, y: 1),
       SIMD2(x: 1, y: 1),
@@ -118,7 +118,7 @@ struct KendallTauTests {
   }
 
   @Test("Tau-b correlation with only ties")
-  func tauBWithOnlyTies() {
+  func tauBWithOnlyTies() async {
     let data = [
       SIMD2(x: 1, y: 1),
       SIMD2(x: 1, y: 1),
@@ -131,13 +131,13 @@ struct KendallTauTests {
   }
 
   @Test("Correlation on empty collection is undefined", arguments: KendallTauVariant.allCases)
-  func emptyCollection(variant: KendallTauVariant) {
+  func emptyCollection(variant: KendallTauVariant) async {
     let data = [Int]()
     #expect(data.kendallTau(of: \.self, and: \.self, variant: variant).isNaN)
   }
 
   @Test("Correlation on collection of one is undefined", arguments: KendallTauVariant.allCases)
-  func collectionOfOne(variant: KendallTauVariant) {
+  func collectionOfOne(variant: KendallTauVariant) async {
     let data = [1]
     #expect(data.kendallTau(of: \.self, and: \.self, variant: variant).isNaN)
   }

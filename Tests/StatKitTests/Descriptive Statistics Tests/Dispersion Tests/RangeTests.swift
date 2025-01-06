@@ -1,43 +1,27 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
 
-final class RangeTests: XCTestCase {
-  func testIntegerArrayRange() {
-    let array = [1, 2, 3, 4, 5]
-    let calculatedRange = array.range(of: \.self)
-    let expectedRange = 4.0
-    
-    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
+@Suite("Range Tests", .tags(.dispersion))
+struct RangeTests {
+  @Test("Valid data produces valid range", arguments: [
+    ([1, 2, 3, 4, 5], 4.0),
+    ([1.5, 22.8, 3.1, 4.0, 5.3], 21.3),
+  ])
+  func validData(data: [Double], expectedRange: Double) async {
+    #expect(data.range(of: \.self).isApproximatelyEqual(to: expectedRange, absoluteTolerance: 1e-6))
   }
-  
-  func testFloatingPointArrayRange() {
-    let array = [1.5, 22.8, 3.1, 4.0, 5.3]
-    let calculatedRange = array.range(of: \.self)
-    let expectedRange = 21.3
-    
-    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
+
+  @Test("Range for empty collection is undefined")
+  func emptyCollection() async {
+    let data = [Int]()
+
+    #expect(data.range(of: \.self).isNaN)
   }
-  
-  func testEmptyArrayRange() {
-    let array = [Int]()
-    let calculatedRange = array.range(of: \.self)
+
+  @Test("Range for single element collection is 0")
+  func singleElementCollection() async {
+    let data: [Double] = [1]
     
-    XCTAssertTrue(calculatedRange.isNaN)
-  }
-  
-  func testObjectArrayRange() {
-    let array = [SIMD2(x: 1, y: 2),
-                 SIMD2(x: 6, y: -5),
-                 SIMD2(x: 10, y: 19),
-                 SIMD2(x: 28, y: 2)]
-    
-    let calculatedRange = array.range(of: \.y)
-    let expectedRange = 24.0
-    
-    XCTAssertEqual(calculatedRange, expectedRange, accuracy: 1e-6)
+    #expect(data.range(of: \.self) == 0)
   }
 }
-
-#endif

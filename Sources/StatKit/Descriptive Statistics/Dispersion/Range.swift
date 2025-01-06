@@ -1,3 +1,5 @@
+import RealModule
+
 public extension Collection {
   /// Computes the range of a variable in a collection.
   /// - parameter variable: The variable under investigation.
