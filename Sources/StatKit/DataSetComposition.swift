@@ -1,5 +1,5 @@
 /// Specifies the composition of a data set.
-public enum DataSetComposition {
+public enum DataSetComposition: Sendable, CaseIterable {
   /// A data set containing the entire pool of items under study.
   case population
   /// A data set containing a subset of the items under study.
