@@ -1,103 +1,25 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
-import RealModule
 
-final class VariabilityTests: XCTestCase {
-  func testIntegerSampleVariance() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedVariance = intArray.variance(variable: \.self, from: .sample)
-    let expectedVariance = 2.5
-    
-    XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
+@Suite("Variance Tests", .tags(.dispersion))
+struct VarianceTests {
+  @Test("Valid data returns correct variance", arguments: [
+    ((1 ... 5).map(\.realValue), 2.5, DataSetComposition.sample),
+    ((-5 ... 5).map(\.realValue), 11.0, DataSetComposition.sample),
+    ((1 ... 5).map(\.realValue), 2, DataSetComposition.population),
+    ((-5 ... 5).map(\.realValue), 10, DataSetComposition.population),
+  ])
+  func validData(data: [Double], expectedVariance: Double, composition: DataSetComposition) {
+    #expect(data.variance(variable: \.self, from: composition).isApproximatelyEqual(to: expectedVariance, absoluteTolerance: 1e-6))
   }
-  
-  func testIntegerPopulationVariance() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedVariance = intArray.variance(variable: \.self, from: .population)
-    let expectedVariance = 2.0
-    
-    XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
+
+  @Test("Variance of empty collection is undefined", arguments: [[Double]()], DataSetComposition.allCases)
+  func emptyCollection(data: [Double], composition: DataSetComposition) {
+    #expect(data.variance(variable: \.self, from: composition).isNaN)
   }
-  
-  func testFloatingPointSampleVariance() {
-    let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedVariance = fpArray.variance(variable: \.self, from: .sample)
-    let expectedVariance = 2.5
-    
-    XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
-  }
-  
-  func testFloatingPointPopulationVariance() {
-    let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedVariance = fpArray.variance(variable: \.self, from: .population)
-    let expectedVariance = 2.0
-    
-    XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
-  }
-  
-  func testEmptySetSampleVariance() {
-    let emptySet = [Int]()
-    let calculatedVariance = emptySet.variance(variable: \.self, from: .sample)
-    
-    XCTAssertTrue(calculatedVariance.isNaN)
-  }
-  
-  func testSingleEntrySetSampleVariance() {
-    let emptySet = [1]
-    let calculatedVariance = emptySet.variance(variable: \.self, from: .sample)
-    let expectedVariance = 0.0
-    
-    XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
-  }
-  
-  func testIntegerSampleStandardDeviation() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = intArray.standardDeviation(variable: \.self, from: .sample)
-    let expectedStandardDeviation = (2.5).squareRoot()
-    
-    XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
-  }
-  
-  func testIntegerPopulationStandardDeviation() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = intArray.standardDeviation(variable: \.self, from: .population)
-    let expectedStandardDeviation = 2.0.squareRoot()
-    
-    XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
-  }
-  
-  func testFloatingPointSampleStandardDeviation() {
-    let fpArray = [1, 2, 3, 4, 5]
-    let calculatedStandardDeviation = fpArray.standardDeviation(variable: \.self, from: .sample)
-    let expectedStandardDeviation = 2.5.squareRoot()
-    
-    XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
-  }
-  
-  func testFloatingPointPopulationStandardDeviation() {
-    let fpArray = [1.0, 2.0, 3.0, 4.0, 5.0]
-    let calculatedStandardDeviation = fpArray.standardDeviation(variable: \.self, from: .population)
-    let expectedStandardDeviation = 2.0.squareRoot()
-    
-    XCTAssertEqual(calculatedStandardDeviation, expectedStandardDeviation, accuracy: 1e-6)
-  }
-  
-  func testEmptySetSampleStandardDeviation() {
-    let emptySet = [Int]()
-    let calculatedVariance = emptySet.standardDeviation(variable: \.self, from: .sample)
-    
-    XCTAssertTrue(calculatedVariance.isNaN)
-  }
-  
-  func testSingleEntrySetSampleStandardDeviation() {
-    let emptySet = [1]
-    let calculatedVariance = emptySet.standardDeviation(variable: \.self, from: .sample)
-    let expectedVariance = 0.0
-    
-    XCTAssertEqual(calculatedVariance, expectedVariance, accuracy: 1e-6)
+
+  @Test("Variance of single element collection is 0", arguments: [[1], [-1]] , DataSetComposition.allCases)
+  func singleElementCollection(data: [Double], composition: DataSetComposition) {
+    #expect(data.variance(variable: \.self, from: composition) == 0)
   }
 }
-
-#endif
