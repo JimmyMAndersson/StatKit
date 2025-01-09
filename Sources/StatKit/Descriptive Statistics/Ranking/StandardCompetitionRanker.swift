@@ -20,7 +20,7 @@ internal struct StandardCompetitionRanker: RankingStrategyProtocol {
     return sequence.map { element in
       let key = element[keyPath: X]
       guard let rank = ranks[key] else {
-        fatalError("Could not calculate Standard Competition ranking. Some ranks were missing")
+        fatalError("Could not calculate Standard Competition ranking. Rank for \(key) not found.")
       }
       return rank
     }

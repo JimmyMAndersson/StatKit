@@ -21,7 +21,7 @@ internal struct OrdinalRanker: RankingStrategyProtocol {
       .map { element in
         let key = element[keyPath: X]
         guard let rank = ranks[key]?.removeLast() else {
-          fatalError("Could not calculate Ordinal ranking. Some ranks were missing")
+          fatalError("Could not calculate Ordinal ranking. Rank for \(key) not found.")
         }
         return rank
       }.reversed()

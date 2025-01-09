@@ -20,11 +20,13 @@ internal struct FractionalRanker: RankingStrategyProtocol {
       }
     
     return sequence.map { element in
+      let key = element[keyPath: X]
+      
       guard
-        let rankSum = ranks[element[keyPath: X]]?.rankSum,
-        let occurences = ranks[element[keyPath: X]]?.occurences
+        let rankSum = ranks[key]?.rankSum,
+        let occurences = ranks[key]?.occurences
       else {
-        fatalError("Could not calculate Fractional ranking. Some ranks were missing")
+        fatalError("Could not calculate Fractional ranking. Rank for \(key) not found.")
       }
       
       return rankSum.realValue / occurences.realValue
