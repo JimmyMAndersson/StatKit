@@ -49,7 +49,8 @@ public extension Collection {
   /// - parameter Y: The second variable.
   /// - returns: Spearmans rank-order correlation coefficient.
   ///
-  /// Since there is no notion of correlation in collections with less than two elements or when one of the variables are constant,
+  /// Since there is no notion of correlation in collections with less than two
+  /// elements or when one of the variables are constant,
   /// this method returns NaN if the array count is less than two.
   /// The time complexity of this method is O(n).
   @inlinable
