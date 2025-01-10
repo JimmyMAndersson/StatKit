@@ -13,7 +13,8 @@ extension MedianStrategy {
   /// - parameter variable: The random variable for which to calculate the mean.
   /// - parameter collection: The collection of values.
   /// - returns: The specified mean value.
-  /// The time complexity of this method is O(n).
+  ///
+  /// - complexity: O(n log n), where n is the length of the collection.
   @usableFromInline
   internal func compute<T, C>(
     for variable: KeyPath<C.Element, T>,
@@ -26,7 +27,7 @@ extension MedianStrategy {
       let sortedElements = collection.sorted(by: { lhs, rhs in
         lhs[keyPath: variable] < rhs[keyPath: variable]
       })
-      
+
       let midPoint = (collection.count - 1) / 2
       
       switch (self, isEvenNumberOfElements) {
