@@ -1,95 +1,43 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
 
-final class QuantileTests: XCTestCase {
-  func testEmptySequenceQuantile() {
-    let data = [Int]()
-    let calculatedQuantile = data.quantile(probability: 1, of: \.self, method: .inverseEmpiricalCDF)
-    
-    XCTAssertTrue(calculatedQuantile.isNaN)
+@Suite("Quantile Tests", .tags(.quantiles))
+struct QuantileTests {
+  @Test(
+    "Valid data returns correct quantile",
+    arguments: [
+      ([1, 4, 2, 6, 4, 3], 1, .inverseEmpiricalCDF, 6),
+      ([1, 4, 2, 6, 4, 3], 0, .inverseEmpiricalCDF, 1),
+      ([1, 4, 2, 6, 4, 3], 1, .averagedInverseEmpiricalCDF, 6),
+      ([1, 4, 2, 6, 4, 3], 0, .averagedInverseEmpiricalCDF, 1),
+      ([1, 4, 2, 6, 4, 3], 1, .closestOrOddIndexed, 6),
+      ([1, 4, 2, 6, 4, 3], 0, .closestOrOddIndexed, 1),
+      ([1, 4, 2, 6, 4, 3], 1, .lerpInverseEmpiricalCDF, 6),
+      ([1, 4, 2, 6, 4, 3], 0, .lerpInverseEmpiricalCDF, 1),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0.5, .inverseEmpiricalCDF, 5),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9], 0.5, .inverseEmpiricalCDF, 5),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0.5, .averagedInverseEmpiricalCDF, 5.5),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9], 0.5, .averagedInverseEmpiricalCDF, 5),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0.5, .closestOrOddIndexed, 5),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9], 0.5, .closestOrOddIndexed, 4),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 0.5, .lerpInverseEmpiricalCDF, 5),
+      ([1, 2, 3, 4, 5, 6, 7, 8, 9], 0.5, .lerpInverseEmpiricalCDF, 4.5),
+    ] as [([Int], Double, QuantileEstimationMethod, Double)]
+  )
+  func validData(data: [Int], probability: Double, method: QuantileEstimationMethod, expectedQuantile: Double) async {
+    #expect(data.quantile(probability: probability, of: \.self, method: method).isApproximatelyEqual(to: expectedQuantile, absoluteTolerance: 1e-6))
   }
-  
-  func testMaxQuantile() {
-    let data = [1, 4, 2, 6, 4, 3]
-    let calculatedQuantile = data.quantile(probability: 1, of: \.self, method: .inverseEmpiricalCDF)
-    let expectedQuantile = 6.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testMinQuantile() {
-    let data = [1, 4, 2, 6, 4, 3]
-    let calculatedQuantile = data.quantile(probability: 0, of: \.self, method: .inverseEmpiricalCDF)
-    let expectedQuantile = 1.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testEvenCountInverseEmpiricalCDF() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .inverseEmpiricalCDF)
-    let expectedQuantile = 5.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testOddCountInverseEmpiricalCDF() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .inverseEmpiricalCDF)
-    let expectedQuantile = 5.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testEvenCountAveragedInverseEmpiricalCDF() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .averagedInverseEmpiricalCDF)
-    let expectedQuantile = 5.5
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testOddCountAveragedInverseEmpiricalCDF() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .averagedInverseEmpiricalCDF)
-    let expectedQuantile = 5.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testEvenCountClosestOrOddIndexed() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .closestOrOddIndexed)
-    let expectedQuantile = 5.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testOddCountClosestOrOddIndexed() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .closestOrOddIndexed)
-    let expectedQuantile = 4.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testEvenCountLerpInverseEmpiricalCDF() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .lerpInverseEmpiricalCDF)
-    let expectedQuantile = 5.0
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
-  }
-  
-  func testOddCountLerpInverseEmpiricalCDF() {
-    let data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    let calculatedQuantile = data.quantile(probability: 0.5, of: \.self, method: .lerpInverseEmpiricalCDF)
-    let expectedQuantile = 4.5
-    
-    XCTAssertEqual(calculatedQuantile, expectedQuantile, accuracy: 1e-6)
+
+  @Test(
+    "Invalid data returns NaN",
+    arguments: [
+      ([], .inverseEmpiricalCDF),
+      ([], .averagedInverseEmpiricalCDF),
+      ([], .closestOrOddIndexed),
+      ([], .lerpInverseEmpiricalCDF),
+    ] as [([Int], QuantileEstimationMethod)]
+  )
+  func invalidData(data: [Int], method: QuantileEstimationMethod) async {
+    #expect(data.quantile(probability: 1, of: \.self).isNaN)
   }
 }
-
-#endif

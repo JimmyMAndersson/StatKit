@@ -7,9 +7,13 @@ public extension Collection {
   /// - parameter variable: The variable under investigation.
   /// - parameter method: The computation method used to estimate the sample quantile.
   ///
-  /// The time complexity of this method is O(n * log(n)).
   /// Since quantiles have no meaning on empty collections or probabilities outside of range [0, 1],
   /// this method returns a NaN for calls under any such conditions.
+  ///
+  /// - important: This method has undefined behavior on collections containing elements that are incomparable.
+  /// For example, an array containing NaN's will produce unpredictable results.
+  ///
+  /// - complexity: O(n log n), where n is the length of the collection.
   func quantile<T: Comparable & ConvertibleToReal>(
     probability: Double,
     of variable: KeyPath<Element, T>,

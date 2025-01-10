@@ -6,4 +6,5 @@ extension Tag {
   @Tag static var ranking: Self
   @Tag static var averages: Self
   @Tag static var summation: Self
+  @Tag static var quantiles: Self
 }
