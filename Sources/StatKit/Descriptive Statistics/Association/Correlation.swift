@@ -123,7 +123,7 @@ public extension Collection {
 }
 
 /// The different supported variants of the Kendall Tau coefficient.
-public enum KendallTauVariant: CaseIterable {
+public enum KendallTauVariant: CaseIterable, Sendable {
   /// The original Tau statistic defined in 1938.
   /// Tau-a does not make adjustments for rank ties.
   case a

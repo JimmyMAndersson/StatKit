@@ -1,5 +1,5 @@
 /// Determines which value to pick in cases where the number of elements in a collection are even.
-public enum MedianStrategy {
+public enum MedianStrategy: CaseIterable, Sendable {
   /// Returns the higher of the two middle values if there is an even number of elements in the collection.
   case high
   /// Returns the lower of the two middle values if there is an even number of elements in the collection.

@@ -1,5 +1,5 @@
 /// An enumeration specififying a type of mean value calculation.
-public enum MeanStrategy: CaseIterable {
+public enum MeanStrategy: CaseIterable, Sendable {
   /// A case specifying the arithmetic mean.
   case arithmetic
 

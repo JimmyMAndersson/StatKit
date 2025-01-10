@@ -18,7 +18,7 @@ protocol RankingStrategyProtocol {
 }
 
 /// A calculation strategy for ranking comparable variables.
-public enum RankingStrategy {
+public enum RankingStrategy: CaseIterable, Sendable {
   /// The Fractional ranking strategy.
   case fractional
   /// The Standard Competition ranking strategy.
