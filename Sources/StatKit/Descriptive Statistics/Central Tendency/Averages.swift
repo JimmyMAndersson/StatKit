@@ -21,7 +21,11 @@ public extension Collection {
   /// - returns: The median of all items.
   ///
   /// Since the median has no meaning on an empty set, this method returns a NaN if the collection is empty.
-  /// The time complexity of this method is O(n).
+  ///
+  /// - important: This method has undefined behavior on collections containing elements that are incomparable.
+  /// For example, an array containing NaN's will produce unpredictable results.
+  ///
+  /// - complexity: O(n log n), where n is the length of the collection.
   @inlinable
   func median<T: Comparable & ConvertibleToReal>(
     variable: KeyPath<Element, T>,
@@ -37,12 +41,16 @@ public extension Collection {
 
   /// Find the mode(s) of the collection.
   /// - parameter variable: The variable over which to calculate the mode(s).
-  /// - returns: A set containing the mode(s) sorted in ascending order.
+  /// - returns: A set containing the mode(s).
   ///
   /// The mode of a sequence is the item that occurs most frequently.
   /// A collection that has a single item that is most occuring is unimodal,
   /// as opposed to collections that have several items that occur equally often and are called multimodal.
-  /// The time complexity of this method is O(n).
+  ///
+  /// - important: This method has undefined behavior on collections containing elements that are incomparable.
+  /// For example, an array containing NaN's will produce unpredictable results.
+  ///
+  /// - complexity: O(n), where n is the length of the collection.
   @inlinable
   func mode<T: Hashable>(
     variable: KeyPath<Element, T>
