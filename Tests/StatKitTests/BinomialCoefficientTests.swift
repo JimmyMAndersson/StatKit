@@ -1,31 +1,31 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
 
-final class BinomialCoefficientTests: XCTestCase {
-  func testNonNegativeInput() {
-    XCTAssertEqual(choose(n: 5, k: 0), 1)
-    XCTAssertEqual(choose(n: 5, k: 1), 5)
-    XCTAssertEqual(choose(n: 5, k: 2), 10)
-    XCTAssertEqual(choose(n: 5, k: 3), 10)
-    XCTAssertEqual(choose(n: 5, k: 4), 5)
-    XCTAssertEqual(choose(n: 5, k: 5), 1)
-    XCTAssertEqual(choose(n: 0, k: 5), 0)
-    XCTAssertEqual(choose(n: 1, k: 10), 0)
-    XCTAssertEqual(choose(n: 10, k: 1), 10)
-  }
-  
-  func testNegativeInput() {
-    XCTAssertEqual(choose(n: -5, k: -1), 0)
-    XCTAssertEqual(choose(n: -5, k: -2), 0)
-    XCTAssertEqual(choose(n: -5, k: -3), 0)
-    XCTAssertEqual(choose(n: -5, k: -4), 0)
-    XCTAssertEqual(choose(n: -5, k: -5), 1)
-    XCTAssertEqual(choose(n: -3, k: -6), -10)
-    XCTAssertEqual(choose(n: -1, k: 0), 1)
-    XCTAssertEqual(choose(n: -128, k: -130), 8256)
+@Suite("Binomial Coefficient Tests", .tags(.binomialCoefficient))
+struct BinomialCoefficientTests {
+  @Test(
+    "Valid data returns correct binomial coefficient",
+    arguments: [
+      (5, 0, 1),
+      (5, 1, 5),
+      (5, 2, 10),
+      (5, 3, 10),
+      (5, 4, 5),
+      (5, 5, 1),
+      (0, 5, 0),
+      (1, 10, 0),
+      (10, 1, 10),
+      (-5, -1, 0),
+      (-5, -2, 0),
+      (-5, -3, 0),
+      (-5, -4, 0),
+      (-5, -5, 1),
+      (-3, -6, -10),
+      (-1, 0, 1),
+      (-128, -130, 8256),
+    ]
+  )
+  func validData(_ n: Int, _ k: Int, _ expected: Int) async {
+    #expect(choose(n: n, k: k) == expected)
   }
 }
-
-#endif
