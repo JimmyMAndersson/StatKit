@@ -7,4 +7,5 @@ extension Tag {
   @Tag static var averages: Self
   @Tag static var summation: Self
   @Tag static var quantiles: Self
+  @Tag static var betaFunction: Self
 }
