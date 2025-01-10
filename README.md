@@ -6,7 +6,10 @@
 <p align="center">
     <img src="https://img.shields.io/github/actions/workflow/status/JimmyMAndersson/StatKit/TestSuite.yml?label=test%20suite&branch=main" />
     <img src="https://img.shields.io/github/actions/workflow/status/JimmyMAndersson/StatKit/CodeStyle.yml?label=code%20style&branch=main" />
-    <img src="https://img.shields.io/badge/platforms-mac+linux+ios+tvos+watchos+visionos+catalyst-brightgreen.svg?style=flat" alt="Platform Support" />
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/platforms-mac+linux+ios+tvos+watchos+visionos+catalyst-orange.svg?style=flat" alt="Platform Support" />
 </p>
 
 <p align="center">
