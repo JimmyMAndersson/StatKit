@@ -5,4 +5,5 @@ extension Tag {
   @Tag static var dispersion: Self
   @Tag static var ranking: Self
   @Tag static var averages: Self
+  @Tag static var summation: Self
 }

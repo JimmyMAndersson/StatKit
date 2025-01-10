@@ -3,7 +3,7 @@ public extension Collection {
   /// - parameter variable: The variable over which to calculate the sum.
   /// - returns: The sum of the variable in the collection.
   ///
-  /// The time complexity of this method is O(n).
+  /// - complexity: O(n), where n is the length of the collection.
   @inlinable
   func sum<T: AdditiveArithmetic>(
     over variable: KeyPath<Element, T>

@@ -1,24 +1,40 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
 
-final class SummationTests: XCTestCase {
-  func testPositiveSum() {
-    let intArray = [1, 2, 3, 4, 5]
-    let calculatedSum = intArray.sum(over: \.self)
-    let expectedSum = 15
-    
-    XCTAssertEqual(calculatedSum, expectedSum)
+@Suite("Summation Tests", .tags(.summation))
+struct SummationTests {
+  @Test(
+    "Valid integer data returns correct sum",
+    arguments: [
+      ([1, 2, 3, 4, 5], 15),
+      ([-1, -2, -3, -4, -5], -15),
+      ([], 0),
+    ] as [([Int], Int)]
+  )
+  func validIntegerData(data: [Int], expectedSum: Int) {
+    #expect(data.sum(over: \.self) == expectedSum)
   }
-  
-  func testNegativeSum() {
-    let intArray = [1, -2, 3, -4, 5, -6]
-    let calculatedSum = intArray.sum(over: \.self)
-    let expectedSum = -3
-    
-    XCTAssertEqual(calculatedSum, expectedSum)
+
+  @Test(
+    "Valid floating point data returns correct sum",
+    arguments: [
+      ([1, 2, 3, 4, 5], 15),
+      ([-1, -2, -3, -4, -5], -15),
+      ([], 0),
+      ([1, 2, 3, 4, .infinity], .infinity),
+    ] as [([Double], Double)]
+  )
+  func validIntegerData(data: [Double], expectedSum: Double) {
+    #expect(data.sum(over: \.self) == expectedSum)
+  }
+
+  @Test(
+    "Invalid floating point data returns NaN",
+    arguments: [
+      ([1, 2, 3, 4, .nan], .nan),
+    ] as [([Double], Double)]
+  )
+  func invalidData(data: [Double], expectedSum: Double) {
+    #expect(data.sum(over: \.self).isNaN)
   }
 }
-
-#endif
