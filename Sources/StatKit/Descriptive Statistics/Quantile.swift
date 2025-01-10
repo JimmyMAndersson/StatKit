@@ -77,7 +77,7 @@ public extension Collection {
 }
 
 /// A method for computing quantiles.
-public enum QuantileEstimationMethod {
+public enum QuantileEstimationMethod: CaseIterable, Sendable {
   /// Computes the quantile usign the inverse empirical CDF.
   case inverseEmpiricalCDF
   /// Computes the quantile usign the inverse empirical CDF, and takes the arithmetic mean at discontinuities.

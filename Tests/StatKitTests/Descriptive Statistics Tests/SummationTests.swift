@@ -24,7 +24,7 @@ struct SummationTests {
       ([1, 2, 3, 4, .infinity], .infinity),
     ] as [([Double], Double)]
   )
-  func validIntegerData(data: [Double], expectedSum: Double) {
+  func validFloatingPointData(data: [Double], expectedSum: Double) {
     #expect(data.sum(over: \.self) == expectedSum)
   }
 
