@@ -20,6 +20,11 @@ extension ConvertibleToReal where Self: BinaryFloatingPoint {
 extension Double: ConvertibleToReal {}
 extension Float: ConvertibleToReal {}
 
+#if swift(>=5.4) && !((os(macOS) || targetEnvironment(macCatalyst)) && arch(x86_64))
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+extension Float16: ConvertibleToReal {}
+#endif
+
 #if canImport(CoreGraphics)
 import CoreGraphics
 extension CGFloat: ConvertibleToReal {}
@@ -41,3 +46,9 @@ extension UInt8: ConvertibleToReal {}
 extension UInt16: ConvertibleToReal {}
 extension UInt32: ConvertibleToReal {}
 extension UInt64: ConvertibleToReal {}
+
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Int128: ConvertibleToReal {}
+
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension UInt128: ConvertibleToReal {}
