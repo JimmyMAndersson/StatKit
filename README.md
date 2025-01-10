@@ -83,7 +83,7 @@ print(points.mode(variable: \.y))
 
 As the examples in the previous section showed, calculating statistics is easy when using collections of types that are readily available. However, most of us work with custom data structures in our projects. Luckily, StatKit provides support for arbitrary custom types thanks to the extensive use of generics.
 
-Let us look at a custom data structure that keeps track of collected data points for a specific brand of cars, and how we can use StatKit to wasily calculate the mean and standard deviation of their fuel consumption:
+Let us look at a custom data structure that keeps track of collected data points for a specific brand of cars, and how we can use StatKit to easily calculate the mean and standard deviation of their fuel consumption:
 
 ```swift
 struct FuelConsumption {
