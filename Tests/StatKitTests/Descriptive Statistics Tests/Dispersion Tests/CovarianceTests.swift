@@ -3,7 +3,7 @@ import StatKit
 
 @Suite("Covariance Tests", .tags(.dispersion))
 struct CovarianceTests {
-  static private let validData: [[SIMD2<Double>]] = [
+  static private let validTestData: [[SIMD2<Double>]] = [
     [
       SIMD2(x: 1, y: 10),
       SIMD2(x: 2, y: 20),
@@ -37,10 +37,10 @@ struct CovarianceTests {
   ]
 
   @Test("Valid data returns correct covariance", arguments: [
-    (validData[0], 51.5, DataSetComposition.population),
-    (validData[1], -27.2, DataSetComposition.population),
-    (validData[0], 57.222222222, DataSetComposition.sample),
-    (validData[1], -30.222222222, DataSetComposition.sample),
+    (Self.validTestData[0], 51.5, DataSetComposition.population),
+    (Self.validTestData[1], -27.2, DataSetComposition.population),
+    (Self.validTestData[0], 57.222222222, DataSetComposition.sample),
+    (Self.validTestData[1], -30.222222222, DataSetComposition.sample),
   ])
   func validData(data: [SIMD2<Double>], expectedVariance: Double, composition: DataSetComposition) async {
     #expect(data.covariance(of: \.x, and: \.y, from: composition).isApproximatelyEqual(to: expectedVariance, absoluteTolerance: 1e-6))
@@ -51,12 +51,12 @@ struct CovarianceTests {
     #expect(data.covariance(of: \.x, and: \.y, from: composition).isNaN)
   }
 
-  @Test("Covariance is commutative", arguments: validData, DataSetComposition.allCases)
+  @Test("Covariance is commutative", arguments: validTestData, DataSetComposition.allCases)
   func covarianceCommutative(data: [SIMD2<Double>], composition: DataSetComposition) async {
     #expect(data.covariance(of: \.x, and: \.y, from: composition) == data.covariance(of: \.y, and: \.x, from: composition))
   }
 
-  @Test("Single variable covariance is equal to variance", arguments: validData, DataSetComposition.allCases)
+  @Test("Single variable covariance is equal to variance", arguments: validTestData, DataSetComposition.allCases)
   func singleVariableCovariance(data: [SIMD2<Double>], composition: DataSetComposition) async {
     #expect(data.covariance(of: \.x, and: \.x, from: composition) == data.variance(variable: \.x, from: composition))
     #expect(data.covariance(of: \.y, and: \.y, from: composition) == data.variance(variable: \.y, from: composition))

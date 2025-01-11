@@ -1,87 +1,124 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
-import RealModule
 
-final class BinomialDistributionTests: XCTestCase {
-  func testMean() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.mean, 10, accuracy: 1e-6)
-    
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.mean, 14, accuracy: 1e-6)
+@Suite("Binomial Distribution Tests", .tags(.distribution))
+struct BinomialDistributionTests {
+  @Test(
+    "Valid distribution parameters return correct mean",
+    arguments: [
+      (0, 20, 0),
+      (1, 1, 1),
+      (0.5, 200, 100),
+    ]
+  )
+  func validInputReturnsCorrectMean(probability: Double, trials: Int, expectedMean: Double) async throws {
+    let mean = BinomialDistribution(probability: probability, trials: trials).mean
+    #expect(mean.isApproximatelyEqual(to: expectedMean, absoluteTolerance: 1e-6))
   }
-  
-  func testVariance() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.variance, 5.0, accuracy: 1e-6)
-    
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.variance, 4.2, accuracy: 1e-6)
-  }
-  
-  func testSkewness() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.skewness, 0, accuracy: 1e-6)
-    
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.skewness, -0.19518, accuracy: 1e-6)
-  }
-  
-  func testExcessKurtosis() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.excessKurtosis, -0.1, accuracy: 1e-6)
 
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.excessKurtosis, -0.0619047619, accuracy: 1e-6)
+  @Test(
+    "Valid distribution parameters return correct variance",
+    arguments: [
+      (0, 20, 0),
+      (1, 1, 0),
+      (0.5, 200, 50),
+    ]
+  )
+  func validInputReturnsCorrectVariance(probability: Double, trials: Int, expectedVariance: Double) async throws {
+    let variance = BinomialDistribution(probability: probability, trials: trials).variance
+    #expect(variance.isApproximatelyEqual(to: expectedVariance, absoluteTolerance: 1e-6))
   }
-  
-  func testCDF() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.cdf(x: 1), 0.0000200271606, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 0), 0.0000009536743, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 10), 0.5880985260010, accuracy: 1e-6)
-    
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.cdf(x: 10), 0.04796190, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 7), 0.00127888, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 15), 0.76249222, accuracy: 1e-6)
+
+  @Test(
+    "Valid distribution parameters return correct skewness",
+    arguments: [
+      (0, 20, .infinity),
+      (1, 1, -.infinity),
+      (0.5, 200, 0),
+      (0.3, 200, 0.06172133998)
+    ]
+  )
+  func validInputReturnsCorrectSkewness(probability: Double, trials: Int, expectedSkewness: Double) async throws {
+    let skewness = BinomialDistribution(probability: probability, trials: trials).skewness
+    #expect(skewness.isApproximatelyEqual(to: expectedSkewness, absoluteTolerance: 1e-6))
   }
-  
-  func testLogCDF() {
-    let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.cdf(x: 1, logarithmic: true), -10.8184212, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 0, logarithmic: true), -13.8629436, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 10, logarithmic: true), -0.5308608, accuracy: 1e-6)
-    
-    let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.cdf(x: 10, logarithmic: true), -3.037348, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 7, logarithmic: true), -6.661771, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 15, logarithmic: true), -0.271163, accuracy: 1e-6)
+
+  @Test(
+    "Valid distribution parameters return correct excess kurtosis",
+    arguments: [
+      (0, 20, .infinity),
+      (1, 1, .infinity),
+      (0.5, 20, -0.1),
+      (0.7, 20, -0.0619047619),
+      (0.05, 200, 0.07526315789)
+    ]
+  )
+  func validInputReturnsCorrectSkewness(probability: Double, trials: Int, expectedKurtosis: Double) async throws {
+    let kurtosis = BinomialDistribution(probability: probability, trials: trials).excessKurtosis
+    #expect(kurtosis.isApproximatelyEqual(to: expectedKurtosis, absoluteTolerance: 1e-6))
   }
-  
-  func testSampling() {
-    let numberOfSamples = 1000000
-    let distribution = BinomialDistribution(probability: 0.7, trials: 20)
-    var samples = [Int]()
-    
-    measure {
-      samples = distribution.sample(numberOfSamples)
-    }
-    
+
+  @Test(
+    "Valid distribution parameters return correct PMF value",
+    arguments: [
+      (0, 20, 10, 0),
+      (0.99, 1, 1, 0.99),
+      (0.5, 20, 5, 0.0147857666015625),
+    ]
+  )
+  func validInputReturnsCorrectSkewness(probability: Double, trials: Int, x: Int, expectedPMF: Double) async throws {
+    let pmf = BinomialDistribution(probability: probability, trials: trials).pmf(x: x)
+    #expect(pmf.isApproximatelyEqual(to: expectedPMF, absoluteTolerance: 1e-6))
+  }
+
+  @Test(
+    "Valid distribution parameters return correct CDF value",
+    arguments: [
+      (0.5, 20, 1, 0.0000200271606),
+      (0.5, 20, 0, 0.0000009536743),
+      (0.5, 20, 10, 0.5880985260010),
+      (0.7, 20, 10, 0.04796190),
+      (0.7, 20, 7, 0.00127888),
+      (0.7, 20, 15, 0.76249222),
+    ]
+  )
+  func validInputReturnsCorrectCDF(probability: Double, trials: Int, x: Int, expectedCDF: Double) async throws {
+    let cdf = BinomialDistribution(probability: probability, trials: trials).cdf(x: x, logarithmic: false)
+    #expect(cdf.isApproximatelyEqual(to: expectedCDF, absoluteTolerance: 1e-6))
+  }
+
+  @Test(
+    "Valid distribution parameter return correct log CDF value",
+    arguments: [
+      (0.5, 20, 1, -10.8184212),
+      (0.5, 20, 0, -13.8629436),
+      (0.5, 20, 10, -0.5308608),
+      (0.7, 20, 10, -3.037348),
+      (0.7, 20, 7, -6.661771),
+      (0.7, 20, 15, -0.271163),
+    ]
+  )
+  func validInputReturnsCorrectLogCDF(probability: Double, trials: Int, x: Int, expectedLogCDF: Double) async throws {
+    let cdf = BinomialDistribution(probability: probability, trials: trials).cdf(x: x, logarithmic: true)
+    #expect(cdf.isApproximatelyEqual(to: expectedLogCDF, absoluteTolerance: 1e-6))
+  }
+
+  @Test("Sampling from a distribution returns correct proportions")
+  func testSampling() async throws {
+    let numberOfSamples = 4000000
+    let numberOfTrials = 5
+    let distribution = BinomialDistribution(probability: 0.7, trials: numberOfTrials)
+    let samples = distribution.sample(numberOfSamples)
+
     var proportions = samples.reduce(into: [Int: Double]()) { result, number in result[Int(number), default: 0] += 1 }
-    
+
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
-    
-    XCTAssertEqual(samples.count, numberOfSamples)
-    let lowerBound = Swift.max(0, Int(distribution.mean - 3 * (distribution.variance).squareRoot()))
-    let upperBound = Swift.min(distribution.trials, Int(distribution.mean + 3 * (distribution.variance).squareRoot()))
-    let testRange =  lowerBound ... upperBound
+
+    #expect(samples.count == numberOfSamples)
+    let testRange =  0 ... numberOfTrials
+
     for successes in testRange {
-      XCTAssertEqual(proportions[successes] ?? -1, distribution.pmf(x: successes), accuracy: 0.01)
+      #expect(proportions[successes, default: -1.0].isApproximatelyEqual(to: distribution.pmf(x: successes), absoluteTolerance: 1e-3))
     }
   }
 }
-
-#endif

@@ -35,7 +35,7 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
   /// The `probability` and `trials` are also commonly known as `p` and `n`, respectively.
   public init(probability: Double, trials: Int) {
     precondition(
-      0 < probability && probability < 1,
+      0 <= probability && probability <= 1,
       "The probability needs to be in (0, 1) (\(probability) provided)."
     )
     precondition(
