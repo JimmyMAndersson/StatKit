@@ -8,10 +8,10 @@ public func choose<Integer: BinaryInteger>(n: Integer, k: Integer) -> Integer {
   switch n < 0 {
     case true:
       if 0 <= k {
-        let sign: Integer = k.isMultiple(of: 2) ? 1 : -1
+        let sign: Integer = (k & 1 == 0) ? 1 : -1
         return sign * binomial(n: k - n - 1, k: k)
       } else if k <= n {
-        let sign: Integer = (n - k).isMultiple(of: 2) ? 1 : -1
+        let sign: Integer = ((n - k) & 1 == 0) ? 1 : -1
         return sign * binomial(n: -1 - k, k: n - k)
       } else {
         return 0
@@ -33,15 +33,15 @@ public func choose<Integer: BinaryInteger>(n: Integer, k: Integer) -> Integer {
 private func binomial<Integer: BinaryInteger>(n: Integer, k: Integer) -> Integer {
   var result: Integer = 1
   var k = k
-  
+
   if k > n - k {
     k = n - k
   }
-  
+
   for offset in 0 ..< Int(k) {
     result *= n - Integer(offset)
     result /= Integer(offset) + 1
   }
-  
+
   return result
 }
