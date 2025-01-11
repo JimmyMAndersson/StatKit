@@ -19,8 +19,8 @@ public struct GeometricDistribution: DiscreteDistribution, UnivariateDistributio
     (2 - probability) / (1 - probability).squareRoot()
   }
   
-  public var kurtosis: Double {
-    9 + .pow(probability, 2) / (1 - probability)
+  public var excessKurtosis: Double {
+    6 + .pow(probability, 2) / (1 - probability)
   }
   
   /// Creates a Geometric Distribution for a specified probability.

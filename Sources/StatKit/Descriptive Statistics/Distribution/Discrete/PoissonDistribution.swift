@@ -28,8 +28,8 @@ public struct PoissonDistribution: DiscreteDistribution, UnivariateDistribution 
     return 1 / rate.squareRoot()
   }
   
-  public var kurtosis: Double {
-    return 3 + 1 / rate
+  public var excessKurtosis: Double {
+    return 1 / rate
   }
   
   public func pmf(x: Int, logarithmic: Bool = false) -> Double {

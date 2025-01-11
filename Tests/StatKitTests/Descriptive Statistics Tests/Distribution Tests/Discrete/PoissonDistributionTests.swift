@@ -28,12 +28,12 @@ final class PoissonDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.skewness, 0.1324532357, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstDistribution = PoissonDistribution(rate: 1)
-    XCTAssertEqual(firstDistribution.kurtosis, 4.0, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstDistribution.excessKurtosis, 1.0, accuracy: 1e-6)
+
     let secondDistribution = PoissonDistribution(rate: 57)
-    XCTAssertEqual(secondDistribution.kurtosis, 3.01754386, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.excessKurtosis, 0.01754386, accuracy: 1e-6)
   }
   
   func testCDF() {

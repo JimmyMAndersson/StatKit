@@ -41,10 +41,10 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
     return numerator / denominator
   }
   
-  public var kurtosis: Double {
+  public var excessKurtosis: Double {
     let numerator = 6 * (.pow(alpha - beta, 2) * (alpha + beta + 1) - alpha * beta * (alpha + beta + 2))
     let denominator = alpha * beta * (alpha + beta + 2) * (alpha + beta + 3)
-    return 3 + (numerator / denominator)
+    return numerator / denominator
   }
   
   public func pdf(x: Double, logarithmic: Bool = false) -> Double {

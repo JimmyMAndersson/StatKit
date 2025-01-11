@@ -26,12 +26,12 @@ final class BetaDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.skewness, -0.59628479, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstDistribution = BetaDistribution(alpha: 1, beta: 1)
-    XCTAssertEqual(firstDistribution.kurtosis, 1.8, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstDistribution.excessKurtosis, -1.2, accuracy: 1e-6)
+
     let secondDistribution = BetaDistribution(alpha: 5, beta: 2)
-    XCTAssertEqual(secondDistribution.kurtosis, 2.88, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.excessKurtosis, -0.12, accuracy: 1e-6)
   }
   
   func testCDF() {

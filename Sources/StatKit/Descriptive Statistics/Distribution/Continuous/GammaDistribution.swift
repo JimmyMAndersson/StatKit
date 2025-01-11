@@ -70,8 +70,8 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
     return 2 / self.shape.squareRoot()
   }
   
-  public var kurtosis: Double {
-    return 6 / self.shape + 3
+  public var excessKurtosis: Double {
+    return 6 / self.shape
   }
   
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {

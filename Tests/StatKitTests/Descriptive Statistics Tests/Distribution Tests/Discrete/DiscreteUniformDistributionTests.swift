@@ -28,12 +28,12 @@ final class DiscreteUniformDistributionTests: XCTestCase {
     XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let standardDistribution = DiscreteUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.kurtosis, 1, accuracy: 1e-6)
-    
+    XCTAssertEqual(standardDistribution.excessKurtosis, -2, accuracy: 1e-6)
+
     let offsetDistribution = DiscreteUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.kurtosis, 1.787692, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.excessKurtosis, -1.2123076923, accuracy: 1e-6)
   }
   
   func testCDF() {

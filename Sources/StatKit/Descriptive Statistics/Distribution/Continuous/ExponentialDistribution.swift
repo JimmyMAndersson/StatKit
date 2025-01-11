@@ -38,8 +38,8 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
     return 2
   }
   
-  public var kurtosis: Double {
-    return 9
+  public var excessKurtosis: Double {
+    return 6
   }
   
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {
