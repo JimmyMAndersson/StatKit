@@ -28,12 +28,12 @@ final class ExponentialDistributionTests: XCTestCase {
     XCTAssertEqual(secondExpDistribution.skewness, 2.0, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstExpDistribution = ExponentialDistribution(rate: 1)
-    XCTAssertEqual(firstExpDistribution.kurtosis, 9.0, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstExpDistribution.excessKurtosis, 6.0, accuracy: 1e-6)
+
     let secondExpDistribution = ExponentialDistribution(rate: 57)
-    XCTAssertEqual(secondExpDistribution.kurtosis, 9.0, accuracy: 1e-6)
+    XCTAssertEqual(secondExpDistribution.excessKurtosis, 6.0, accuracy: 1e-6)
   }
   
   func testCDF() {

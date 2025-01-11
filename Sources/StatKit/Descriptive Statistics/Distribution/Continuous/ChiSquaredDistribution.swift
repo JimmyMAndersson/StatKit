@@ -42,8 +42,8 @@ public struct ChiSquaredDistribution: ContinuousDistribution, UnivariateDistribu
     return (8 / self.degreesOfFreedom.realValue).squareRoot()
   }
 
-  public var kurtosis: Double {
-    return 3 + (12 / self.degreesOfFreedom.realValue)
+  public var excessKurtosis: Double {
+    return 12 / self.degreesOfFreedom.realValue
   }
 
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {

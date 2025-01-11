@@ -29,12 +29,12 @@ final class BinomialDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.skewness, -0.19518, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstDistribution = BinomialDistribution(probability: 0.5, trials: 20)
-    XCTAssertEqual(firstDistribution.kurtosis, 2.9, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstDistribution.excessKurtosis, -0.1, accuracy: 1e-6)
+
     let secondDistribution = BinomialDistribution(probability: 0.7, trials: 20)
-    XCTAssertEqual(secondDistribution.kurtosis, 2.938095, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.excessKurtosis, -0.0619047619, accuracy: 1e-6)
   }
   
   func testCDF() {

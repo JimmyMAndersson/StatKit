@@ -28,12 +28,12 @@ final class GeometricDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.skewness, 2.373464, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.kurtosis, 9.5, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstDistribution.excessKurtosis, 6.5, accuracy: 1e-6)
+
     let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.kurtosis, 10.63333333, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.excessKurtosis, 7.63333333, accuracy: 1e-6)
   }
   
   func testCDF() {

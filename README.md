@@ -101,7 +101,7 @@ As you can see, using KeyPath's makes the StatKit API easy to use and reusable a
 
 ## Distributions
 
-StatKit provides multiple discrete and continuous distribution types for you to work with. These allow you to compute probabilities, calculate common moments such as the skewness and kurtosis, and sample random numbers from a specific data distribution.
+StatKit provides multiple discrete and continuous distribution types for you to work with. These allow you to compute probabilities, calculate common moments such as skewness and variance, and sample random numbers from a specific data distribution.
 
 ```swift
 let normal = NormalDistribution(mean: 0, variance: 1)

@@ -28,12 +28,12 @@ final class ContinuousUniformDistributionTests: XCTestCase {
     XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let standardDistribution = ContinuousUniformDistribution(0, 1)
-    XCTAssertEqual(standardDistribution.kurtosis, 9 / 5, accuracy: 1e-6)
-    
+    XCTAssertEqual(standardDistribution.excessKurtosis, -6 / 5, accuracy: 1e-6)
+
     let offsetDistribution = ContinuousUniformDistribution(-4, 9)
-    XCTAssertEqual(offsetDistribution.kurtosis, 9 / 5, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.excessKurtosis, -6 / 5, accuracy: 1e-6)
   }
   
   func testCDF() {

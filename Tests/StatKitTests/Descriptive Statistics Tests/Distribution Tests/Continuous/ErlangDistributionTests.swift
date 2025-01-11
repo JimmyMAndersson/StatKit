@@ -28,12 +28,12 @@ final class ErlangDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.skewness, 0.894427191, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstDistribution = ErlangDistribution(shape: 1, scale: 1)
-    XCTAssertEqual(firstDistribution.kurtosis, 9.0, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstDistribution.excessKurtosis, 6.0, accuracy: 1e-6)
+
     let secondDistribution = ErlangDistribution(shape: 5, scale: 10)
-    XCTAssertEqual(secondDistribution.kurtosis, 4.2, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.excessKurtosis, 1.2, accuracy: 1e-6)
   }
   
   func testCDF() {

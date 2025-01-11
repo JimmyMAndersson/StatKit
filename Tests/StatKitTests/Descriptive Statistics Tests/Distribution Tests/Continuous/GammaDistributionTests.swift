@@ -28,12 +28,12 @@ final class GammaDistributionTests: XCTestCase {
     XCTAssertEqual(secondDistribution.skewness, 2.828427, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let firstDistribution = GammaDistribution(shape: 1, scale: 1)
-    XCTAssertEqual(firstDistribution.kurtosis, 9.0, accuracy: 1e-6)
-    
+    XCTAssertEqual(firstDistribution.excessKurtosis, 6.0, accuracy: 1e-6)
+
     let secondDistribution = GammaDistribution(shape: 0.5, scale: 10)
-    XCTAssertEqual(secondDistribution.kurtosis, 15.0, accuracy: 1e-6)
+    XCTAssertEqual(secondDistribution.excessKurtosis, 12.0, accuracy: 1e-6)
   }
   
   func testCDF() {

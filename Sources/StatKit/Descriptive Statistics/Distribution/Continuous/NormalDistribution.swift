@@ -29,11 +29,11 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
   }
   
   public var skewness: Double {
-    return 0
+    return .zero
   }
   
-  public var kurtosis: Double {
-    return 3
+  public var excessKurtosis: Double {
+    return .zero
   }
   
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {

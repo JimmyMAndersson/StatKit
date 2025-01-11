@@ -43,10 +43,10 @@ public struct DiscreteUniformDistribution: DiscreteDistribution, UnivariateDistr
     return 0
   }
   
-  public var kurtosis: Double {
-    let numerator = 6 * .pow(Double(integerCount), 2) + 6
-    let denominator = 5 * .pow(Double(integerCount), 2) - 5
-    return 3 - numerator / denominator
+  public var excessKurtosis: Double {
+    let numerator = -6 * (.pow(Double(integerCount), 2) + 1)
+    let denominator = 5 * (.pow(Double(integerCount), 2) - 1)
+    return numerator / denominator
   }
   
   public func cdf(x: Int, logarithmic: Bool = false) -> Double {

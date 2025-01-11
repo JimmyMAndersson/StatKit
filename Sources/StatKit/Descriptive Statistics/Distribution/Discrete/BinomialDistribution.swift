@@ -24,8 +24,8 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
     (1 - 2 * probability) / (variance).squareRoot()
   }
   
-  public var kurtosis: Double {
-    3 + (1 - 6 * probability * (1 - probability)) / variance
+  public var excessKurtosis: Double {
+    (1 - 6 * probability * (1 - probability)) / variance
   }
   
   /// Creates a Binomial Distribution for a specified number of trials and a probability.

@@ -43,8 +43,8 @@ public struct ContinuousUniformDistribution: ContinuousDistribution, UnivariateD
     return 0
   }
   
-  public var kurtosis: Double {
-    return 9 / 5
+  public var excessKurtosis: Double {
+    return -6 / 5
   }
   
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {

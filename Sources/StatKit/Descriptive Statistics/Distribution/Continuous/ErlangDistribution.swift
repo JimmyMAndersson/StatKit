@@ -56,8 +56,8 @@ public struct ErlangDistribution: ContinuousDistribution, UnivariateDistribution
     return self.gamma.skewness
   }
 
-  public var kurtosis: Double {
-    return self.gamma.kurtosis
+  public var excessKurtosis: Double {
+    return self.gamma.excessKurtosis
   }
 
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {

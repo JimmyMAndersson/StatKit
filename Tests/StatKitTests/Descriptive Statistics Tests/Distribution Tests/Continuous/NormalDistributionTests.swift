@@ -28,12 +28,12 @@ final class NormalDistributionTests: XCTestCase {
     XCTAssertEqual(offsetDistribution.skewness, 0, accuracy: 1e-6)
   }
   
-  func testKurtosis() {
+  func testExcessKurtosis() {
     let standardDistribution = NormalDistribution(mean: 0, variance: 1)
-    XCTAssertEqual(standardDistribution.kurtosis, 3, accuracy: 1e-6)
-    
+    XCTAssertEqual(standardDistribution.excessKurtosis, 0, accuracy: 1e-6)
+
     let offsetDistribution = NormalDistribution(mean: -4, variance: 9)
-    XCTAssertEqual(offsetDistribution.kurtosis, 3, accuracy: 1e-6)
+    XCTAssertEqual(offsetDistribution.excessKurtosis, 0, accuracy: 1e-6)
   }
   
   func testCDF() {
