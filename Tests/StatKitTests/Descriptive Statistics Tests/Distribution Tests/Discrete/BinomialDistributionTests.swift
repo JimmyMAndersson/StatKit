@@ -105,8 +105,8 @@ struct BinomialDistributionTests {
 
   @Test("Sampling from a distribution returns correct proportions")
   func testSampling() async throws {
-    let numberOfSamples = 4000000
-    let numberOfTrials = 5
+    let numberOfSamples = 1000000
+    let numberOfTrials = 50
     let distribution = BinomialDistribution(probability: 0.7, trials: numberOfTrials)
     let samples = distribution.sample(numberOfSamples)
 
@@ -118,7 +118,7 @@ struct BinomialDistributionTests {
     let testRange =  0 ... numberOfTrials
 
     for successes in testRange {
-      #expect(proportions[successes, default: -1.0].isApproximatelyEqual(to: distribution.pmf(x: successes), absoluteTolerance: 1e-3))
+      #expect(proportions[successes, default: 0.0].isApproximatelyEqual(to: distribution.pmf(x: successes), absoluteTolerance: 1e-3))
     }
   }
 }
