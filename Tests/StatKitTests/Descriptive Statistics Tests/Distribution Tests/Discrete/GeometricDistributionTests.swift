@@ -1,86 +1,102 @@
-#if !os(watchOS)
-
-import XCTest
+import Testing
 import StatKit
 
-final class GeometricDistributionTests: XCTestCase {
-  func testMean() {
-    let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.mean, 2, accuracy: 1e-6)
-    
-    let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.mean, 1.428571, accuracy: 1e-6)
+@Suite("Geometric Distribution Tests", .tags(.distribution))
+struct GeometricDistributionTests {
+  @Test(
+    "Valid distribution parameters return correct mean",
+    arguments: [
+      (0.5, 2.0),
+      (0.7, 1.428571),
+    ]
+  )
+  func validInputReturnsCorrectMean(probability: Double, expectedMean: Double) async throws {
+    let mean = GeometricDistribution(probability: probability).mean
+    #expect(mean.isApproximatelyEqual(to: expectedMean, absoluteTolerance: 1e-6))
   }
-  
-  func testVariance() {
-    let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.variance, 2, accuracy: 1e-6)
-    
-    let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.variance, 0.6122449, accuracy: 1e-6)
-  }
-  
-  func testSkewness() {
-    let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.skewness, 2.12132, accuracy: 1e-6)
-    
-    let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.skewness, 2.373464, accuracy: 1e-6)
-  }
-  
-  func testExcessKurtosis() {
-    let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.excessKurtosis, 6.5, accuracy: 1e-6)
 
-    let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.excessKurtosis, 7.63333333, accuracy: 1e-6)
+  @Test(
+    "Valid distribution parameters return correct variance",
+    arguments: [
+      (0.5, 2.0),
+      (0.7, 0.6122449),
+    ]
+  )
+  func validInputReturnsCorrectVariance(probability: Double, expectedVariance: Double) async throws {
+    let variance = GeometricDistribution(probability: probability).variance
+    #expect(variance.isApproximatelyEqual(to: expectedVariance, absoluteTolerance: 1e-6))
   }
-  
-  func testCDF() {
-    let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.cdf(x: 1), 0.5, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 3), 0.875, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 7), 0.9921875, accuracy: 1e-6)
-    
-    let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.cdf(x: 1), 0.7, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 3), 0.973, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 7), 0.9997813, accuracy: 1e-6)
+
+  @Test(
+    "Valid distribution parameters return correct skewness",
+    arguments: [
+      (0.5, 2.12132),
+      (0.7, 2.373464),
+    ]
+  )
+  func validInputReturnsCorrectSkewness(probability: Double, expectedSkewness: Double) async throws {
+    let skewness = GeometricDistribution(probability: probability).skewness
+    #expect(skewness.isApproximatelyEqual(to: expectedSkewness, absoluteTolerance: 1e-6))
   }
-  
-  func testLogCDF() {
-    let firstDistribution = GeometricDistribution(probability: 0.5)
-    XCTAssertEqual(firstDistribution.cdf(x: 1, logarithmic: true), -0.693147181, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 3, logarithmic: true), -0.133531393, accuracy: 1e-6)
-    XCTAssertEqual(firstDistribution.cdf(x: 7, logarithmic: true), -0.007843177, accuracy: 1e-6)
-    
-    let secondDistribution = GeometricDistribution(probability: 0.7)
-    XCTAssertEqual(secondDistribution.cdf(x: 1, logarithmic: true), -0.3566749439, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 3, logarithmic: true), -0.0273711968, accuracy: 1e-6)
-    XCTAssertEqual(secondDistribution.cdf(x: 7, logarithmic: true), -0.0002187239, accuracy: 1e-6)
+
+  @Test(
+    "Valid distribution parameters return correct excess kurtosis",
+    arguments: [
+      (0.5, 6.5),
+      (0.7, 7.63333333),
+    ]
+  )
+  func validInputReturnsCorrectExcessKurtosis(probability: Double, expectedKurtosis: Double) async throws {
+    let kurtosis = GeometricDistribution(probability: probability).excessKurtosis
+    #expect(kurtosis.isApproximatelyEqual(to: expectedKurtosis, absoluteTolerance: 1e-6))
   }
-  
-  func testSampling() {
+
+  @Test(
+    "Valid distribution parameters return correct CDF value",
+    arguments: [
+      (0.5, 1, 0.5),
+      (0.5, 3, 0.875),
+      (0.5, 7, 0.9921875),
+      (0.7, 1, 0.7),
+      (0.7, 3, 0.973),
+      (0.7, 7, 0.9997813),
+    ]
+  )
+  func validInputReturnsCorrectCDF(probability: Double, x: Int, expectedCDF: Double) async throws {
+    let cdf = GeometricDistribution(probability: probability).cdf(x: x)
+    #expect(cdf.isApproximatelyEqual(to: expectedCDF, absoluteTolerance: 1e-6))
+  }
+
+  @Test(
+    "Valid distribution parameters return correct log CDF value",
+    arguments: [
+      (0.5, 1, -0.693147181),
+      (0.5, 3, -0.133531393),
+      (0.5, 7, -0.007843177),
+      (0.7, 1, -0.3566749439),
+      (0.7, 3, -0.0273711968),
+      (0.7, 7, -0.0002187239),
+    ]
+  )
+  func validInputReturnsCorrectLogCDF(probability: Double, x: Int, expectedLogCDF: Double) async throws {
+    let cdf = GeometricDistribution(probability: probability).cdf(x: x, logarithmic: true)
+    #expect(cdf.isApproximatelyEqual(to: expectedLogCDF, absoluteTolerance: 1e-6))
+  }
+
+  @Test("Sampling from a distribution returns correct proportions")
+  func testSampling() async throws {
     let numberOfSamples = 1000000
     let distribution = GeometricDistribution(probability: 0.7)
-    var samples = [Int]()
-    
-    measure {
-      samples = distribution.sample(numberOfSamples)
-    }
-    
-    var proportions = samples.reduce(into: [Int: Double]()) { result, number in result[Int(number), default: 0] += 1 }
-    
+    let samples = distribution.sample(numberOfSamples)
+
+    var proportions = samples.reduce(into: [Int: Double]()) { result, number in result[number, default: 0] += 1 }
+
     for key in proportions.keys { proportions[key]? /= Double(numberOfSamples) }
-    
-    XCTAssertEqual(samples.count, numberOfSamples)
-    let lowerBound = 1
-    let upperBound = 10
-    let testRange =  lowerBound ... upperBound
-    for successes in testRange {
-      XCTAssertEqual(proportions[successes] ?? -1, distribution.pmf(x: successes), accuracy: 0.01)
+
+    #expect(samples.count == numberOfSamples)
+
+    for x in 1 ... 10 {
+      #expect(proportions[x, default: 0.0].isApproximatelyEqual(to: distribution.pmf(x: x), absoluteTolerance: 0.01))
     }
   }
 }
-
-#endif
