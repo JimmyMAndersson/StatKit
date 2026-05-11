@@ -1,6 +1,14 @@
 import Testing
 import StatKit
 
+private enum EducationLevel: Comparable, Hashable {
+  case highSchool, bachelor, master, doctorate
+}
+
+private enum IncomeLevel: Comparable, Hashable {
+  case low, middle, high
+}
+
 @Suite("Kendall Tau Tests", .tags(.correlationCoefficient))
 struct KendallTauTests {
   @Test("Monotonically increasing data yields a correlation of 1", arguments: KendallTauVariant.allCases)
@@ -128,6 +136,25 @@ struct KendallTauTests {
     ]
 
     #expect(data.kendallTau(of: \.x, and: \.y, variant: .b).isNaN)
+  }
+
+  @Test("Ordinal data produces a valid correlation")
+  func ordinalData() async {
+    let data: [(education: EducationLevel, income: IncomeLevel)] = [
+      (.highSchool, .low), (.highSchool, .low), (.highSchool, .middle),
+      (.bachelor, .low), (.bachelor, .middle), (.bachelor, .middle), (.bachelor, .high),
+      (.master, .middle), (.master, .high), (.master, .high),
+      (.doctorate, .high), (.doctorate, .high),
+    ]
+
+    #expect(
+      data.kendallTau(of: \.education, and: \.income, variant: .a)
+        .isApproximatelyEqual(to: 0.5151515152, absoluteTolerance: 1e-6)
+    )
+    #expect(
+      data.kendallTau(of: \.education, and: \.income, variant: .b)
+        .isApproximatelyEqual(to: 0.6812273147, absoluteTolerance: 1e-6)
+    )
   }
 
   @Test("Correlation on empty collection is undefined", arguments: KendallTauVariant.allCases)
