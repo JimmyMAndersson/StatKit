@@ -125,8 +125,8 @@ public extension Collection {
     and Y: KeyPath<Element, U>,
     variant: KendallTauVariant = .b
   ) -> Double
-  where T: Comparable & Hashable & ConvertibleToReal,
-        U: Comparable & Hashable & ConvertibleToReal
+  where T: Comparable & Hashable,
+        U: Comparable & Hashable
   {
   let tiesX = self.countTieRanks(of: X)
   let tiesY = self.countTieRanks(of: Y)
