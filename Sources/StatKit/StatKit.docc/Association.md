@@ -4,7 +4,7 @@ Measures of association help determine if and how two variables are related to e
 
 ## Overview
 
-One of the most common ways of measuring association is by the Pearson Product Moment correlation. However, other methods, such as Kendall's Tau and Spearman's Rho, allow analysts to determine if two variables are related in other ways than just linearly.
+Association measures quantify the strength and direction of a relationship between two variables. The appropriate measure depends on the nature of the data: some measures assume a linear relationship on continuous data, while others are rank-based and apply to ordinal data. Rank-based measures differ in how they handle tied observations, which is an important consideration when ties are present in the data.
 
 ## Topics
 
@@ -13,6 +13,7 @@ One of the most common ways of measuring association is by the Pearson Product M
 - ``StatKit/Swift/Collection/pearsonR(of:and:)``
 - ``StatKit/Swift/Collection/spearmanR(of:and:)``
 - ``StatKit/Swift/Collection/kendallTau(of:and:variant:)``
+- ``StatKit/Swift/Collection/goodmanKruskalGamma(of:and:)``
 
 ### Enums
 

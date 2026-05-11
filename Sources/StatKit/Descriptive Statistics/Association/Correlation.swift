@@ -80,6 +80,37 @@ public extension Collection {
   return ranks.pearsonR(of: \.X, and: \.Y)
   }
 
+  /// Calculates Goodman and Kruskals gamma rank correlation coefficient for a collection.
+  /// - parameter X: The first variable.
+  /// - parameter Y: The second variable.
+  /// - returns: Goodman and Kruskals gamma coefficient.
+  ///
+  /// Since there is no notion of association in collections with less than two elements,
+  /// or when all pairs are tied, this method returns NaN in those cases.
+  func goodmanKruskalGamma<T, U>(
+    of X: KeyPath<Element, T>,
+    and Y: KeyPath<Element, U>
+  ) -> Double
+  where T: Comparable & Hashable,
+        U: Comparable & Hashable
+  {
+  guard self.count > 1 else { return .signalingNaN }
+
+  let tiesX = self.countTieRanks(of: X)
+  let tiesY = self.countTieRanks(of: Y)
+  let jointTies = self.countJointTieRanks(of: X, and: Y)
+
+  let count = self.count
+  let discordant = self.discordantPairs(of: X, and: Y)
+  let combinations = count * (count - 1) / 2
+  let concordant = combinations - discordant - tiesX - tiesY + jointTies
+
+  let denominator = (concordant + discordant).realValue
+  guard !denominator.isZero else { return .signalingNaN }
+
+  return (concordant - discordant).realValue / denominator
+  }
+
   /// Calculates Kendalls rank correlction coefficient for a collection.
   /// - parameter X: The first variable.
   /// - parameter Y: The second variable.
