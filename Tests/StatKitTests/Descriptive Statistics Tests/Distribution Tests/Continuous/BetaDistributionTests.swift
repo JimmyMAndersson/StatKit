@@ -143,6 +143,16 @@ struct BetaDistributionTests {
       (5.0, 2.0, 0.1, 0.0027),
       (5.0, 2.0, 0.9, 1.9683),
       (5.0, 2.0, 0.4, 0.4608),
+      // Boundary points: x = 0
+      (0.5, 0.5, 0.0, Double.infinity),  // alpha < 1 → +∞
+      (0.9, 0.9, 0.0, Double.infinity),  // alpha < 1 → +∞
+      (1.0, 1.0, 0.0, 1.0),             // alpha = 1 → 1/B(α,β) = 1
+      (2.0, 2.0, 0.0, 0.0),             // alpha > 1 → 0
+      // Boundary points: x = 1
+      (0.5, 0.5, 1.0, Double.infinity),  // beta < 1 → +∞
+      (0.9, 0.9, 1.0, Double.infinity),  // beta < 1 → +∞
+      (1.0, 1.0, 1.0, 1.0),             // beta = 1 → 1/B(α,β) = 1
+      (2.0, 2.0, 1.0, 0.0),             // beta > 1 → 0
     ]
   )
   func validInputReturnsCorrectPDF(alpha: Double, beta: Double, x: Double, expectedPDF: Double) async throws {
@@ -162,6 +172,16 @@ struct BetaDistributionTests {
       (0.1, 5000.0, -1.0, -Double.infinity),
       (0.1, 5000.0, 0.9, -11511.929057),
       (0.1, 5000.0, 0.4, -2554.193633),
+      // Boundary points: x = 0
+      (0.5, 0.5, 0.0, Double.infinity),   // alpha < 1 → +∞
+      (0.9, 0.9, 0.0, Double.infinity),   // alpha < 1 → +∞
+      (1.0, 1.0, 0.0, 0.0),              // alpha = 1 → log(1/B(1,1)) = 0
+      (2.0, 2.0, 0.0, -Double.infinity),  // alpha > 1 → -∞
+      // Boundary points: x = 1
+      (0.5, 0.5, 1.0, Double.infinity),   // beta < 1 → +∞
+      (0.9, 0.9, 1.0, Double.infinity),   // beta < 1 → +∞
+      (1.0, 1.0, 1.0, 0.0),              // beta = 1 → log(1/B(1,1)) = 0
+      (2.0, 2.0, 1.0, -Double.infinity),  // beta > 1 → -∞
     ]
   )
   func validInputReturnsCorrectLogPDF(alpha: Double, beta: Double, x: Double, expectedLogPDF: Double) async throws {

@@ -48,15 +48,24 @@ public struct BetaDistribution: ContinuousDistribution, UnivariateDistribution {
   }
   
   public func pdf(x: Double, logarithmic: Bool = false) -> Double {
-    switch x {
-      case ...0, 1...:
-        return logarithmic ? -.infinity : 0
-      
-      default:
-        let logBeta = .logGamma(alpha + beta) - .logGamma(alpha) - .logGamma(beta)
-        let logX = (alpha - 1) * .log(x) + (beta - 1) * .log(1 - x)
-        return logarithmic ? logBeta + logX : .exp(logBeta + logX)
+    let logBeta: Double = .logGamma(alpha + beta) - .logGamma(alpha) - .logGamma(beta)
+
+    guard x >= 0, x <= 1 else { return logarithmic ? -.infinity : 0 }
+
+    if x == 0 {
+      if alpha < 1 { return logarithmic ? .infinity : .infinity }
+      if alpha > 1 { return logarithmic ? -.infinity : 0 }
+      return logarithmic ? logBeta : .exp(logBeta)
     }
+
+    if x == 1 {
+      if beta < 1 { return logarithmic ? .infinity : .infinity }
+      if beta > 1 { return logarithmic ? -.infinity : 0 }
+      return logarithmic ? logBeta : .exp(logBeta)
+    }
+
+    let logX = (alpha - 1) * .log(x) + (beta - 1) * .log(1 - x)
+    return logarithmic ? logBeta + logX : .exp(logBeta + logX)
   }
   
   public func cdf(x: Double, logarithmic: Bool = false) -> Double {
