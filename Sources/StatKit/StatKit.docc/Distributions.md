@@ -25,6 +25,7 @@ These types define common distributions used to make theoretical calculations or
 
 ### Continuous Univariate Distributions
 
+- ``ArcSineDistribution``
 - ``ContinuousUniformDistribution``
 - ``ExponentialDistribution``
 - ``NormalDistribution``
