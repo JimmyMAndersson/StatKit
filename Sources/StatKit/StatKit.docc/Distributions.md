@@ -28,6 +28,7 @@ These types define common distributions used to make theoretical calculations or
 - ``ArcSineDistribution``
 - ``ContinuousUniformDistribution``
 - ``ExponentialDistribution``
+- ``LogisticDistribution``
 - ``NormalDistribution``
 - ``BetaDistribution``
 - ``GammaDistribution``
