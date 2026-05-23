@@ -35,6 +35,7 @@ These types define common distributions used to make theoretical calculations or
 - ``GammaDistribution``
 - ``ChiSquaredDistribution``
 - ``ErlangDistribution``
+- ``WeibullDistribution``
 
 ### Type Aliases
 
