@@ -22,7 +22,7 @@ public struct ExponentialDistribution: ContinuousDistribution, UnivariateDistrib
         return logarithmic ? -.infinity : 0
         
       default:
-        return logarithmic ? .log(rate) + rate * x : rate * .exp(-rate * x)
+        return logarithmic ? .log(rate) - rate * x : rate * .exp(-rate * x)
     }
   }
   
