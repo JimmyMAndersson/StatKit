@@ -10,6 +10,8 @@ struct VarianceTests {
       ((-5 ... 5).map(\.realValue), 11.0, DataSetComposition.sample),
       ((1 ... 5).map(\.realValue), 2, DataSetComposition.population),
       ((-5 ... 5).map(\.realValue), 10, DataSetComposition.population),
+      ([42.0, 42.0], 0.0, DataSetComposition.sample),
+      ([42.0, 42.0], 0.0, DataSetComposition.population),
     ] as [([Double], Double, DataSetComposition)]
   )
   func validData(data: [Double], expectedVariance: Double, composition: DataSetComposition) {
@@ -21,8 +23,31 @@ struct VarianceTests {
     #expect(data.variance(variable: \.self, from: composition).isNaN)
   }
 
-  @Test("Variance of single element collection is 0", arguments: [[1], [-1]] , DataSetComposition.allCases)
-  func singleElementCollection(data: [Double], composition: DataSetComposition) {
-    #expect(data.variance(variable: \.self, from: composition) == 0)
+  @Test(
+    "Population variance of single-element collection is 0",
+    arguments: [[1.0], [-1.0], [42.0]] as [[Double]]
+  )
+  func singleElementPopulationVariance(data: [Double]) {
+    #expect(data.variance(variable: \.self, from: .population) == 0)
+  }
+
+  @Test(
+    "Sample variance of single-element collection is undefined",
+    arguments: [[1.0], [-1.0], [42.0]] as [[Double]]
+  )
+  func singleElementSampleVariance(data: [Double]) {
+    #expect(data.variance(variable: \.self, from: .sample).isNaN)
+  }
+
+  @Test("Variance of collection containing NaN is NaN", arguments: DataSetComposition.allCases)
+  func collectionContainingNaN(composition: DataSetComposition) {
+    let data = [1.0, Double.nan, 3.0]
+    #expect(data.variance(variable: \.self, from: composition).isNaN)
+  }
+
+  @Test("Variance of collection containing infinity is NaN", arguments: DataSetComposition.allCases)
+  func collectionContainingInfinity(composition: DataSetComposition) {
+    let data = [1.0, Double.infinity, 3.0]
+    #expect(data.variance(variable: \.self, from: composition).isNaN)
   }
 }
