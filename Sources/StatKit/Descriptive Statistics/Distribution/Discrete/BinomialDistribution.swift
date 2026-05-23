@@ -36,11 +36,11 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
   public init(probability: Double, trials: Int) {
     precondition(
       0 <= probability && probability <= 1,
-      "The probability needs to be in (0, 1) (\(probability) provided)."
+      "The probability needs to be in [0, 1] (\(probability) provided)."
     )
     precondition(
       0 <= trials,
-      "Possibilities need to non-negative (\(trials) provided)."
+      "Number of trials need to non-negative (\(trials) provided)."
     )
 
     self.probability = probability
@@ -48,21 +48,27 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
   }
 
   public func pmf(x: Int, logarithmic: Bool = false) -> Double {
-    let coefficient = Double(choose(n: trials, k: x))
-    let successes: Double = .pow(probability, Double(x))
-    let failures: Double = .pow(1 - probability, Double(trials - x))
-    let result = coefficient * successes * failures
-
-    switch result {
-      case ...0:
-        return logarithmic ? -.infinity : 0
-
-      case 1...:
-        return logarithmic ? 0 : 1
-
-      default:
-        return logarithmic ? .log(result) : result
+    guard 0 <= x && x <= trials else {
+      return logarithmic ? -.infinity : 0
     }
+
+    if probability == 0 {
+      let isMode = x == 0
+      return logarithmic ? (isMode ? 0 : -.infinity) : (isMode ? 1 : 0)
+    }
+    if probability == 1 {
+      let isMode = x == trials
+      return logarithmic ? (isMode ? 0 : -.infinity) : (isMode ? 1 : 0)
+    }
+
+    let logCoefficient = Double.logGamma(Double(trials + 1))
+                       - Double.logGamma(Double(x + 1))
+                       - Double.logGamma(Double(trials - x + 1))
+    let logResult = logCoefficient
+                  + Double(x) * .log(probability)
+                  + Double(trials - x) * .log(1 - probability)
+
+    return logarithmic ? logResult : .exp(logResult)
   }
 
   public func cdf(x: Int, logarithmic: Bool = false) -> Double {
@@ -97,6 +103,7 @@ public struct BinomialDistribution: DiscreteDistribution, UnivariateDistribution
   }
 
   public func sample(_ numberOfElements: Int) -> [Int] {
+    precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
     var rng = Xoroshiro256StarStar()
     let weights = (0 ... trials).map { pmf(x: $0) }
     let table = WalkersAliasTable(weights: weights)
