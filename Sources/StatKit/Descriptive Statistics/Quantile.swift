@@ -10,10 +10,14 @@ public extension Collection {
   /// Since quantiles have no meaning on empty collections or probabilities outside of range [0, 1],
   /// this method returns a NaN for calls under any such conditions.
   ///
-  /// - important: This method has undefined behavior on collections containing elements that are incomparable.
-  /// For example, an array containing NaN's will produce unpredictable results.
+  /// Collections containing NaN values will also produce a NaN result.
   ///
-  /// - complexity: O(n log n), where n is the length of the collection.
+  /// Infinite values are handled correctly as long as the chosen estimation method does not require
+  /// arithmetic between conflicting infinities (e.g. `+∞ − ∞`).
+  /// If such arithmetic is unavoidable for the requested probability and method, this method returns NaN.
+  ///
+  /// - important: This method has undefined behavior on collections containing elements that are incomparable
+  /// for reasons other than NaN (e.g. custom types with a broken `Comparable` implementation).
   func quantile<T: Comparable & ConvertibleToReal>(
     probability: Double,
     of variable: KeyPath<Element, T>,
@@ -23,50 +27,52 @@ public extension Collection {
     guard
       probability.isFinite,
       0 <= probability,
-      probability <= 1
+      probability <= 1,
+      !self.isEmpty,
+      !self.contains(where: { $0[keyPath: variable].realValue.isNaN })
     else { return .signalingNaN }
 
     let ordered = self.sorted { lhs, rhs in
       lhs[keyPath: variable] < rhs[keyPath: variable]
     }
 
-    guard !ordered.isEmpty else { return .signalingNaN }
-
     if probability == 1 {
       guard let element = ordered.last else {
-        fatalError("Could not fetch last element of Sequence.")
+        fatalError("Could not fetch greatest element of collection.")
       }
       return element[keyPath: variable].realValue
     }
 
     if probability == 0 {
       guard let element = ordered.first else {
-        fatalError("Could not fetch first element of Sequence.")
+        fatalError("Could not fetch smallest element of collection.")
       }
       return element[keyPath: variable].realValue
     }
 
     switch method {
       case .inverseEmpiricalCDF:
-        let h = Double(ordered.count) * probability + 0.5
-        let index = Int((h - 0.5).rounded(.up)) - 1
+        let h = Double(ordered.count - 1) * probability
+        let index = Int(h.rounded(.up))
         return ordered[index][keyPath: variable].realValue
 
       case .averagedInverseEmpiricalCDF:
-        let h = Double(ordered.count) * probability + 0.5
-        let firstIndex = Int((h - 0.5).rounded(.up)) - 1
-        let secondIndex = Int((h + 0.5).rounded(.down)) - 1
-        return ordered[firstIndex...secondIndex].mean(variable: variable)
+        let h = Double(ordered.count - 1) * probability
+        let firstIndex = Int(h.rounded(.down))
+        let secondIndex = Int(h.rounded(.up))
+        let firstElement = ordered[firstIndex][keyPath: variable]
+        let secondElement = ordered[secondIndex][keyPath: variable]
+        return (firstElement.realValue + secondElement.realValue) / 2
 
-      case .closestOrOddIndexed:
-        let h = Double(ordered.count) * probability
-        let index = Int(h.rounded(.toNearestOrEven)) - 1
+      case .closest:
+        let h = Double(ordered.count - 1) * probability
+        let index = Int(h.rounded(.toNearestOrEven))
         return ordered[index][keyPath: variable].realValue
 
       case .lerpInverseEmpiricalCDF:
-        let h = Double(ordered.count) * probability
-        let firstIndex = Int(h.rounded(.down)) - 1
-        let secondIndex = Int(h.rounded(.up)) - 1
+        let h = Double(ordered.count - 1) * probability
+        let firstIndex = Int(h.rounded(.down))
+        let secondIndex = Int(h.rounded(.up))
         let firstElement = ordered[firstIndex][keyPath: variable]
         let secondElement = ordered[secondIndex][keyPath: variable]
         let difference = secondElement - firstElement
@@ -84,8 +90,8 @@ public enum QuantileEstimationMethod: CaseIterable, Sendable {
   case averagedInverseEmpiricalCDF
   /// Computes the quantile by rounding to the closest observation.
   ///
-  /// In case of a tie, the odd index element will be chosen.
-  case closestOrOddIndexed
+  /// In case of a tie, the even index element will be chosen.
+  case closest
   /// Computes the quantile usign the inverse empirical CDF, and linearly interpolates at discontinuities.
   case lerpInverseEmpiricalCDF
 }
