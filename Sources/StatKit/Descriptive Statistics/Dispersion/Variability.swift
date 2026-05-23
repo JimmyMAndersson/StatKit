@@ -14,7 +14,12 @@ public extension Collection {
   ) -> Double {
 
     guard !self.isEmpty else { return .signalingNaN }
-    guard self.count > 1 else { return 0 }
+    guard self.count > 1 else {
+      switch composition {
+        case .sample: return .signalingNaN
+        case .population: return 0
+      }
+    }
 
     let mean = self.mean(variable: variable)
 
