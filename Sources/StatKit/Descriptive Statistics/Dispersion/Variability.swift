@@ -5,8 +5,6 @@ public extension Collection {
   /// - parameter variable: The variable over which to calculate the variance.
   /// - parameter composition: The composition of the collection.
   /// - returns: The variance of the collection.
-  ///
-  /// The time complexity of this method is O(n).
   @inlinable
   func variance<T: ConvertibleToReal>(
     variable: KeyPath<Element, T>,
@@ -39,8 +37,6 @@ public extension Collection {
   /// - parameter variable: The variable over which to calculate the standard deviation.
   /// - parameter composition: The composition of the collection.
   /// - returns: The standard deviation of the collection, rounded to a representable value.
-  ///
-  /// The time complexity of this method is O(n).
   @inlinable
   func standardDeviation<T: ConvertibleToReal>(
     variable: KeyPath<Element, T>,
@@ -57,7 +53,6 @@ public extension Collection {
   ///
   /// Since there is no notion of covariance in collections with less than two elements,
   /// this method returns NaN if the array count is less than two.
-  /// The time complexity of this method is O(n).
   @inlinable
   func covariance<T, U>(
     of X: KeyPath<Element, T>,

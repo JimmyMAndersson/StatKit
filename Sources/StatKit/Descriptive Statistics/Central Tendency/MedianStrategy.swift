@@ -13,8 +13,6 @@ extension MedianStrategy {
   /// - parameter variable: The random variable for which to calculate the mean.
   /// - parameter collection: The collection of values.
   /// - returns: The specified mean value.
-  ///
-  /// - complexity: O(n log n), where n is the length of the collection.
   @usableFromInline
   internal func compute<T, C>(
     for variable: KeyPath<C.Element, T>,

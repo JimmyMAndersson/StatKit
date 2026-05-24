@@ -17,7 +17,6 @@ extension MeanStrategy {
   /// - parameter variable: The random variable for which to calculate the mean.
   /// - parameter collection: The collection of values.
   /// - returns: The specified mean value.
-  /// The time complexity of this method is O(n).
   @usableFromInline
   internal func compute<C: Collection, T: ConvertibleToReal>(
     for variable: KeyPath<C.Element, T>,

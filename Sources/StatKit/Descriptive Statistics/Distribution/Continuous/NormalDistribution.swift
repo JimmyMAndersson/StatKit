@@ -18,6 +18,9 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
     self.variance = variance
   }
   
+  /// Create a Normal Distribution with a specified mean and standard deviation.
+  /// - parameter mean: The mean value of this distribution.
+  /// - parameter standardDeviation: The standard deviation for this distribution.
   public init(mean: Double, standardDeviation: Double) {
     precondition(
       0 < standardDeviation,

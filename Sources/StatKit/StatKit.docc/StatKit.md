@@ -10,17 +10,14 @@ StatKit provides Swift developers with tools to describe data sets and make pred
 
 ### Descriptive Statistics
 
-- <doc:Centeral-Tendency>
+- <doc:Central-Tendency>
 - <doc:Association>
 - <doc:Dispersion>
 - <doc:Ranking>
 - <doc:Summation>
 - <doc:Partitioning>
 - <doc:Distributions>
-- <doc:Combinatorial-Extensions>
-
-### Inferential Statistics
-
+- <doc:Mathematical-Functions>
 
 ### Module Specific Protocols
 - ``ConvertibleToReal``

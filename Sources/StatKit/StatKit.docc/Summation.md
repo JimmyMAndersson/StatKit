@@ -2,11 +2,9 @@
 
 Sum over variables in a data set.
 
-@Comment {
-  ## Overview
-  
-  Maybe we don't need an overview for this?
-}
+## Overview
+
+Summation is a fundamental building block in statistical computation, underpinning everything from means to more complex aggregations.
 
 ## Topics
 

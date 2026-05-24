@@ -9,8 +9,6 @@ public extension Collection {
   /// - important: This method triggers a precondition failure if attempting to rank a collection
   /// of instances that do not compare equal to themselves. For example, attempting to rank a collection
   /// of floating point numbers that contain NaN's will fail, since `Double.nan == Double.nan` is false.
-  ///
-  /// The time complexity of this method is O(n).
   func rank<T: Comparable & Hashable>(
     variable: KeyPath<Element, T>,
     by order: @escaping (_ lhs: T, _ rhs: T) -> Bool,
