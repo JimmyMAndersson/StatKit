@@ -19,15 +19,31 @@ protocol RankingStrategyProtocol {
 
 /// A calculation strategy for ranking comparable variables.
 public enum RankingStrategy: CaseIterable, Sendable {
-  /// The Fractional ranking strategy.
+  /// Tied elements receive the average of the ranks they would otherwise occupy.
+  ///
+  /// For example, two elements tied for 2nd place both receive rank 2.5, and the next element receives rank 4.
   case fractional
-  /// The Standard Competition ranking strategy.
+
+  /// Tied elements share the lowest rank in their group, and the next rank skips over the tie count.
+  ///
+  /// For example, two elements tied for 2nd place both receive rank 2, and the next element receives rank 4.
   case standardCompetition
-  /// The Modified Competition ranking strategy.
+
+  /// Tied elements share the highest rank in their group.
+  ///
+  /// For example, two elements tied for 2nd place both receive rank 3, and the next element receives rank 4.
   case modifiedCompetition
-  /// The Ordinal ranking strategy.
+
+  /// Tied elements are assigned consecutive ranks based on their order in the collection, with no averaging.
+  ///
+  /// For example, two elements tied for 2nd place receive ranks 2 and 3 respectively,
+  /// and the next element receives rank 4.
   case ordinal
-  /// The Dense ranking strategy.
+
+  /// Tied elements share the same rank, and the next distinct rank is always incremented by one
+  /// regardless of tie count.
+  ///
+  /// For example, two elements tied for 2nd place both receive rank 2, and the next element receives rank 3.
   case dense
   
   /// A calculator object that can be used to compute the specified rank.

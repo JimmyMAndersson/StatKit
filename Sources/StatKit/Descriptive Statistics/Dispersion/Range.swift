@@ -6,7 +6,6 @@ public extension Collection {
   /// - returns: The range of the selected variable.
   ///
   /// The range is the difference between the lowest and highest number in a collection.
-  /// The time complexity of this method is O(n).
   func range<T: Comparable & ConvertibleToReal>(
     of variable: KeyPath<Element, T>
   ) -> Double {

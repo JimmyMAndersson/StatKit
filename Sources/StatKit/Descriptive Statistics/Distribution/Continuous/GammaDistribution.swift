@@ -14,6 +14,8 @@ public struct GammaDistribution: ContinuousDistribution, UnivariateDistribution 
   /// Creates a Gamma Distribution with a specified alpha and beta parameters.
   /// - parameter alpha: The distribution alpha parameter.
   /// - parameter beta: The distribution beta parameter.
+  ///
+  /// - important: This initializer is deprecated. Use ``init(shape:scale:)`` or ``init(shape:rate:)`` instead.
   @available(*, deprecated, renamed: "init(shape:scale:)")
   public init(alpha: Double, beta: Double) {
     precondition(0 < alpha, "The shape parameter needs to be greater than 0.")

@@ -5,7 +5,6 @@ public extension Collection {
   /// - returns: The mean of all items.
   ///
   /// Since the arithmetic mean has no meaning on an empty set, this method returns a NaN if the collection is empty.
-  /// The time complexity of this method is O(n).
   @inlinable
   func mean<T: ConvertibleToReal>(
     variable: KeyPath<Element, T>,
@@ -24,8 +23,6 @@ public extension Collection {
   ///
   /// - important: This method has undefined behavior on collections containing elements that are incomparable.
   /// For example, an array containing NaN's will produce unpredictable results.
-  ///
-  /// - complexity: O(n log n), where n is the length of the collection.
   @inlinable
   func median<T: Comparable & ConvertibleToReal>(
     variable: KeyPath<Element, T>,
@@ -49,8 +46,6 @@ public extension Collection {
   ///
   /// - important: This method has undefined behavior on collections containing elements that are incomparable.
   /// For example, an array containing NaN's will produce unpredictable results.
-  ///
-  /// - complexity: O(n), where n is the length of the collection.
   @inlinable
   func mode<T: Hashable>(
     variable: KeyPath<Element, T>
