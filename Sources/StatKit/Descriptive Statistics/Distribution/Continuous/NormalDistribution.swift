@@ -60,19 +60,29 @@ public struct NormalDistribution: ContinuousDistribution, UnivariateDistribution
   }
   
   public func sample() -> Double {
-    let u1 = Double.random(in: 0 ... 1)
-    let u2 = Double.random(in: 0 ... 1)
+    let u1 = Double.random(in: Double.leastNonzeroMagnitude ..< 1)
+    let u2 = Double.random(in: Double.leastNonzeroMagnitude ..< 1)
     return mean + (-2 * variance * .log(u1)).squareRoot() * .sin(2 * .pi * u2)
   }
-  
+
   public func sample(_ numberOfElements: Int) -> [Double] {
     precondition(0 < numberOfElements, "The requested number of samples need to be greater than 0.")
-    
+
     var uniformGenerator = Xoroshiro256StarStar()
-    return (1 ... numberOfElements).map { _ in
-      let u1 = Double.random(in: 0 ... 1, using: &uniformGenerator)
-      let u2 = Double.random(in: 0 ... 1, using: &uniformGenerator)
-      return mean + (-2 * variance * .log(u1)).squareRoot() * .sin(2 * .pi * u2)
+    var result = [Double]()
+    result.reserveCapacity(numberOfElements)
+
+    while result.count < numberOfElements {
+      let u1 = Double.random(in: Double.leastNonzeroMagnitude ..< 1, using: &uniformGenerator)
+      let u2 = Double.random(in: Double.leastNonzeroMagnitude ..< 1, using: &uniformGenerator)
+      let radius = (-2 * variance * .log(u1)).squareRoot()
+      let angle = 2 * Double.pi * u2
+      result.append(mean + radius * .cos(angle))
+      if result.count < numberOfElements {
+        result.append(mean + radius * .sin(angle))
+      }
     }
+
+    return result
   }
 }
